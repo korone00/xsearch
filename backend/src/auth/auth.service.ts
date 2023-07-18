@@ -1,17 +1,26 @@
-import {Injectable,  HttpStatus, ForbiddenException} from '@nestjs/common'
+import {Injectable,  HttpStatus, ForbiddenException,HttpException} from '@nestjs/common'
 import { UserRepository } from 'src/users/user.repository';
 import * as bcrypt from 'bcrypt'
 import { JwtService } from "@nestjs/jwt";
+<<<<<<< HEAD
 import { RedisService } from 'nestjs-redis';
 import { UnauthorizedException } from '@nestjs/common';
 
+=======
+import { UserService } from 'src/users/users.service';
+import { User } from 'src/users/entities/user.entity';
+>>>>>>> 2e4f254ab883e7e5cda6614aacb61e53a25be9b5
 
 @Injectable()
 export class AuthService{
     constructor(
         private userRepository:UserRepository,
         private jwtService:JwtService,
+<<<<<<< HEAD
         private redisService: RedisService
+=======
+        private userService:UserService
+>>>>>>> 2e4f254ab883e7e5cda6614aacb61e53a25be9b5
     ){}
     async validateUser(id:string, password:string):Promise<any>{
         const user=await this.userRepository.findUserById(id);
@@ -44,6 +53,7 @@ export class AuthService{
         };
     }
 
+<<<<<<< HEAD
     async logout(user: any) {
         const accessToken = this.jwtService.decode(user.accessToken);
         const expiresIn = accessToken['exp'];
@@ -56,4 +66,17 @@ export class AuthService{
     }
 
 
+=======
+    async registerUser(newUser:User){
+        let userExist=await this.userService.find(newUser);
+        if(userExist){ // 중복 회원 검사
+            throw new HttpException('이미 존재하는 회원아이디입니다.',HttpStatus.BAD_REQUEST);
+        }
+        const userRegister=await this.userService.save(newUser);
+        if(!userRegister){ // 혹시 모를 회원가입 실패
+            throw new HttpException('회원가입 오류',HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return userRegister;
+    }
+>>>>>>> 2e4f254ab883e7e5cda6614aacb61e53a25be9b5
 }
