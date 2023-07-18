@@ -1,5 +1,5 @@
 import {Injectable,  HttpStatus, ForbiddenException} from '@nestjs/common'
-import { UserRepository } from 'src/user/user.repository';
+import { UserRepository } from 'src/users/user.repository';
 import * as bcrypt from 'bcrypt'
 import { JwtService } from "@nestjs/jwt";
 
