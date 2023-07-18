@@ -1,6 +1,7 @@
-import { Controller,UseGuards,Post,Req } from "@nestjs/common";
+import { Controller,UseGuards,Post,Req,Body } from "@nestjs/common";
 import { AuthService } from "./auth.service";
 import { LocalAuthGuard } from "./local-auth.guard";
+import { User } from "src/users/entities/user.entity";
 
 @Controller('auth')
 export class AuthController{
@@ -10,4 +11,9 @@ export class AuthController{
     async login(@Req() req){
         return this.authService.login(req.user);
     }// 결과로 할당된 토큰 반환
+
+    @Post('register')
+    async registerAccount(@Body() user:User):Promise<any>{
+        return await this.authService.registerUser(user);
+    }
 }
