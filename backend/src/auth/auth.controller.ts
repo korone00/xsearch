@@ -1,4 +1,4 @@
-import { Controller,UseGuards,Post,Req } from "@nestjs/common";
+import { Controller,UseGuards,Post,Req, Get } from "@nestjs/common";
 import { AuthService } from "./auth.service";
 import { LocalAuthGuard } from "./local-auth.guard";
 
@@ -10,4 +10,11 @@ export class AuthController{
     async login(@Req() req){
         return this.authService.login(req.user);
     }// 결과로 할당된 토큰 반환
+    @Get('logout')
+    async logout(@Req() req) {
+        await this.authService.logout(req.user);
+        return "Logout Success!";
+    }
+
 }
+

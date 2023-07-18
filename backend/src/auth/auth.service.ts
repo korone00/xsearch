@@ -2,12 +2,16 @@ import {Injectable,  HttpStatus, ForbiddenException} from '@nestjs/common'
 import { UserRepository } from 'src/users/user.repository';
 import * as bcrypt from 'bcrypt'
 import { JwtService } from "@nestjs/jwt";
+import { RedisService } from 'nestjs-redis';
+import { UnauthorizedException } from '@nestjs/common';
+
 
 @Injectable()
 export class AuthService{
     constructor(
         private userRepository:UserRepository,
-        private jwtService:JwtService
+        private jwtService:JwtService,
+        private redisService: RedisService
     ){}
     async validateUser(id:string, password:string):Promise<any>{
         const user=await this.userRepository.findUserById(id);
@@ -39,5 +43,17 @@ export class AuthService{
             accessToken:this.jwtService.sign(payload)
         };
     }
+
+    async logout(user: any) {
+        const accessToken = this.jwtService.decode(user.accessToken);
+        const expiresIn = accessToken['exp'];
+    
+        if (await this.redisService.getClient().set(`BlackList_${user.userId}`, 'loggedouted', 'EX', expiresIn)) {
+          return true;
+        } else {
+          throw new UnauthorizedException();
+        }
+    }
+
 
 }

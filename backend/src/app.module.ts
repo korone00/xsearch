@@ -2,10 +2,9 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { User } from './users/entities/user.entity';
 import { UserModule } from './users/users.modules';
-import { AuthModule } from './auth/auth.module';
-// import { join } from 'path';
-// import { HandlebarsAdapter, RenderModule } from '@nestjs-modules/render';
+
 
 @Module({
   imports: [
@@ -14,13 +13,12 @@ import { AuthModule } from './auth/auth.module';
       host: 'localhost',
       port: 5432,
       username: 'postgres',
-      password: '0927',
-      database: 'user-app',
-      entities: [__dirname+'/**/*.entity.{ts,js}'], 
+      password: '1234',
+      database: 'postgres',
+      entities: [User], 
       synchronize: true,  //shouldn't be used in production - otherwise you can lose production data.
     }),
     UserModule,
-    AuthModule
   ],
   
   controllers: [AppController],

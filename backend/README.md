@@ -56,11 +56,12 @@ $ npm install --save typeorm pg @nestjs/typeorm
 
 npm install
 
-## Installation
+## nest js needed module Installation
 
 ```bash
 $ npm install
 $ npm install --save-dev @nestjs/testing
+$ npm install --save nestjs-redis
 ```
 
 ## Running the app
@@ -76,7 +77,7 @@ $ npm run start:dev
 
 ## check and test API by POSTMAN
 
-# 1. Install postman
+# 1. Install postman 
 https://www.postman.com/downloads/
 
 # 2. Launch Postman: Run the installed Postman app.
