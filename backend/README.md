@@ -1,35 +1,66 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+## Set up a PostgresSQL database with Docker
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+# 1. docker install
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+windows, mac, linux
 
-## Description
+https://hub.docker.com/
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+# install postgresql images, pull PostgreSQL by using docker 
+```bash
+$ docker pull postgres
+```
+And login docker hub
+
+# 2. login docker
+```bash
+$ docker login  
+```
+# 3. play docker container
+```bash
+$ docker run -d -p 5432:5432 --name some-postgres -e POSTGRES_PASSWORD=1234 postgres
+```
+# 4. docker ps
+
+Type the \l, You can check the database list
+
+this shows a list of all images that are running. If you are wonder container is running. Check the status "Up ~~ seconds"
+
+# 5. excution the postgres sql
+```bash
+$ docker exec -it some-postgres /bin/bash
+$ psql -U postgres
+```
+
+
+
+
+Database setup
+
+1. Create database
+
+```sql
+create database test_db;
+```
+
+nest js Setup
+Install NestJS CLI 
+```bash
+$ npm install -g @nestjs/cli
+```
+PostgreSQL driver and TypeORM package
+```bash
+$ cd your_project_name
+$ npm install --save typeorm pg @nestjs/typeorm
+```
+
+npm install
 
 ## Installation
 
 ```bash
 $ npm install
+$ npm install --save-dev @nestjs/testing
 ```
 
 ## Running the app
@@ -41,33 +72,46 @@ $ npm run start
 # watch mode
 $ npm run start:dev
 
-# production mode
-$ npm run start:prod
 ```
 
-## Test
+## check and test API by POSTMAN
 
+# 1. Install postman
+https://www.postman.com/downloads/
+
+# 2. Launch Postman: Run the installed Postman app.
+
+# 3. Create a request: Click the "+" button at the top to create a new request tab.
+
+# 4. Choose HTTP method and URL: Select the desired HTTP method from the dropdown list and enter the API endpoint URL in the URL input field.
+
+# 5. Set authentication and headers: Configure the required authentication tokens, headers, etc. for the request.
+
+# 6. Write request body: If using methods like POST or PUT, write the request body in the appropriate format under the "Body" tab.
+
+# 7. Send the request: Click the blue "Send" button to send the request.
+
+'''
+{
+  "firstName": "John",
+  "lastName": "Doe"
+}
+
+''' 
+
+# 8. Check the response: The response for the sent request will be displayed in the panel below.
+
+
+## Handlebars
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+$ npm install --save @nestjs/serve-static hbs
 ```
 
-## Support
+## render
+```bash
+$ npm install --save @nestjs-modules/render
+```
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
 
-## Stay in touch
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+## So far, we have developed that we can communicate with the postpresql database and nest js using docker, and we can add data to the database using post man. Our future goal is to store the member's information in the database through the login function
