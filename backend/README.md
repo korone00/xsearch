@@ -81,10 +81,8 @@ https://www.postman.com/downloads/
 }
 
 ''' 
-
 # 8. Check the response: The response for the sent request will be displayed in the panel below.
-
-
+# if you succeed, you can get token
 
 
 ## nest js module download
