@@ -2,6 +2,7 @@ import { Controller,UseGuards,Post,Req, Get } from "@nestjs/common";
 import { AuthService } from "./auth.service";
 import { LocalAuthGuard } from "./local-auth.guard";
 import { User } from "src/users/entities/user.entity";
+import { JwtAuthGuard } from "./jwt-auth.guard";
 
 @Controller('auth')
 export class AuthController{
@@ -18,6 +19,11 @@ export class AuthController{
         return "Logout Success!";
         // res.redirect('/login'); // move to login.
     }
-
+    
+    @UseGuards(JwtAuthGuard)
+    @Get('profile')
+    userProfile(@Req() req){
+        return req.user;
+    }
 }
 

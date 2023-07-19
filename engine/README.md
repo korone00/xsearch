@@ -1,4 +1,4 @@
-# x_search_engine
+# xsearch_engine
 image search engine
 
 # Engine build steps
@@ -14,7 +14,7 @@ image search engine
 
 After installing anaconda, run the conda prompt.
 
-```
+```bash
 (base) C:\Users\Minhyeok>conda --version
 conda 23.5.2
 ```
@@ -24,18 +24,18 @@ I installed the latest version, version 23.5.2.
 
 ### 0.2 Set virtual environment
 
-```
+```bash
 $ conda create -n xsearch python=3.8
 ```
 It means to create a virtual environment called xsearch and install python 3.8 at the same time.
 You have to download python version below 3.11.
 
-```
+```bash
 #check virtual environments list
 $ conda env list
 ```
 
-```
+```bash
 # activate virtual env
 $ conda activate xsearch
 ```
@@ -43,7 +43,7 @@ $ conda activate xsearch
 #### package install
 Install the package in the virtual environment.
 
-```
+```bash
 #PIL
 $ conda install pillow
 
@@ -68,7 +68,7 @@ Ten pictures were used for each category.
 
 ### 1.1 kaggle api install
 
-```
+```bash
 $ conda install -c conda-forge kaggle
 $ conda install kaggle
 ```
@@ -98,7 +98,7 @@ Copy the previously downloaded ```kaggle.json``` file to this ```.kaggle``` fold
 
 Enter the following command in the anaconda prompt and check if the output is good. This command shows a list of ongoing contests in Kaggle.
 
-```
+```bash
 kaggle competitions list
 ```
 
@@ -107,9 +107,9 @@ kaggle competitions list
 
 ### 1.3 data download from kaggle
 
-If you enter the command below, you can download the food11-image-dataset in the path path.
+If you enter the command below, you can download the food11-image-dataset in the path.
 
-```
+```bash
 kaggle datasets download -d trolukovich/food11-image-dataset -p <path>
 ```
 
@@ -121,7 +121,7 @@ We define dataset used for finding image similarity in dataset.py.
 
 If you want to change the image dataset, you modify this code. the dataset is stored in imgs folder.
 
-```
+```python
 kaggle.api.dataset_download_files('trolukovich/food11-image-dataset', path='imgs', unzip=False)
 with zipfile.ZipFile('imgs/food11-image-dataset.zip', 'r') as zip_ref:
     zip_ref.extractall('imgs')
@@ -132,7 +132,7 @@ with zipfile.ZipFile('imgs/food11-image-dataset.zip', 'r') as zip_ref:
 image is changed to imbedded vector through feature extractor.
 ViT model extracts feature vector of image embedded vector.
 
-```
+```python
 feature_extractor = ViTFeatureExtractor.from_pretrained('facebook/dino-vits16')
 model = ViTModel.from_pretrained('facebook/dino-vits16')
 ```
@@ -142,14 +142,14 @@ model = ViTModel.from_pretrained('facebook/dino-vits16')
 initialize the chromaDB.
 *We have utilized a method of creating directories to store data. If you wish to store data using a server or any other method, we recommend referring to the chromaDB documentation(https://docs.trychroma.com/).
 
-```
+```python
 client = chromadb.PersistentClient(path="./chroma")
 collection = client.create_collection("foods")
 ```
 
 add the vector of image data to collection of chromadb.
 
-```
+```python
 collection.add(
     embeddings=embeddings, #image tensor 
     metadatas=metadatas, #url, image label
@@ -163,13 +163,13 @@ In model.py, class instance is created and calculate similarity of target image 
 
 ### 3.1 create the class 'Xsearch' instance
 
-```
+```python
 xsearch = Xsearch()
 ```
 
 ### 3.2 call function with image path of target image
 
-```
+```python
 xsearch("your_image_path")
 ```
 
@@ -178,7 +178,7 @@ xsearch("your_image_path")
 result dictionary is included image id, similarity(distance), metadata(name(image class), image url)
 
 example)
-```
+```python
 {'ids': [['Egg_36', 'Egg_33', 'Meat_51']], 
 'distances': [[412.2847900390625, 422.6854248046875, 424.696533203125]], 
 'metadatas': [[{'name': 'Egg', 'uri': 'imgs/evaluation\\Egg\\6.jpg'}, 
@@ -189,7 +189,7 @@ example)
 
 Looking at the structure of the above dictionary, the values corresponding to the keys are all 2-dimensional lists. Therefore, to use these values, you need to first convert the 2-dimensional lists into 1-dimensional lists.
 
-```
+```python
 #sample
 query_result["metadatas"][0]
 ```
