@@ -9,6 +9,8 @@ import { JwtModule } from "@nestjs/jwt";
 import { LocalStrategy } from './local.strategy';
 import { JwtStrategy } from './jwt.strategy';
 import { UserService } from 'src/users/users.service';
+import { RedisService,RedisModule } from 'nestjs-redis';
+
 @Module({
     imports:[
         PassportModule,
@@ -18,10 +20,11 @@ import { UserService } from 'src/users/users.service';
         })
         ,
         TypeOrmModule.forFeature([User]),
+        RedisModule
     ],
     controllers:[AuthController],
-    providers:[AuthService, LocalStrategy,JwtStrategy,UserRepository,UserService]
-
+    providers:[AuthService, LocalStrategy,JwtStrategy,
+        UserRepository,UserService, RedisService]
 
 })
 export class AuthModule{}

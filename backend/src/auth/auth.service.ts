@@ -25,9 +25,7 @@ export class AuthService{
                 error:'Forbidden'
             })
         }
-        //const matching=await bcrypt.compare(password,user.password);
-        var matching=false;
-        if(password==user.password) matching=true 
+        const matching=await bcrypt.compare(password,user.password);
         if(matching){
             const {password, ...result}=user;
             return result; // user의 정보가 password 뺴고 다 result에 담김
