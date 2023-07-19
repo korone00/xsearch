@@ -1,4 +1,4 @@
-# xsearch_engine powerd by milvus
+# xsearch_engine powered by milvus
 
 ## Prepration
 
@@ -18,8 +18,8 @@ python -m pip install -q towhee opencv-python pillow
 
 ### Prepare data
 
-윈도우에서 ```unzip```명령어를 사용하기 위해선 다음 링크를 참조하자.
-"\n"
+To use the ```unzip``` command in Windows, refer to the following link.
+
 [cmd에서 zip 사용하기](https://fcurryman.tistory.com/101)
 
 image download
