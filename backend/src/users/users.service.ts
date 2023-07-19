@@ -27,9 +27,9 @@ async save(user:User):Promise<User>{
   return await this.userRepository.save(user);
 }
 
-  // findAll(): Promise<User[]> {
-  //   return this.usersRepository.find();
-  // }
+  findAll(): Promise<User[]> {
+    return this.userRepository.find();
+  }
 
   // create(user: Partial<User>): Promise<User> {
   //   return this.usersRepository.save(user);

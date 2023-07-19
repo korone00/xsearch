@@ -2,3 +2,13 @@
 imgs/
 chroma/
 vittest.ipynb
+__pycache__/
+exception/
+object/
+test/
+train/
+volumes/
+reverse_image_search.csv
+reverse_image_search.zip
+docker-compose.yml
+1_build_image_search_engine.ipynb

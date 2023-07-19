@@ -10,18 +10,18 @@ https://hub.docker.com/
 ```bash
 $ docker pull postgres
 ```
-And login docker hub
 
 # 2. login docker
 ```bash
-$ docker login  
+$ docker login
 ```
+
 # 3. play docker container
 ```bash
-$ docker run -d -p 5432:5432 --name some-postgres -e POSTGRES_PASSWORD=1234 postgres
+$ docker run -d -p 5432:5432 --name postgres -e POSTGRES_PASSWORD=1234 postgres
 ```
-# 4. docker ps
 
+# 4. docker ps
 Type the \l, You can check the database list
 
 this shows a list of all images that are running. If you are wonder container is running. Check the status "Up ~~ seconds"
@@ -40,40 +40,21 @@ Database setup
 1. Create database
 
 ```sql
-create database test_db;
+CREATE DATABASE pg_database;
+\c pg_database;
+CREATE TABLE user (
+  id varchar(50),
+  password varchar(50),
+  name varchar(100),
+  email varchar(100)
+);
+
+INSERT INTO user (id, password, name, email)
+VALUES ('asd', '123', 'eric', 'eric@');
+INSERT INTO user (id, password, name, email)
+VALUES ('qwe', '123', 'john', 'john@');
 ```
 
-nest js Setup
-Install NestJS CLI 
-```bash
-$ npm install -g @nestjs/cli
-```
-PostgreSQL driver and TypeORM package
-```bash
-$ cd your_project_name
-$ npm install --save typeorm pg @nestjs/typeorm
-```
-
-npm install
-
-## nest js needed module Installation
-
-```bash
-$ npm install
-$ npm install --save-dev @nestjs/testing
-$ npm install --save nestjs-redis
-```
-
-## Running the app
-
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-```
 
 ## check and test API by POSTMAN
 
@@ -91,28 +72,33 @@ https://www.postman.com/downloads/
 # 6. Write request body: If using methods like POST or PUT, write the request body in the appropriate format under the "Body" tab.
 
 # 7. Send the request: Click the blue "Send" button to send the request.
+# POST and localhost:3000/auth/login, you will take the token
 
 '''
 {
-  "firstName": "John",
-  "lastName": "Doe"
+  "id": "qwe",
+  "password": "123"
 }
 
 ''' 
-
 # 8. Check the response: The response for the sent request will be displayed in the panel below.
+# if you succeed, you can get token
 
 
-## Handlebars
+## nest js module download
 ```bash
-$ npm install --save @nestjs/serve-static hbs
+$ npm install
+$ npm install --save @nestjs/typeorm typeorm
+$ npm install --save-dev @nestjs/testing
 ```
 
-## render
+## Running the app
+
 ```bash
-$ npm install --save @nestjs-modules/render
+# development
+$ npm run start
+
+# watch mode
+$ npm run start:dev
+
 ```
-
-
-
-## So far, we have developed that we can communicate with the postpresql database and nest js using docker, and we can add data to the database using post man. Our future goal is to store the member's information in the database through the login function
