@@ -14,8 +14,8 @@ import { AuthModule } from './auth/auth.module';
       host: 'localhost',
       port: 5432,
       username: 'postgres',
-      password: '0927',
-      database: 'xsearch',
+      password: '1234',
+      database: 'postgres',
       entities: [__dirname+'/**/*.entity.{ts,js}'], 
       synchronize: true,  //shouldn't be used in production - otherwise you can lose production data.
     }),

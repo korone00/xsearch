@@ -6,10 +6,10 @@ import {User} from './entities/user.entity'
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  // @Get()
-  // findAll(): Promise<User[]> {
-  //   return this.userService.findAll();
-  // }
+  @Get()
+  findAll(): Promise<User[]> {
+    return this.userService.findAll();
+  }
 
   // @Post()
   // create(@Body() user: Partial<User>): Promise<User> {

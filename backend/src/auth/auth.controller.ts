@@ -13,9 +13,10 @@ export class AuthController{
     }// 결과로 할당된 토큰 반환
     
     @Get('logout')
-    async logout(@Req() req) {
-        await this.authService.logout(req.user);
+    async logout(@Req() req) { //, @Res() res: Response
+        // await this.authService.invalidateAccessToken(req.user); // 토큰을 만료시킵니다.
         return "Logout Success!";
+        // res.redirect('/login'); // move to login.
     }
 
 }

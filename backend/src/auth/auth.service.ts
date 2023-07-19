@@ -2,7 +2,6 @@ import {Injectable,  HttpStatus, ForbiddenException,HttpException} from '@nestjs
 import { UserRepository } from 'src/users/user.repository';
 import * as bcrypt from 'bcrypt'
 import { JwtService } from "@nestjs/jwt";
-import { RedisService } from 'nestjs-redis';
 import { UnauthorizedException } from '@nestjs/common';
 
 import { UserService } from 'src/users/users.service';
@@ -13,8 +12,7 @@ export class AuthService{
     constructor(
         private userRepository:UserRepository,
         private jwtService:JwtService,
-        private userService:UserService,
-        private redisService: RedisService
+        private userService:UserService
     ){}
     async validateUser(id:string, password:string):Promise<any>{
         const user=await this.userRepository.findUserById(id);
@@ -38,22 +36,16 @@ export class AuthService{
 
         }
     }
+    async invalidateAccessToken(user: any) {
+        const accessToken = this.jwtService.sign({id: user.id, expiresIn: 0}); // expiresIn을 0으로 설정하여 토큰을 만료시킵니다.
+        // await this.userService.updateUserToken(user.id, accessToken); // 데이터베이스에 만료된 토큰을 업데이트 합니다.
+    }
+    
     async login(user:any){
         const payload={id:user.id, name:user.name,email:user.email};
         return {
             accessToken:this.jwtService.sign(payload)
         };
-    }
-
-    async logout(user: any) {
-        const accessToken = this.jwtService.decode(user.accessToken);
-        const expiresIn = accessToken['exp'];
-    
-        if (await this.redisService.getClient().set(`BlackList_${user.userId}`, 'loggedouted', 'EX', expiresIn)) {
-          return true;
-        } else {
-          throw new UnauthorizedException();
-        }
     }
 
     async registerUser(newUser:User){
