@@ -25,9 +25,10 @@ I installed the latest version, version 23.5.2.
 ### 0.2 Set virtual environment
 
 ```
-$ conda create -n xsearch python=3.7
+$ conda create -n xsearch python=3.8
 ```
-It means to create a virtual environment called xsearch and install python 3.7 at the same time.
+It means to create a virtual environment called xsearch and install python 3.8 at the same time.
+You have to download python version below 3.11.
 
 ```
 #check virtual environments list
@@ -43,16 +44,14 @@ $ conda activate xsearch
 Install the package in the virtual environment.
 
 ```
-#numpy
-$ conda install numpy
-
 #PIL
 $ conda install pillow
 
 #transformers
 $ conda install transformers
 
-#faiss
+
+#faiss(optional)
 $ conda install -c pytorch faiss-cpu # CPU version
 //$ conda install -c pytorch faiss-gpu # GPU version
 
@@ -114,6 +113,84 @@ If you enter the command below, you can download the food11-image-dataset in the
 kaggle datasets download -d trolukovich/food11-image-dataset -p <path>
 ```
 
-## 2. Extract image features using resNet
-## 3. Save feature in vector db
-## 4. Similarity search using faiss
+## 2. Extract image features and save them using ViT(Vision Transformer) and chromaDB
+
+We define dataset used for finding image similarity in dataset.py.
+
+### 2.1 the kaggle dataset is downloaded
+
+If you want to change the image dataset, you modify this code. the dataset is stored in imgs folder.
+
+```
+kaggle.api.dataset_download_files('trolukovich/food11-image-dataset', path='imgs', unzip=False)
+with zipfile.ZipFile('imgs/food11-image-dataset.zip', 'r') as zip_ref:
+    zip_ref.extractall('imgs')
+```
+
+### 2.2 images in dataset is changed to embedded vector using FeatureExtractor, ViT
+
+image is changed to imbedded vector through feature extractor.
+ViT model extracts feature vector of image embedded vector.
+
+```
+feature_extractor = ViTFeatureExtractor.from_pretrained('facebook/dino-vits16')
+model = ViTModel.from_pretrained('facebook/dino-vits16')
+```
+
+### 2.3 embedded vectors of images are stored in chromaDB
+
+initialize the chromaDB.
+*We have utilized a method of creating directories to store data. If you wish to store data using a server or any other method, we recommend referring to the chromaDB documentation(https://docs.trychroma.com/).
+
+```
+client = chromadb.PersistentClient(path="./chroma")
+collection = client.create_collection("foods")
+```
+
+add the vector of image data to collection of chromadb.
+
+```
+collection.add(
+    embeddings=embeddings, #image tensor 
+    metadatas=metadatas, #url, image label
+    ids=ids #image id
+)
+```
+
+## 3. Predict similarity of images
+
+In model.py, class instance is created and calculate similarity of target image and others image in chromaDB
+
+### 3.1 create the class 'Xsearch' instance
+
+```
+xsearch = Xsearch()
+```
+
+### 3.2 call function with image path of target image
+
+```
+xsearch("your_image_path")
+```
+
+### 3.3 return result dictionary of query() function in chromaDB
+
+result dictionary is included image id, similarity(distance), metadata(name(image class), image url)
+
+example)
+```
+{'ids': [['Egg_36', 'Egg_33', 'Meat_51']], 
+'distances': [[412.2847900390625, 422.6854248046875, 424.696533203125]], 
+'metadatas': [[{'name': 'Egg', 'uri': 'imgs/evaluation\\Egg\\6.jpg'}, 
+{'name': 'Egg', 'uri': 'imgs/evaluation\\Egg\\3.jpg'}, 
+{'name': 'Meat', 'uri': 'imgs/evaluation\\Meat\\1.jpg'}]], 
+'embeddings': None, 'documents': [[None, None, None]]}
+```
+
+Looking at the structure of the above dictionary, the values corresponding to the keys are all 2-dimensional lists. Therefore, to use these values, you need to first convert the 2-dimensional lists into 1-dimensional lists.
+
+```
+#sample
+query_result["metadatas"][0]
+```
+
