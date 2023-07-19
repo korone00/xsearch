@@ -2,8 +2,6 @@ import {Injectable,  HttpStatus, ForbiddenException,HttpException} from '@nestjs
 import { UserRepository } from 'src/users/user.repository';
 import * as bcrypt from 'bcrypt'
 import { JwtService } from "@nestjs/jwt";
-import { UnauthorizedException } from '@nestjs/common';
-
 import { UserService } from 'src/users/users.service';
 import { User } from 'src/users/entities/user.entity';
 
@@ -38,8 +36,8 @@ export class AuthService{
         }
     }
     async invalidateAccessToken(user: any) {
-        const accessToken = this.jwtService.sign({id: user.id, expiresIn: 0}); // expiresIn을 0으로 설정하여 토큰을 만료시킵니다.
-        // await this.userService.updateUserToken(user.id, accessToken); // 데이터베이스에 만료된 토큰을 업데이트 합니다.
+        const accessToken = this.jwtService.sign({id: user.id, expiresIn: 0}); // token expiresIn to 0
+        // await this.userService.updateUserToken(user.id, accessToken);
     }
     
     async login(userlogin:any){

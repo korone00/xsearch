@@ -90,6 +90,8 @@ https://www.postman.com/downloads/
 $ npm install
 $ npm install --save @nestjs/typeorm typeorm
 $ npm install --save-dev @nestjs/testing
+$ npm install @nestjs/swagger
+
 ```
 
 ## Running the app
