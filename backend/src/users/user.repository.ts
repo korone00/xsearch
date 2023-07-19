@@ -2,7 +2,6 @@ import { Repository ,DataSource} from 'typeorm'
 import { User } from './entities/user.entity';
 import {Injectable} from '@nestjs/common';
 
-//@EntityRepository(User)
 @Injectable()
 export class UserRepository extends Repository<User>{ //Repository<Entity> 형식
     constructor(dataSource: DataSource){
@@ -16,7 +15,7 @@ export class UserRepository extends Repository<User>{ //Repository<Entity> 형�
         if(!user){
           return null;
         }
-        return user; // 일단 user service 오류 제쳐두고 auth 먼저 해결
+        return user; 
       } 
       
 }

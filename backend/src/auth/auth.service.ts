@@ -42,12 +42,14 @@ export class AuthService{
         // await this.userService.updateUserToken(user.id, accessToken); // 데이터베이스에 만료된 토큰을 업데이트 합니다.
     }
     
-    async login(user:any){
+    async login(userlogin:any){
+        const user= await this.userRepository.findUserById(userlogin.id);
         const payload={id:user.id, name:user.name,email:user.email};
         return {
             accessToken:this.jwtService.sign(payload)
         };
     }
+
 
     // async logout(user: any) {
     //     const accessToken = this.jwtService.decode(user.accessToken);
