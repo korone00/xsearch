@@ -20,7 +20,7 @@ p_search = p_search_pre.output('img_path', 'pred', 'score')
 
 # Search for example query image(s)
 collection.load()
-
+dc = p_search('test/warplane/*.JPEG')
 dc = dc.get_dict()
 
 #json
