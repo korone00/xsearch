@@ -4,7 +4,7 @@ from tqdm import tqdm
 import requests
 from PIL import Image
 import os
-#from chromadb.config import Settings
+#from chromadb.config import Settings -> previous version
 
 class Xsearch:
     def __init__(self): #initialize model and database
@@ -61,14 +61,19 @@ class Xsearch:
             n_results = 3
         )
 
-
+#test Xsearch
 if __name__ == '__main__':
     xsearch = Xsearch() #create the instance
     temp = xsearch("imgs/evaluation/Bread/0.jpg") #predict the image
     print(temp)
 
 
-
+#return dictionary example
 '''
-{'ids': [['Egg_36', 'Egg_33', 'Meat_51']], 'distances': [[412.2847900390625, 422.6854248046875, 424.696533203125]], 'metadatas': [[{'name': 'Egg', 'uri': 'imgs/evaluation\\Egg\\6.jpg'}, {'name': 'Egg', 'uri': 'imgs/evaluation\\Egg\\3.jpg'}, {'name': 'Meat', 'uri': 'imgs/evaluation\\Meat\\1.jpg'}]], 'embeddings': None, 'documents': [[None, None, None]]}
+{'ids': [['Egg_36', 'Egg_33', 'Meat_51']], 
+'distances': [[412.2847900390625, 422.6854248046875, 424.696533203125]], 
+'metadatas': [[{'name': 'Egg', 'uri': 'imgs/evaluation\\Egg\\6.jpg'}, 
+{'name': 'Egg', 'uri': 'imgs/evaluation\\Egg\\3.jpg'}, 
+{'name': 'Meat', 'uri': 'imgs/evaluation\\Meat\\1.jpg'}]], 
+'embeddings': None, 'documents': [[None, None, None]]}
 '''
