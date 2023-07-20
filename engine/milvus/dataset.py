@@ -1,9 +1,8 @@
 import csv
 from glob import glob
-from pathlib import Path
 from statistics import mean
 
-from towhee import pipe, ops, DataCollection
+from towhee import pipe, ops
 from pymilvus import connections, FieldSchema, CollectionSchema, DataType, Collection, utility
 
 import requests
@@ -64,7 +63,7 @@ DEVICE = None # if None, use default device (cuda is enabled if available)
 # Milvus parameters
 HOST = '127.0.0.1'
 PORT = '19530'
-TOPK = 10 
+TOPK = 5 
 DIM = 2048 # dimension of embedding extracted by MODEL
 COLLECTION_NAME = 'reverse_image_search'
 INDEX_TYPE = 'IVF_FLAT'
@@ -95,17 +94,8 @@ p_embed = (
         .map('img', 'vec', ops.image_embedding.timm(model_name=MODEL, device=DEVICE))
 )
 
-
-# # Display embedding result, no need for implementation
-# p_display = p_embed.output('img_path', 'img', 'vec')
-# DataCollection(p_display('./test/goldfish/*.JPEG')).show()
-
-
 # Create milvus collection (delete first if exists)
 def create_milvus_collection(collection_name, dim):
-    # if utility.has_collection(collection_name):
-    #     utility.drop_collection(collection_name)
-
     fields = [
         FieldSchema(name='path', dtype=DataType.VARCHAR, description='path to image', max_length=500, 
                     is_primary=True, auto_id=False),

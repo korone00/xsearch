@@ -12,3 +12,4 @@ reverse_image_search.csv
 reverse_image_search.zip
 docker-compose.yml
 1_build_image_search_engine.ipynb
+.json
