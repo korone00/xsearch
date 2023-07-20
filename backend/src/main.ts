@@ -17,6 +17,14 @@ async function bootstrap() {
   .setTitle('For Test')
   .setDescription('testing nestjs application')
   .setVersion('1.0')
+  .addBearerAuth({
+    type:'http',
+    scheme:'bearer',
+    name:'JWT',
+    in:'header'
+  },
+  'access-token',
+  )
   .build();
   
   const document=SwaggerModule.createDocument(app,config);

@@ -14,8 +14,8 @@ import { UploadModule } from './modules/upload/upload.module';
       host: 'localhost',
       port: 5432,
       username: 'postgres',
-      password: '1234',
-      database: 'postgres',
+      password: '0927',
+      database: 'xsearch',
       entities: [__dirname+'/**/*.entity.{ts,js}'], 
       synchronize: true,  //shouldn't be used in production - otherwise you can lose production data.
     }),

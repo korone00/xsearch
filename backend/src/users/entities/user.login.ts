@@ -1,7 +1,7 @@
 import {ApiProperty} from '@nestjs/swagger'
 
 
-export class Logintest {
+export class loginDto {
     @ApiProperty({
       example: "examid",
       description: "id",
