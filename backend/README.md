@@ -22,7 +22,10 @@ https://hub.docker.com/_/postgres?tab=tags
      $ docker pull postgres
      ```
 
-If you, succeed you can check the postgres in Docker desktop images
+<p align="center">
+ <img src = "./readmeimgs/dockerimgs.png">
+</p>
+If you, succeed you can check the postgres image in Docker desktop images
 you can choose two options to make container
 
 3-1.  command
@@ -32,14 +35,18 @@ you can choose two options to make container
      $ docker run -d --name postgres -e POSTGRES_PASSWORD=1234 -p 5432:5432 -v pgdata:/var/lib/postgresql/data postgres
      ```
 
+
 3-2. Click the run button, and you will check optional settings
 |text|type|
 |---|---|
 |container name|postgres|
 |Hostport|5432|
-|Volumes Host Path|/var/lib/docker/volumes/|
+|Volumes Host Path|{path you want to}|
 |Environment variables(Variables:Values)|POSTGRES_PASSWORD:1234|
-
+|Environment variables(Variables:Values)|POSTGRES_DB:xsearch|
+<p align="center">
+ <img src = "./readmeimgs/dockercontainer.png">
+</p>
 Type the container name to postgres
 Host
 click the ImagesInto the 
@@ -58,12 +65,22 @@ TablePlus : https://tableplus.com/
    - Host: Hostname or IP address of the Postgres running in Docker (localhost)
    - Port: The port of the PostgreSQL running on (default: 5432)
    - User: The username (default: postgres)
-   - Password: 1234.
+   - Password: 0927.
    - Database: Name of the database to use
 
   After completing the settings, click the "Test" button to verify the connection, then click "Connect" to finalize the connection.
+<p align="center">
+ <img src = "./readmeimgs/tablescon.png">
+</p>
+this is a exam images
 
-4-2. Database command:
+<p align="center">
+ <img src = "./readmeimgs/tablequery.png">
+</p>
+and run all this query, if you are succeed, you are going to connect nest js web
+
+
+4-2. Database command:I(don't need to do this)
    - Connect to the PostgreSQL container:
 
      ```bash
@@ -88,10 +105,10 @@ TablePlus : https://tableplus.com/
      VALUES ('qwe', '123', 'john', 'john@');
      ```
 
-5. Install Postman:
+5. Install Postman:(don't need to do this)
    - Download and install Postman from: https://www.postman.com/downloads/
 
-6. Test API using Postman:
+6. Test API using Postman:(don't need to do this)
    - Launch Postman and create a new request by clicking the "+" button at the top.
    - Choose the desired HTTP method and enter the API endpoint URL.
    - Configure any required authentication tokens, headers, etc., under the "Headers" tab.
@@ -104,12 +121,13 @@ TablePlus : https://tableplus.com/
    $ npm install
    $ npm install --save @nestjs/typeorm typeorm
    $ npm install --save-dev @nestjs/testing
-   $ npm install @nestjs/swagger
    ```
 
 ## Running the Backend Server
 
 To run the Nest.js backend server:
+you need to run container actions, and npm run start.
+and localhost:3000/api, you can test database server and login, out, regiter etc...
 
 ```bash
 # Development mode
@@ -118,5 +136,10 @@ $ npm run start
 # Watch mode (for automatic restart on file changes)
 $ npm run start:dev
 ```
+<p align="center">
+ <img src = "./readmeimgs/swaggerapi.png">
+</p>
 
 Your backend database server should now be up and running, and you can start developing and testing your application.
+
+

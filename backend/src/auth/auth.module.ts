@@ -14,15 +14,13 @@ import { UserService } from 'src/users/users.service';
     imports:[
         PassportModule,
         JwtModule.register({
-            secret:'secretKey',
-            signOptions:{expiresIn:'60s'},
-        })
-        ,
+            secret: process.env.JWT_SECRET_KEY,
+            signOptions:{expiresIn: process.env.ACCESS_TOKEN_EXPIRATION},
+        }),
         TypeOrmModule.forFeature([User]),
     ],
     controllers:[AuthController],
-    providers:[AuthService, LocalStrategy,JwtStrategy,
-        UserRepository,UserService]
-
+    providers:[AuthService, LocalStrategy, JwtStrategy,
+        UserRepository, UserService]
 })
 export class AuthModule{}
