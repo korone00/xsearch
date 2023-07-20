@@ -11,19 +11,19 @@ import requests
 # If you excute dataset.py, you don't have to excute this file again.
 
 # 'trolukovich/food11-image-dataset' kaggle dataset download
-'''
+
+#You have to run the below code only once.
+
 kaggle.api.dataset_download_files('trolukovich/food11-image-dataset', path='imgs', unzip=False)
 with zipfile.ZipFile('imgs/food11-image-dataset.zip', 'r') as zip_ref:
     zip_ref.extractall('imgs')
-'''
+
 
 #store img paths
 img_list = sorted(glob("imgs/evaluation/*/[0-9].jpg"))
 
 #define chromadb
-
-#client = chromadb.Client()
-#client = chromadb.EphemeralClient()
+#client = chromadb.Client() -> previous version
 client = chromadb.PersistentClient(path="./chroma")
 collection = client.create_collection("foods")
 
@@ -77,6 +77,8 @@ collection.add(
 
 
 #test
+
+'''
 test_img = Image.open(requests.get("https://i.imgur.com/yNp6qTS.png", stream=True).raw).convert("RGB")
 
 
@@ -91,3 +93,4 @@ query_result = collection.query(
 )
 
 print(query_result)
+'''

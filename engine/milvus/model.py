@@ -1,46 +1,33 @@
-import csv
-from glob import glob
+
+import json
+
 from pathlib import Path
-from statistics import mean
 
-from towhee import pipe, ops, DataCollection
-from pymilvus import connections, FieldSchema, CollectionSchema, DataType, Collection, utility
-from dataset import script_dir, HOST, PORT, TOPK, COLLECTION_NAME, p_embed, collection 
 
-from towhee.types.image import Image
+from towhee import ops 
+from dataset import HOST, PORT, TOPK, COLLECTION_NAME, p_embed, collection 
+
 # Search pipeline
 p_search_pre = (
         p_embed.map('vec', ('search_res'), ops.ann_search.milvus_client(
                     host=HOST, port=PORT, limit=TOPK,
                     collection_name=COLLECTION_NAME))
-               .map('search_res', 'pred', lambda x: [str(Path(y[0]).resolve()) for y in x])
-        #        .output('img_path', 'pred')
+               .map('search_res', ('pred'), lambda x: [str(Path(y[0]).resolve()) for y in x])
+               .map('search_res', ('score'), lambda x: [str(y[1]) for y in x])
 )
-p_search = p_search_pre.output('img_path', 'pred')
+
+p_search = p_search_pre.output('img_path', 'pred', 'score')
 
 # Search for example query image(s)
 collection.load()
-dc = p_search('test/goldfish/*.JPEG')
 
-# Display search results with image paths
+dc = dc.get_dict()
 
-# DataCollection(dc).show()
+#json
+json_data = json.dumps(dc)
 
-
-dc.get_dict()
-
+with open('json_result.json', 'w') as f:
+    f.write(json_data)
 
 # Disconnect database
 collection.release()
-
-# def read_images(img_paths):
-#     imgs = []
-#     for p in img_paths:
-#         imgs.append(Image(cv2.imread(p), 'BGR'))
-#     return imgs
-
-# p_search_img = (
-#     p_search_pre.map('pred', 'pred_images', read_images)
-#                 .output('img', 'pred_images')
-# )
-# DataCollection(p_search_img('test/goldfish/*.JPEG')).show()
