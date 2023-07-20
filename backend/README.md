@@ -119,8 +119,13 @@ and run all this query, if you are succeed, you are going to connect nest js web
 7. Download Nest.js modules:
    ```bash
    $ npm install
+
+   // If you occur problems in VS, Type below Scripts
    $ npm install --save @nestjs/typeorm typeorm
+   $ npm install @types/hbs --save-dev
    $ npm install --save-dev @nestjs/testing
+   $ npm install --save-dev @types/babel__core
+
    ```
 
 ## Running the Backend Server
@@ -140,6 +145,18 @@ $ npm run start:dev
  <img src = "./readmeimgs/swaggerapi.png">
 </p>
 
-Your backend database server should now be up and running, and you can start developing and testing your application.
 
+Your backend database server should now be up and running, and you can start developing and testing your application
 
+# dotenv settings
+If you don't have an .env file in a subdocument of the backend folder, create one and add an example like the following
+```
+DB_HOST=localhost
+DB_PORT=5432
+DB_USERNAME=postgres
+DB_PASSWORD=0927
+DB_DATABASE=xsearch
+
+ACCESS_TOKEN_EXPIRATION=60s
+JWT_SECRET_KEY=secretKey
+```

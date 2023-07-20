@@ -19,9 +19,8 @@ import { ConfigService, ConfigModule } from '@nestjs/config';
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: async (config: ConfigService) => ({
-        //            secret: config.get(process.env.JWT_SECRET_KEY), // 여기는 이 방법이 안 돼서 백틱으로 감싼 형식으로 했더니 된다.
-        secret: `${process.env.JWT_SECRET_KEY}`,
-        signOptions: { expiresIn: `${process.env.ACCESS_TOKEN_EXPIRATION}` },
+        secret: config.get<string>('JWT_SECRET_KEY'), // Update this line
+        signOptions: { expiresIn: config.get<string>('ACCESS_TOKEN_EXPIRATION') }, // Update this line
       }),
     }),
     TypeOrmModule.forFeature([User]),

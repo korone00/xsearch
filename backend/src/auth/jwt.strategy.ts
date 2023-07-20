@@ -9,7 +9,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: true, // 배포 시, false로 설정할 것.
-      secretOrKey: config.get(process.env.JWT_SECRET_KEY), // 해결
+      secretOrKey: config.get<String>('JWT_SECRET_KEY'), // 해결
     });
   }
   async validate(payload: any) {
