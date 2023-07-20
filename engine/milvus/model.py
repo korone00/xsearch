@@ -6,9 +6,8 @@ from statistics import mean
 from towhee import pipe, ops, DataCollection
 from pymilvus import connections, FieldSchema, CollectionSchema, DataType, Collection, utility
 from dataset import script_dir, HOST, PORT, TOPK, COLLECTION_NAME, p_embed, collection 
-import cv2
-from towhee.types.image import Image
 
+from towhee.types.image import Image
 # Search pipeline
 p_search_pre = (
         p_embed.map('vec', ('search_res'), ops.ann_search.milvus_client(
@@ -19,14 +18,17 @@ p_search_pre = (
 )
 p_search = p_search_pre.output('img_path', 'pred')
 
-# Display search results with images, no need for implementation
-
 # Search for example query image(s)
 collection.load()
 dc = p_search('test/goldfish/*.JPEG')
 
 # Display search results with image paths
-dc.get_dict('pred').values()
+
+# DataCollection(dc).show()
+
+
+dc.get_dict()
+
 
 # Disconnect database
 collection.release()
