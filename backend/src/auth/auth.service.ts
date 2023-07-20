@@ -47,7 +47,9 @@ export class AuthService{
             accessToken:this.jwtService.sign(payload)
         };
     }
-
+    public getCookieWithJWT(token:any){
+        return `Authentication=${token};HttpOnly;Path=/;Max-Age=60s`
+    }
 
     // async logout(user: any) {
     //     const accessToken = this.jwtService.decode(user.accessToken);

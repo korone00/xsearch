@@ -1,11 +1,11 @@
-import { Controller,UseGuards,Post,Req, Get,Body } from "@nestjs/common";
+import { Controller,UseGuards,Post,Req, Get,Body,Res } from "@nestjs/common";
 import { AuthService } from "./auth.service";
 import { LocalAuthGuard } from "./local-auth.guard";
 import { User } from "src/users/entities/user.entity";
 import { JwtAuthGuard } from "./jwt-auth.guard";
 import { ApiTags, ApiOperation, ApiCreatedResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { loginDto } from "src/users/entities/user.login";
-
+import {Response} from 'express'
 
 @Controller('auth')
 @ApiTags('auth API')
@@ -15,8 +15,11 @@ export class AuthController{
     @ApiCreatedResponse({description:'사용자 login'})
     @UseGuards(LocalAuthGuard) //login 실행하기 전, 필요한 작업 수행
     @Post('login')
-    async login(@Body() userlogin:loginDto){// 원본은 @Req() req
-        return this.authService.login(userlogin); //req.user 였음
+    async login(@Body() userlogin:loginDto, @Res() response:Response){
+        const token= await this.authService.login(userlogin);
+        const cookie=this.authService.getCookieWithJWT(token);
+        response.setHeader('Set-Cookie',cookie);        
+        return response.send(`access-tocken:${token.accessToken}`); 
     }// 결과로 할당된 토큰 반환
 
     @ApiOperation({summary:'register API', description:'사용자 register'})

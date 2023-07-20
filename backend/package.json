@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
+    "@nestjs/config": "^3.0.0",
     "@nestjs/core": "^9.0.0",
     "@nestjs/jwt": "^10.1.0",
     "@nestjs/ng-universal": "^8.0.0",
@@ -53,6 +54,7 @@
     "@types/jest": "29.2.4",
     "@types/node": "18.11.18",
     "@types/passport-jwt": "^3.0.9",
+    "@types/passport-local": "^1.0.35",
     "@types/supertest": "^2.0.11",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
