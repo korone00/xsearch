@@ -1,33 +1,55 @@
-
 import json
-
 from pathlib import Path
+from towhee import pipe, ops
+from dataset import MilvusSearch
 
+class MilvusPredict(MilvusSearch):
+    def __init__(self):
+        super().__init__()
+    
+    def search(self, img_path):
+        p_embed = (
+            pipe.input('src')
+                .flat_map('src', 'img_path', self.load_image)
+                .map('img_path', 'img', ops.image_decode())
+                .map('img', 'vec', ops.image_embedding.timm(model_name=self.MODEL, device=self.DEVICE))
+        )
+        
+        p_search_pre = (
+            p_embed.map('vec', ('search_res'), ops.ann_search.milvus_client(
+                        host=self.HOST, port=self.PORT, limit=self.TOPK,
+                        collection_name=self.COLLECTION_NAME))
+                    .map('search_res', ('pred'), lambda x: [str(Path(y[0]).resolve()) for y in x])
+                    .map('search_res', ('score'), lambda x: [str(y[1]) for y in x])
+        )
+        
+        p_search = p_search_pre.output('img_path', 'pred', 'score')
+        
+        path = img_path
+        dc = p_search(path)
+        dc_dict = dc.get_dict()
+        
+        json_data = json.dumps(dc_dict)
+        
+        with open('jsonfile.json', 'w') as f:
+            f.write(json_data)
+            
+        return json_data
+        
+def xsearch_engine():
+    milvus = MilvusPredict()
+    collection = milvus.connect()
+    print(collection.num_entities)
+    collection.load()
 
-from towhee import ops 
-from dataset import HOST, PORT, TOPK, COLLECTION_NAME, p_embed, collection 
-
-# Search pipeline
-p_search_pre = (
-        p_embed.map('vec', ('search_res'), ops.ann_search.milvus_client(
-                    host=HOST, port=PORT, limit=TOPK,
-                    collection_name=COLLECTION_NAME))
-               .map('search_res', ('pred'), lambda x: [str(Path(y[0]).resolve()) for y in x])
-               .map('search_res', ('score'), lambda x: [str(y[1]) for y in x])
-)
-
-p_search = p_search_pre.output('img_path', 'pred', 'score')
-
+    jsons = milvus.search('test/warplane/*.JPEG')
+    
+    # Disconnect database
+    collection.release()
+    
+    return jsons
+    
 # Search for example query image(s)
-collection.load()
-dc = p_search('test/warplane/*.JPEG')
-dc = dc.get_dict()
-
-#json
-json_data = json.dumps(dc)
-
-with open('json_result.json', 'w') as f:
-    f.write(json_data)
-
-# Disconnect database
-collection.release()
+if __name__ == '__main__':
+    jsons = xsearch_engine() #return json
+    print(jsons)
