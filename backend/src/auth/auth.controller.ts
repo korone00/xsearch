@@ -3,8 +3,8 @@ import { AuthService } from "./auth.service";
 import { LocalAuthGuard } from "./local-auth.guard";
 import { User } from "src/users/entities/user.entity";
 import { JwtAuthGuard } from "./jwt-auth.guard";
-import { ApiTags, ApiOperation, ApiCreatedResponse } from '@nestjs/swagger';
-import { Logintest } from "src/users/entities/user.login";
+import { ApiTags, ApiOperation, ApiCreatedResponse, ApiBearerAuth } from '@nestjs/swagger';
+import { loginDto } from "src/users/entities/user.login";
 
 
 @Controller('auth')
@@ -15,7 +15,7 @@ export class AuthController{
     @ApiCreatedResponse({description:'사용자 login'})
     @UseGuards(LocalAuthGuard) //login 실행하기 전, 필요한 작업 수행
     @Post('login')
-    async login(@Body() userlogin:Logintest){// 원본은 @Req() req
+    async login(@Body() userlogin:loginDto){// 원본은 @Req() req
         return this.authService.login(userlogin); //req.user 였음
     }// 결과로 할당된 토큰 반환
 
@@ -37,6 +37,7 @@ export class AuthController{
     
     @UseGuards(JwtAuthGuard)
     @Get('profile')
+    @ApiBearerAuth('access-token')
     @ApiOperation({summary:'profile API', description:'사용자 profile'})
     @ApiCreatedResponse({description:'사용자 profile'})
     userProfile(@Req() req){

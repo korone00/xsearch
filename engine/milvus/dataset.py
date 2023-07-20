@@ -17,44 +17,45 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 os.chdir(script_dir)
 #c:\Users\Minhyeok\Project\xsearch\engine\milvus
 
-## Prepration Data
-# Download link as a string
-download_link = "https://github.com/towhee-io/examples/releases/download/data/reverse_image_search.zip"
+if __name__ == '__main__':
+    ## Prepration Data
+    # Download link as a string
+    download_link = "https://github.com/towhee-io/examples/releases/download/data/reverse_image_search.zip"
 
-# Function to download the file
-def download_file(url, save_path):
-    if os.path.exists(save_path):
-        print("File already exists. Skipping download.")
-        return
+    # Function to download the file
+    def download_file(url, save_path):
+        if os.path.exists(save_path):
+            print("File already exists. Skipping download.")
+            return
 
-    response = requests.get(url)
-    if response.status_code == 200:
-        with open(save_path, "wb") as f:
-            f.write(response.content)
-        print("File downloaded successfully.")
-    else:
-        print("Failed to download the file.")
+        response = requests.get(url)
+        if response.status_code == 200:
+            with open(save_path, "wb") as f:
+                f.write(response.content)
+            print("File downloaded successfully.")
+        else:
+            print("Failed to download the file.")
 
-# Unzip the downloaded file in the same directory
-def unzip_file(zip_file_path):
-    unzip_dir = os.path.splitext(zip_file_path)[0]
-    if os.path.exists(unzip_dir):
-        print("Unzipped folder already exists. Skipping decompression.")
-        return
+    # Unzip the downloaded file in the same directory
+    def unzip_file(zip_file_path):
+        unzip_dir = os.path.splitext(zip_file_path)[0]
+        if os.path.exists(unzip_dir):
+            print("Unzipped folder already exists. Skipping decompression.")
+            return
 
-    with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
-        zip_ref.extractall(os.path.dirname(zip_file_path))
-    print("File unzipped successfully.")
+        with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
+            zip_ref.extractall(os.path.dirname(zip_file_path))
+        print("File unzipped successfully.")
 
-# Specify the path where you want to save the downloaded file
-save_path = os.path.join(script_dir,"reverse_image_search.zip")
+    # Specify the path where you want to save the downloaded file
+    save_path = os.path.join(script_dir,"reverse_image_search.zip")
 
-# Check if the file already exists before downloading
-if not os.path.exists(save_path):
-    download_file(download_link, save_path)
+    # Check if the file already exists before downloading
+    if not os.path.exists(save_path):
+        download_file(download_link, save_path)
 
-# Call the unzip_file function with the downloaded file path
-unzip_file(save_path)
+    # Call the unzip_file function with the downloaded file path
+    unzip_file(save_path)
 
 # Towhee parameters
 MODEL = 'resnet50'
@@ -102,9 +103,9 @@ p_embed = (
 
 # Create milvus collection (delete first if exists)
 def create_milvus_collection(collection_name, dim):
-    if utility.has_collection(collection_name):
-        utility.drop_collection(collection_name)
-    
+    # if utility.has_collection(collection_name):
+    #     utility.drop_collection(collection_name)
+
     fields = [
         FieldSchema(name='path', dtype=DataType.VARCHAR, description='path to image', max_length=500, 
                     is_primary=True, auto_id=False),
@@ -126,23 +127,30 @@ def create_milvus_collection(collection_name, dim):
 connections.connect(host=HOST, port=PORT)
 
 # Create collection
-collection = create_milvus_collection(COLLECTION_NAME, DIM)
+if utility.has_collection(COLLECTION_NAME):
+    collection = Collection(COLLECTION_NAME)
+else:
+    collection = create_milvus_collection(COLLECTION_NAME, DIM)
+
 print(f'A new collection created: {COLLECTION_NAME}')
 
-# Insert pipeline
-p_insert = (
-        p_embed.map(('img_path', 'vec'), 'mr', ops.ann_insert.milvus_client(
-                    host=HOST,
-                    port=PORT,
-                    collection_name=COLLECTION_NAME
-                    ))
-        .output('mr')
-)
+if __name__ == '__main__':
+    # Insert pipeline
+    p_insert = (
+            p_embed.map(('img_path', 'vec'), 'mr', ops.ann_insert.milvus_client(
+                        host=HOST,
+                        port=PORT,
+                        collection_name=COLLECTION_NAME
+                        ))
+            .output('mr')
+    )
 
 
-# Insert data
-p_insert(INSERT_SRC)
+    # Insert data
+    p_insert(INSERT_SRC)
 
 # Check collection
 print('Number of data inserted:', collection.num_entities)
 print("Success!")
+
+collection.release()
