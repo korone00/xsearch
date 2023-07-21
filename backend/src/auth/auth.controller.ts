@@ -42,15 +42,16 @@ export class AuthController {
     return await this.authService.registerUser(user);
   }
 
-  @ApiOperation({ summary: 'logout API', description: '사용자 logout' })
-  @ApiCreatedResponse({ description: '사용자 logout' })
+  @UseGuards(JwtAuthGuard)
   @Get('logout')
-  async logout(@Req() req) {
-    //await this.authService.logout(req.user);
-    return 'Logout Success!';
-    // res.redirect('/login'); // move to login.
+  @ApiBearerAuth('access-token')
+  @ApiOperation({summary:'logout API', description:'사용자 logout'})
+  @ApiCreatedResponse({description:'사용자 logout'})
+  async logOut(@Req() req:Request, @Res() res: Response) {
+      res.setHeader('Set-Cookie',this.authService.getAwayCookie())
+      return res.status(200).send('로그아웃 성공. 다시 로그인 하세요');
   }
-
+  
   @UseGuards(JwtAuthGuard)
   @Get('profile')
   @ApiBearerAuth('access-token')

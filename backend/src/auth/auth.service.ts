@@ -54,17 +54,9 @@ export class AuthService {
     return `Authentication=${token};HttpOnly;Path=/;Max-Age=60s`;
   }
 
-  // async logout(user: any) {
-  //     const accessToken = this.jwtService.decode(user.accessToken);
-  //     const expiresIn = accessToken['exp'];
-
-  //     if (await this.redisService.getClient().set(`BlackList_${user.userId}`, 'loggedouted', 'EX', expiresIn)) {
-  //       return true;
-  //     } else {
-  //       throw new UnauthorizedException();
-  //     }
-  // }
-
+  public getAwayCookie(){
+    return `Authentication=;HttpOnly;Path=/,Max-Age=0`;
+}
   async registerUser(newUser: User) {
     const userExist = await this.userService.find(newUser);
     if (userExist) {
