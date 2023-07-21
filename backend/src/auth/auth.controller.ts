@@ -32,7 +32,7 @@ export class AuthController {
     const token = await this.authService.login(userlogin);
     const cookie = this.authService.getCookieWithJWT(token);
     response.setHeader('Set-Cookie', cookie);
-    return response.send(`access-tocken:${token.accessToken}`);
+    return response.send(`access-tocken:${token}`);
   } // 결과로 할당된 토큰 반환
 
   @ApiOperation({ summary: 'register API', description: '사용자 register' })
