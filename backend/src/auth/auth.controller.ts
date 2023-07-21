@@ -28,12 +28,22 @@ export class AuthController {
   @ApiCreatedResponse({ description: '사용자 login' })
   @UseGuards(LocalAuthGuard) //login 실행하기 전, 필요한 작업 수행
   @Post('login')
-  async login(@Body() userlogin: loginDto, @Res() response: Response) {
-    const token = await this.authService.login(userlogin);
-    const cookie = this.authService.getCookieWithJWT(token);
-    response.setHeader('Set-Cookie', cookie);
-    return response.send(`access-tocken:${token}`);
-  } // 결과로 할당된 토큰 반환
+  // async login(@Body() userlogin: loginDto, @Res() response: Response) {
+  //   const token = await this.authService.login(userlogin);
+  //   const cookie = this.authService.getCookieWithJWT(token);
+  //   response.setHeader('Set-Cookie', cookie);
+  //   return response.send(`access-tocken:${token}`);
+  // }
+  async login(@Body() userlogin:loginDto, @Res() response:Response){
+        const token= await this.authService.login(userlogin);
+        response.setHeader('Authorization','Bearer'+token);//그냥 token으로 주면 Bearer가 붙지 않음
+        response.cookie('jwt',token,{
+            httpOnly:true,
+            maxAge:24*60*60*1000
+        })
+        response.send('login suceess'+`access-tocken:${token}`)
+    } //new version
+
 
   @ApiOperation({ summary: 'register API', description: '사용자 register' })
   @ApiCreatedResponse({ description: '사용자 register' })
@@ -42,15 +52,21 @@ export class AuthController {
     return await this.authService.registerUser(user);
   }
 
-  @UseGuards(JwtAuthGuard)
-  @Get('logout')
+ // @UseGuards(JwtAuthGuard)
+  @Post('logout')
   @ApiBearerAuth('access-token')
   @ApiOperation({summary:'logout API', description:'사용자 logout'})
   @ApiCreatedResponse({description:'사용자 logout'})
+  // async logOut(@Req() req:Request, @Res() res: Response) {
+  //     res.setHeader('Set-Cookie',this.authService.getAwayCookie())
+  //     return res.status(200).send('로그아웃 성공. 다시 로그인 하세요');
+  // }
   async logOut(@Req() req:Request, @Res() res: Response) {
-      res.setHeader('Set-Cookie',this.authService.getAwayCookie())
-      return res.status(200).send('로그아웃 성공. 다시 로그인 하세요');
-  }
+    res.cookie('jwt','',{
+        maxAge:0
+    })
+    return res.status(200).send('로그아웃 성공. 다시 로그인 하세요');
+ }
   
   @UseGuards(JwtAuthGuard)
   @Get('profile')
