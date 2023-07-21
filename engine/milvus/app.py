@@ -4,21 +4,13 @@ from flask import Flask, request, jsonify
 from dataset import dataLoader
 from model import xsearch_engine
 
-if __name__ == '__main__':
-    #load_dotenv()
-    #flaskIP = os.environ.get("flaskIP")
-    #flaskHOST = os.environ.get("flaskPORT")
-    flaskHOST = '127.0.0.1'
-    flaskPORT = '5000'
-    app = Flask(__name__)
-    app.run(host=flaskHOST, port=flaskPORT)
-    
+app = Flask(__name__)
+
 @app.before_first_request
 def initialize_engine():
     print("Initializing engine...")
     dataLoader()
     
-# Endpoint for image search
 @app.route('/search', methods=['POST'])
 def search_similar_images():
     try:
@@ -40,4 +32,12 @@ def search_similar_images():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500 #http status code
+
+if __name__ == '__main__':
+    #load_dotenv()
+    #flaskIP = os.environ.get("flaskIP")
+    #flaskHOST = os.environ.get("flaskPORT")
+    flaskHOST = '127.0.0.1'
+    flaskPORT = '5000'
+    app.run(host=flaskHOST, port=flaskPORT)
 
