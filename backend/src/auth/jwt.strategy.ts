@@ -4,9 +4,13 @@ import { ExtractJwt } from 'passport-jwt';
 //import { Strategy } from 'passport-local';
 import { Strategy } from 'passport-jwt';
 import { ConfigService } from '@nestjs/config';
+import { UserRepository } from 'src/users/user.repository';
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
-  constructor(private readonly config: ConfigService) {
+  constructor(
+    private readonly config: ConfigService,
+    private readonly userRepository:UserRepository
+    ) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: true, // 배포 시, false로 설정할 것.
@@ -14,6 +18,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
   }
   async validate(payload: any) {
-    return { id: payload.id, name: payload.name, email: payload.email };
+    const user= await this.userRepository.findUserById(payload.id);
+    return user;
   }
 }

@@ -45,7 +45,7 @@ export class AuthService {
 
   async login(userlogin: any) {
     const user = await this.userRepository.findUserById(userlogin.id);
-    const payload = { id: user.id, name: user.name, email: user.email };
+    const payload = { id: user.id};
     return this.jwtService.sign(payload);
   }
   public getCookieWithJWT(token: any) {
@@ -74,4 +74,7 @@ export class AuthService {
     }
     return userRegister;
   }
+  async getUserList():Promise<any>{
+    return this.userService.findAll();
+}
 }

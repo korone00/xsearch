@@ -19,6 +19,8 @@ import {
 } from '@nestjs/swagger';
 import { loginDto } from 'src/users/entities/user.login';
 import { Response } from 'express';
+import { RoleGuard } from "./role.guard";
+import { Roles } from "./roles";
 
 @Controller('auth')
 @ApiTags('auth API')
@@ -26,14 +28,8 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
   @ApiOperation({ summary: 'login API', description: '사용자 login' })
   @ApiCreatedResponse({ description: '사용자 login' })
-  @UseGuards(LocalAuthGuard) //login 실행하기 전, 필요한 작업 수행
+  @UseGuards(LocalAuthGuard) 
   @Post('login')
-  // async login(@Body() userlogin: loginDto, @Res() response: Response) {
-  //   const token = await this.authService.login(userlogin);
-  //   const cookie = this.authService.getCookieWithJWT(token);
-  //   response.setHeader('Set-Cookie', cookie);
-  //   return response.send(`access-tocken:${token}`);
-  // }
   async login(@Body() userlogin:loginDto, @Res() response:Response){
         const token= await this.authService.login(userlogin);
         response.setHeader('Authorization','Bearer'+token);//그냥 token으로 주면 Bearer가 붙지 않음
@@ -52,15 +48,11 @@ export class AuthController {
     return await this.authService.registerUser(user);
   }
 
- // @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   @Post('logout')
   @ApiBearerAuth('access-token')
   @ApiOperation({summary:'logout API', description:'사용자 logout'})
   @ApiCreatedResponse({description:'사용자 logout'})
-  // async logOut(@Req() req:Request, @Res() res: Response) {
-  //     res.setHeader('Set-Cookie',this.authService.getAwayCookie())
-  //     return res.status(200).send('로그아웃 성공. 다시 로그인 하세요');
-  // }
   async logOut(@Req() req:Request, @Res() res: Response) {
     res.cookie('jwt','',{
         maxAge:0
@@ -76,4 +68,13 @@ export class AuthController {
   userProfile(@Req() req) {
     return req.user;
   }
+    @Roles('admin')
+    @UseGuards(JwtAuthGuard,RoleGuard)
+    @ApiBearerAuth('access-token')
+    @ApiOperation({summary:'userList API', description:'사용자 전체 목록 (only for Admin)'})
+    @ApiCreatedResponse({description:'사용자 전체 목록'})
+    @Get('userlist')
+    getUserList():any{
+        return this.authService.getUserList();
+    }
 }
