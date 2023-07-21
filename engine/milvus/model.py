@@ -36,13 +36,13 @@ class MilvusPredict(MilvusSearch):
             
         return json_data
         
-def xsearch_engine():
+def xsearch_engine(img_path):
     milvus = MilvusPredict()
     collection = milvus.connect()
     print(collection.num_entities)
     collection.load()
 
-    jsons = milvus.search('test/warplane/*.JPEG')
+    jsons = milvus.search(img_path)
     
     # Disconnect database
     collection.release()
@@ -51,5 +51,5 @@ def xsearch_engine():
     
 # Search for example query image(s)
 if __name__ == '__main__':
-    jsons = xsearch_engine() #return json
+    jsons = xsearch_engine('test/warplane/*.JPEG') #return json
     print(jsons)
