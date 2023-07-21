@@ -8,13 +8,16 @@ if __name__ == '__main__':
     #load_dotenv()
     #flaskIP = os.environ.get("flaskIP")
     #flaskHOST = os.environ.get("flaskPORT")
-    flaskHOST = '0.0.0.0'
+    flaskHOST = '127.0.0.1'
     flaskPORT = '5000'
-    
     app = Flask(__name__)
     app.run(host=flaskHOST, port=flaskPORT)
+    
+@app.before_first_request
+def initialize_engine():
+    print("Initializing engine...")
     dataLoader()
-
+    
 # Endpoint for image search
 @app.route('/search', methods=['POST'])
 def search_similar_images():

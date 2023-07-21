@@ -116,7 +116,7 @@ class MilvusSearch:
         return collection
     
     def setEnv(self):
-        self.HOST = '0.0.0.0'
+        self.HOST = '127.0.0.1'
         self.PORT = '19530'
         #load_dotenv()
         #self.HOST = os.environ.get("milvusHOST")
