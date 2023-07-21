@@ -34,4 +34,13 @@ export class User extends BaseEntity {
   })
   @Column()
   email: string;
+
+  @ApiProperty({
+    example:'user',
+    description:'role',
+    required:false,
+})    
+@Column()
+role:string;
+
 }
