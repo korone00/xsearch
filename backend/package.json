@@ -41,7 +41,11 @@
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.2.0",
     "swagger-ui-express": "^5.0.0",
-    "typeorm": "^0.3.17"
+    "typeorm": "^0.3.17",
+    "uuid": "^9.0.0",
+    "v1": "^1.0.0",
+    "v3": "^0.0.0",
+    "v5": "^0.1.2"
   },
   "devDependencies": {
     "@nestjs/cli": "^9.0.0",
@@ -56,6 +60,7 @@
     "@types/passport-jwt": "^3.0.9",
     "@types/passport-local": "^1.0.35",
     "@types/supertest": "^2.0.11",
+    "@types/uuid": "^9.0.2",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
     "dotenv": "^16.3.1",

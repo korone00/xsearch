@@ -30,8 +30,7 @@ export class uploadController {
    @UseInterceptors(FilesInterceptor('file', null, multerOptions))
 
   
-  async UploadFile(@UploadedFile() file) {
-    
+  async UploadFile(@UploadedFile() file:Express.Multer.File) {
     console.log(file);
     return { succ: true };
   }
