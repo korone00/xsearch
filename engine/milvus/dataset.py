@@ -2,9 +2,11 @@ import csv
 from glob import glob
 from towhee import pipe, ops
 from pymilvus import connections, FieldSchema, CollectionSchema, DataType, Collection, utility
+from dotenv import load_dotenv
 import requests
 import zipfile
 import os
+from flask import flask
 
 #class : MilvusSearch
 class MilvusSearch:
@@ -13,8 +15,8 @@ class MilvusSearch:
         self.MODEL = 'resnet50'
         self.DEVICE = None # if None, use default device (cuda is enabled if available)
         # Milvus parameters
-        self.HOST = '127.0.0.1'
-        self.PORT = '19530'
+        self.HOST = None
+        self.PORT = None
         self.TOPK = 5 
         self.DIM = 2048 # dimension of embedding extracted by MODEL
         self.COLLECTION_NAME = 'reverse_image_search'
@@ -113,12 +115,18 @@ class MilvusSearch:
         print(f'A new collection created: {self.COLLECTION_NAME}')
         
         return collection
-            
+    
+    def setEnv(self):
+        load_dotenv()
+        self.HOST = os.environ.get("milvusIP")
+        self.PORT = os.environ.get("milvusPORT")
+                    
 #main function of dataset.py
 def dataLoader():
     ## Prepration Data
     #create MilvusSearch class instance
     milvus = MilvusSearch()
+    milvus.setEnv()
     
     script_dir = os.path.dirname(os.path.abspath(__file__))
     os.chdir(script_dir)
