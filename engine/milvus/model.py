@@ -4,8 +4,6 @@ from towhee import pipe, ops
 from dataset import MilvusSearch
 from flask import Flask, request
 
-app = Flask(__name__)
-
 class MilvusPredict(MilvusSearch):
     def __init__(self):
         super().__init__()

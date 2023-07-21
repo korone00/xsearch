@@ -1,7 +1,7 @@
 from dotenv import load_dotenv
 import os
 from flask import Flask, request, jsonify
-from dataset import dataloader
+from dataset import dataLoader
 from model import xsearch_engine
 
 if __name__ == '__main__':
@@ -13,7 +13,7 @@ if __name__ == '__main__':
     
     app = Flask(__name__)
     app.run(host=flaskHOST, port=flaskPORT)
-    dataloader()
+    dataLoader()
 
 # Endpoint for image search
 @app.route('/search', methods=['POST'])
