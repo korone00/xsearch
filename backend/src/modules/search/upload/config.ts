@@ -9,14 +9,16 @@ export const multerConfig = {
 };
 
 function uuidRandom(file) {
-  const result = `${uuid()}${extname(file.originalname)}`;
+  const result = `${Date.now}${extname(file.originalname)}`;
   return result;
 }
 
 export const multerOptions = {
-  fileFilter: (req: any, file: any, cb: any) => {
-    if (file.mimetype.match(/\/(jpg|jpeg|png|gif)%/)) {
+  fileFilter: (req, file, cb) => {
+    
+    if (file.mimetype.match(/\/(jpg|jpeg|png|gif)$/)) {
       cb(null, true); //allow storage of file
+      console.log("파일 업로드 성공");
     } else {
       cb(
         new HttpException(
@@ -30,19 +32,16 @@ export const multerOptions = {
   //storage properties
   storage: diskStorage({
     //destination storage path detail
-    destination: (req: any, file: any, cb: any) => {
+    destination: (req, file, cb) => {
       const uploadPath = multerConfig.dest;
       if (!existsSync(uploadPath)) {
         mkdirSync(uploadPath);
       }
       cb(null, uploadPath);
     },
-    filename: (req: any, file: any, cb: any) => {
+    filename: (req, file, cb) => {
       cb(null, uuidRandom(file));
     },
   }),
 };
 
-function uuid() {
-  throw new Error('Function not implemented.');
-}
