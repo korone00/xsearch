@@ -5,12 +5,14 @@ from dataset import dataloader
 from model import xsearch_engine
 
 if __name__ == '__main__':
-    load_dotenv()
-    flaskIP = os.environ.get("IP")
-    flaskHOST = os.environ.get("HOST")
+    #load_dotenv()
+    #flaskIP = os.environ.get("flaskIP")
+    #flaskHOST = os.environ.get("flaskPORT")
+    flaskHOST = '0.0.0.0'
+    flaskPORT = '5000'
     
     app = Flask(__name__)
-    app.run(host=flaskHOST, port=flaskIP)
+    app.run(host=flaskHOST, port=flaskPORT)
     dataloader()
 
 # Endpoint for image search

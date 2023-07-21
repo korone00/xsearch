@@ -117,9 +117,11 @@ class MilvusSearch:
         return collection
     
     def setEnv(self):
-        load_dotenv()
-        self.HOST = os.environ.get("milvusIP")
-        self.PORT = os.environ.get("milvusPORT")
+        self.HOST = '0.0.0.0'
+        self.PORT = '19530'
+        #load_dotenv()
+        #self.HOST = os.environ.get("milvusHOST")
+        #self.PORT = os.environ.get("milvusPORT")
                     
 #main function of dataset.py
 def dataLoader():
