@@ -6,7 +6,6 @@ from dotenv import load_dotenv
 import requests
 import zipfile
 import os
-from flask import flask
 
 #class : MilvusSearch
 class MilvusSearch:
