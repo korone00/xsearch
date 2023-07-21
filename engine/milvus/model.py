@@ -2,10 +2,17 @@ import json
 from pathlib import Path
 from towhee import pipe, ops
 from dataset import MilvusSearch
+from flask import Flask, request
+
+app = Flask(__name__)
 
 class MilvusPredict(MilvusSearch):
     def __init__(self):
         super().__init__()
+    
+    def setCollectionName(self, collection_name):
+        self.COLLECTION_NAME = collection_name
+        
     
     def search(self, img_path):
         p_embed = (
@@ -35,9 +42,12 @@ class MilvusPredict(MilvusSearch):
             f.write(json_data)
             
         return json_data
-        
-def xsearch_engine(img_path):
+
+
+def xsearch_engine(img_path, collection_name):
     milvus = MilvusPredict()
+    milvus.setCollectionName(collection_name)
+    
     collection = milvus.connect()
     print(collection.num_entities)
     collection.load()
