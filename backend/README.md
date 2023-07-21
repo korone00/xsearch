@@ -132,7 +132,7 @@ and run all this query, if you are succeed, you are going to connect nest js web
 
 To run the Nest.js backend server:
 you need to run container actions, and npm run start.
-and localhost:3000/api, you can test database server and login, out, regiter etc...
+and visit localhost:3000/api, you can test database server and login, out, register etc...
 
 ```bash
 # Development mode
