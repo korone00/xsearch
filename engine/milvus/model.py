@@ -32,32 +32,38 @@ class MilvusPredict(MilvusSearch):
         
         path = img_path
         dc = p_search(path)
-        dc_dict = dc.get_dict()
+        json_data = dc.get_dict()
         
-        json_data = json.dumps(dc_dict)
-        
+       
+        #json file download
+        '''
+        json_data = json.dumps(json_data)
         with open('jsonfile.json', 'w') as f:
             f.write(json_data)
+        '''
             
         return json_data
 
 
 def xsearch_engine(img_path, collection_name):
     milvus = MilvusPredict()
-    milvus.setCollectionName(collection_name)
     
-    collection = milvus.connect()
-    print(collection.num_entities)
+    collection = milvus.connect(collection_name)
+    
     collection.load()
-
     jsons = milvus.search(img_path)
     
     # Disconnect database
     collection.release()
     
+    #return json data
     return jsons
     
 # Search for example query image(s)
 if __name__ == '__main__':
-    jsons = xsearch_engine('test/warplane/*.JPEG') #return json
+    #img_path = 'reverse_image_search/test/warplane/*.JPEG' #test example
+    img_path = 'reverse_image_search/test/apiary/*.JPEG'
+    collection_name = 'reverse_image_search' #collection_name_example
+
+    jsons = xsearch_engine(img_path, collection_name) #return json
     print(jsons)

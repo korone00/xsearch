@@ -18,7 +18,7 @@ def search_similar_images():
         if 'file' not in request.files:
             return jsonify({'error': 'No file part in the request.'}), 400 #http status code
 
-        file = request.files['file']
+        file = request.files['file'] #image path
         if file.filename == '':
             return jsonify({'error': 'No selected file.'}), 400 #http status code
 
@@ -40,4 +40,3 @@ if __name__ == '__main__':
     flaskHOST = '127.0.0.1'
     flaskPORT = '5000'
     app.run(host=flaskHOST, port=flaskPORT)
-
