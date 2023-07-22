@@ -1,217 +1,170 @@
-# xsearch_engine powerd by milvus
+<p align="center">
+  <a href="https://github.com/korone00/xsearch" rel="noopener">
+    <img width="1536px" height="px" src="engine\readmeimgs\linkedin_banner_image_2.png" alt="Project logo">
+  </a>
+</p>
 
-## Prepration
+<h1 align="center">XSearch_engine</h1>
 
-### Install dependencies
+<div align="center">
 
-Windows 10
+[![Status](https://img.shields.io/badge/status-active-success.svg)](https://github.com/korone00/xsearch)
+[![GitHub Issues](https://img.shields.io/github/issues/korone00/xsearch.svg)](https://github.com/korone00/xsearch/issues)
+[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/korone00/xsearch.svg)](https://github.com/korone00/xsearch/pulls)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
 
-create virtual env
-```bash
-conda create -n env_name python=3.10
+</div>
+
+---
+
+<p align="center"> We can find the image you want.
+    <br>
+</p>
+
+## 📝 Table of Contents
+
+- [About](#about)
+- [Getting Started](#getting_started)
+- [Deployment](#deployment)
+- [Usage](#usage)
+- [Built Using](#built_using)
+- [TODO](../TODO.md)
+- [Contributing](../CONTRIBUTING.md)
+- [Authors](#authors)
+- [Acknowledgments](#acknowledgement)
+
+## 🧐 About <a name = "about"></a>
+
+Find similar images on the web. It works with Milvus DB and is easy to start with a docker image.
+
+## 🏁 Getting Started <a name = "getting_started"></a>
+
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See [deployment](#deployment) for notes on how to deploy the project on a live system.
+
+### Prerequisites
+
+#### 1. Install Docker
+
+- Visit the Docker Hub website: <https://hub.docker.com/>
+  - Download and install Docker for your operating system (Windows, macOS, or Linux).
+
+#### you can take a xsearch_engine images on this page
+
+<https://hub.docker.com/r/rlafosem/xsearch_engine/tags>
+
+#### 2. Set up a Milvus DB images with Docker
+
+- Open a terminal and run the following commands:
+  - Make a directory
+
+      ```bash
+      cd <your_project_directory>
+      ```
+
+  - Docker image download
+
+      ```bash
+      curl -LJO https://github.com/milvus-io/milvus/releases/download/v2.2.10/milvus-standalone-docker-compose.yml
+      ```
+
+  - Rename docker image
+
+      ```bash
+      rename milvus-standalone-docker-compose.yml docker-compose.yml
+      ```
+
+  - Add milvus container
+
+      ```bash
+      docker-compose up
+      ```
+
+  - Install milvus
+
+      ```bash
+      python -m pip install -q pymilvus==2.2.11
+      ```
+
+#### 3. Set up a Xsearch_engine imageswith Docker
+
+- Open a terminal and run the following commands:
+
+     ```bash
+     # Pull the Xsearch_engine Docker image
+     $ docker pull rlafosem/xsearch_engine:latest
+     ```
+
+### Installing
+
+If you, succeed you can check the rlafosem/xserach_engine image in Docker desktop image
+you can choose two options to make container
+
+#### 3-1. Use CLI
+     ```
+     $ docker run -d --name xsearh_engine -p 5000:5000 rlafosem/xsearch_engine:latest
+     ```
+
+
+#### 3-2. Use Docker Desktop
+|text|type|
+|---|---|
+|container name|xsearch_engine|
+|Hostport|5000|
+|Volumes Host Path|{path you want to}|
+
+<p align="center">
+ <img src = "engine\readmeimgs\container_run.PNG">
+</p>
+
+Set options and RUN
+
+### If you've been following along, you should have successfully created your container.
+
+------------------------------------------------------------------------------
+작성중...
+## 🔧 Running the tests <a name = "tests"></a>
+
+Explain how to run the automated tests for this system.
+
+### Break down into end to end tests
+
+Explain what these tests test and why
+
+```
+Give an example
 ```
 
-install python package
-```bash
-python -m pip install -q towhee opencv-python pillow
+### And coding style tests
+
+Explain what these tests test and why
+
+```
+Give an example
 ```
 
-### Prepare data
+## 🎈 Usage <a name="usage"></a>
 
-윈도우에서 ```unzip```명령어를 사용하기 위해선 다음 링크를 참조하자.
-"\n"
-[cmd에서 zip 사용하기](https://fcurryman.tistory.com/101)
+Add notes about how to use the system.
 
-image download
-```bash
-curl -L https://github.com/towhee-io/examples/releases/download/data/reverse_image_search.zip -O
+## 🚀 Deployment <a name = "deployment"></a>
 
-unzip -q -o reverse_image_search.zip
-```
+Add additional notes about how to deploy this on a live system.
 
-docker image download
-```bash
-curl -LJO https://github.com/milvus-io/milvus/releases/download/v2.2.10/milvus-standalone-docker-compose.yml
-```
+## ⛏️ Built Using <a name = "built_using"></a>
 
-rename docker image
-```bash
-rename milvus-standalone-docker-compose.yml docker-compose.yml
-```
+- [MongoDB](https://www.mongodb.com/) - Database
+- [Express](https://expressjs.com/) - Server Framework
+- [VueJs](https://vuejs.org/) - Web Framework
+- [NodeJs](https://nodejs.org/en/) - Server Environment
 
-add milvus container
-```bash
-docker-compose up
-```
+## ✍️ Authors <a name = "authors"></a>
 
-install milvus
-```bash
-python -m pip install -q pymilvus==2.2.11
-```
+- [@kylelobo](https://github.com/kylelobo) - Idea & Initial work
 
-## Reverse Image Search
+See also the list of [contributors](https://github.com/kylelobo/The-Documentation-Compendium/contributors) who participated in this project.
 
-### Configuration
+## 🎉 Acknowledgements <a name = "acknowledgement"></a>
 
-```python
-import csv
-from glob import glob
-from pathlib import Path
-from statistics import mean
-
-from towhee import pipe, ops, DataCollection
-from pymilvus import connections, FieldSchema, CollectionSchema, DataType, Collection, utility
-
-
-# Towhee parameters
-MODEL = 'resnet50'
-DEVICE = None # if None, use default device (cuda is enabled if available)
-
-# Milvus parameters
-HOST = '127.0.0.1'
-PORT = '19530'
-TOPK = 10
-DIM = 2048 # dimension of embedding extracted by MODEL
-COLLECTION_NAME = 'reverse_image_search'
-INDEX_TYPE = 'IVF_FLAT'
-METRIC_TYPE = 'L2'
-
-# path to csv (column_1 indicates image path) OR a pattern of image paths
-INSERT_SRC = 'reverse_image_search.csv'
-QUERY_SRC = './test/*/*.JPEG'
-```
-
-### Embedding pipeline
-
-```python
-# Load image path
-def load_image(x):
-    if x.endswith('csv'):
-        with open(x) as f:
-            reader = csv.reader(f)
-            next(reader)
-            for item in reader:
-                yield item[1]
-    else:
-        for item in glob(x):
-            yield item
-
-# Embedding pipeline
-p_embed = (
-    pipe.input('src')
-        .flat_map('src', 'img_path', load_image)
-        .map('img_path', 'img', ops.image_decode())
-        .map('img', 'vec', ops.image_embedding.timm(model_name=MODEL, device=DEVICE))
-)
-```
-
-```python
-# Display embedding result, no need for implementation
-p_display = p_embed.output('img_path', 'img', 'vec')
-DataCollection(p_display('./test/goldfish/*.JPEG')).show()
-```
-
-### Steps
-
-1. create a Milvus collection
-2. insert data into collection
-3. query image across database
-
-### 1. create a Milvus collection
-
-```python
-# Create milvus collection (delete first if exists)
-def create_milvus_collection(collection_name, dim):
-    if utility.has_collection(collection_name):
-        utility.drop_collection(collection_name)
-
-    fields = [
-        FieldSchema(name='path', dtype=DataType.VARCHAR, description='path to image', max_length=500, 
-                    is_primary=True, auto_id=False),
-        FieldSchema(name='embedding', dtype=DataType.FLOAT_VECTOR, description='image embedding vectors', dim=dim)
-    ]
-    schema = CollectionSchema(fields=fields, description='reverse image search')
-    collection = Collection(name=collection_name, schema=schema)
-
-    index_params = {
-        'metric_type': METRIC_TYPE,
-        'index_type': INDEX_TYPE,
-        'params': {"nlist": 2048}
-    }
-    collection.create_index(field_name='embedding', index_params=index_params)
-    return collection
-```
-
-```python
-# Connect to Milvus service
-connections.connect(host=HOST, port=PORT)
-
-# Create collection
-collection = create_milvus_collection(COLLECTION_NAME, DIM)
-print(f'A new collection created: {COLLECTION_NAME}')
-```
-
-### 2. insert data into collection
-
-```python
-# Insert pipeline
-p_insert = (
-        p_embed.map(('img_path', 'vec'), 'mr', ops.ann_insert.milvus_client(
-                    host=HOST,
-                    port=PORT,
-                    collection_name=COLLECTION_NAME
-                    ))
-          .output('mr')
-)
-```
-
-```python
-# Insert data
-p_insert(INSERT_SRC)
-
-# Check collection
-print('Number of data inserted:', collection.num_entities)
-```
-
-
-### 3. Search
-
-```python
-# Search pipeline
-p_search_pre = (
-        p_embed.map('vec', ('search_res'), ops.ann_search.milvus_client(
-                    host=HOST, port=PORT, limit=TOPK,
-                    collection_name=COLLECTION_NAME))
-               .map('search_res', 'pred', lambda x: [str(Path(y[0]).resolve()) for y in x])
-#                .output('img_path', 'pred')
-)
-p_search = p_search_pre.output('img_path', 'pred')
-```
-
-```python
-# Search for example query image(s)
-collection.load()
-dc = p_search('test/goldfish/*.JPEG')
-
-# Display search results with image paths
-DataCollection(dc).show()
-```
-
-```python
-# Display search results with images, no need for implementation
-
-import cv2
-from towhee.types.image import Image
-
-def read_images(img_paths):
-    imgs = []
-    for p in img_paths:
-        imgs.append(Image(cv2.imread(p), 'BGR'))
-    return imgs
-
-p_search_img = (
-    p_search_pre.map('pred', 'pred_images', read_images)
-                .output('img', 'pred_images')
-)
-DataCollection(p_search_img('test/goldfish/*.JPEG')).show()
-```
+- Hat tip to anyone whose code was used
+- Inspiration
+- References
