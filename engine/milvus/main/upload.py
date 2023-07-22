@@ -20,12 +20,7 @@ from model import xsearch_engine
 #         # Sending data to endpoint2 using JSON in the request body
 #         response = request.post('http://localhost:5000/search', json=data)
 #         return response.json()
-
-
-from flask import request, jsonify
-from flask_restx import Resource, Namespace
   
-
 upload = Namespace(name='upload', description='Access upload file from NestJs')
 
 @upload.route('', methods=['POST', 'GET'])
@@ -36,7 +31,6 @@ class UploadResource(Resource):
     @upload.param('IMG_PATH', 'Data from NestJs, Need to processing')
     def post(self):
         file_data = request.json.get('fileData')  # Access the file data sent by NestJS
-        
         # Process the file_data or file_path and perform the image search using your AI engine and Milvus DB.
         # Return the search results or any other response as needed.
         return jsonify({'message': 'File uploaded successfully.'})

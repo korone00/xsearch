@@ -90,18 +90,18 @@ and run all this query, if you are succeed, you are going to connect nest js web
    - Inside the PostgreSQL interactive shell, create a new database and table:
 
      ```sql
-     CREATE DATABASE pg_database;
-     \c pg_database;
-     CREATE TABLE user (
+     CREATE DATABASE xsearch;
+     \c xsearch;
+     CREATE TABLE users (
        id varchar(50),
        password varchar(50),
        name varchar(100),
        email varchar(100)
      );
 
-     INSERT INTO user (id, password, name, email)
+     INSERT INTO users (id, password, name, email)
      VALUES ('asd', '123', 'eric', 'eric@');
-     INSERT INTO user (id, password, name, email)
+     INSERT INTO users (id, password, name, email)
      VALUES ('qwe', '123', 'john', 'john@');
      ```
 
@@ -132,7 +132,11 @@ and run all this query, if you are succeed, you are going to connect nest js web
 
 To run the Nest.js backend server:
 you need to run container actions, and npm run start.
-and visit localhost:3000/api, you can test database server and login, out, register etc...
+and 
+
+***visit "localhost:3000/api"***
+
+you can test database server and login, out, register etc...
 
 ```bash
 # Development mode
