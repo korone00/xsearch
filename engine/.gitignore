@@ -10,4 +10,11 @@ reverse_image_search.zip
 reverse_image_search/
 docker-compose.yml
 .json
+exception/
+object/
+test/
+train/
+volumes/
+.ipynb
+.csv
 
