@@ -4,11 +4,11 @@
 imgs/
 vittest.ipynb
 
+
 #milvus
 __pycache__/
 reverse_image_search.zip
 reverse_image_search/
-docker-compose.yml
 .json
 exception/
 object/
@@ -17,4 +17,8 @@ train/
 volumes/
 .ipynb
 .csv
+
+#minio
+storage/
+results/
 
