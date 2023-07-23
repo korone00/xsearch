@@ -6,6 +6,7 @@ import {
   Get,
   Body,
   Res,
+  Query
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './local-auth.guard';
@@ -74,7 +75,7 @@ export class AuthController {
     @ApiOperation({summary:'userList API', description:'사용자 전체 목록 (only for Admin)'})
     @ApiCreatedResponse({description:'사용자 전체 목록'})
     @Get('userlist')
-    getUserList():any{
-        return this.authService.getUserList();
+    async getUserList(@Query('page') page:number=1):Promise<User[]>{
+        return await this.authService.paginate(page);
     }
 }

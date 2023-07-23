@@ -15,11 +15,6 @@ import { ApiOperation } from '@nestjs/swagger/dist';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @ApiOperation({ summary: 'find API', description: '사용자 목록 불러오기' })
-  @Get()
-  findAll(): Promise<User[]> {
-    return this.userService.findAll();
-  }
 
   // @Post()
   // create(@Body() user: Partial<User>): Promise<User> {

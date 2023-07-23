@@ -23,10 +23,6 @@ export class UserService {
     return await this.userRepository.save(user);
   }
 
-  findAll(): Promise<User[]> {
-    return this.userRepository.find();
-  }
-
   // create(user: Partial<User>): Promise<User> {
   //   return this.usersRepository.save(user);
   // }

@@ -76,7 +76,25 @@ export class AuthService {
     }
     return userRegister;
   }
-  async getUserList():Promise<any>{
-    return this.userService.findAll();
-}
+  //getUserList --> paginate
+  // paginate 직접 구현
+  async paginate(page: number=1):Promise<any>{ 
+        const take=5;
+        const [users,total]=await this.userRepository.findAndCount({
+            take,
+            skip:(page-1)*take, 
+        });
+        return {
+            data: users.map(user=>{
+                const {password,role, ...data}=user;
+                return data;
+            }),
+            meta:{
+                total, // 총 데이터 개수
+                page, // 현재 페이지
+                last_page:Math.ceil(total/take), // 마지막 페이지
+            }
+        }
+      }
+
 }
