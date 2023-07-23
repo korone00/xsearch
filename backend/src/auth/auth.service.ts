@@ -46,7 +46,9 @@ export class AuthService {
   async login(userlogin: any) {
     const user = await this.userRepository.findUserById(userlogin.id);
     const payload = { id: user.id};
-    return this.jwtService.sign(payload);
+    return {
+      accessToken: this.jwtService.sign(payload)
+  }
   }
   public getCookieWithJWT(token: any) {
     return `Authentication=${token};HttpOnly;Path=/;Max-Age=60s`;

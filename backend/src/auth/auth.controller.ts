@@ -32,12 +32,12 @@ export class AuthController {
   @Post('login')
   async login(@Body() userlogin:loginDto, @Res() response:Response){
         const token= await this.authService.login(userlogin);
-        response.setHeader('Authorization','Bearer'+token);//그냥 token으로 주면 Bearer가 붙지 않음
-        response.cookie('jwt',token,{
+        response.setHeader('Authorization','Bearer'+token.accessToken);//그냥 token으로 주면 Bearer가 붙지 않음
+        response.cookie('jwt',token.accessToken,{
             httpOnly:true,
             maxAge:24*60*60*1000
         })
-        response.send('login suceess'+`access-tocken:${token}`)
+        response.send(token)
     } //new version
 
 
