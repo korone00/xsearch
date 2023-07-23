@@ -7,6 +7,7 @@ import {
   Body,
   Res,
   Query,
+  Put,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './local-auth.guard';
@@ -22,6 +23,7 @@ import { UserDto } from 'src/users/entities/user.userdto';
 import { Response } from 'express';
 import { RoleGuard } from './role.guard';
 import { Roles } from './roles';
+import { UpdateUserDto } from 'src/users/entities/user.updatedto';
 
 @Controller('auth')
 @ApiTags('auth API')
@@ -90,5 +92,21 @@ export class AuthController {
   deleteUser(@Body() userDelete: UserDto) {
     this.authService.deleteUser(userDelete.id);
     return `${userDelete.id}님 계정 삭제 완료`;
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth('access-token')
+  @ApiOperation({
+    summary: 'modify API',
+    description: '사용자 정보 수정',
+  })
+  @ApiCreatedResponse({ description: '사용자 정보 수정' })
+  @Put('modify') // not using parameters
+  async modifyUser(
+    @Req() req,
+    @Body() modifyInfo: UpdateUserDto,
+  ): Promise<User> {
+    // 수정된 객체 반환
+    return await this.authService.modify(req.user.id, modifyInfo);
   }
 }

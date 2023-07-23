@@ -9,6 +9,7 @@ import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { UserService } from 'src/users/users.service';
 import { User } from 'src/users/entities/user.entity';
+import { UpdateUserDto } from 'src/users/entities/user.updatedto';
 
 @Injectable()
 export class AuthService {
@@ -50,13 +51,13 @@ export class AuthService {
       accessToken: this.jwtService.sign(payload),
     };
   }
-  public getCookieWithJWT(token: any) {
-    return `Authentication=${token};HttpOnly;Path=/;Max-Age=60s`;
-  }
+  // public getCookieWithJWT(token: any) {
+  //   return `Authentication=${token};HttpOnly;Path=/;Max-Age=60s`;
+  // }
 
-  public getAwayCookie() {
-    return `Authentication=;HttpOnly;Path=/,Max-Age=0`;
-  }
+  // public getAwayCookie() {
+  //   return `Authentication=;HttpOnly;Path=/,Max-Age=0`;
+  // }
   async registerUser(newUser: User) {
     const userExist = await this.userService.find(newUser);
     if (userExist) {
@@ -98,5 +99,16 @@ export class AuthService {
   }
   async deleteUser(id: string): Promise<any> {
     return this.userRepository.delete({ id: id });
+  }
+  async modify(id: string, modifyInfo: UpdateUserDto): Promise<User> {
+    const user = await this.userRepository.findOne({
+      where: { id },
+    });
+    const newInfo = {
+      ...user, // 원래 정보
+      ...modifyInfo, // 새로운 정보
+    };
+    return await this.userRepository.save(newInfo);
+    //update문을 사용할 수도 있지만, 수정된 객체를 반환하기 위해 save를 사용
   }
 }
