@@ -45,18 +45,18 @@ export class AuthService {
 
   async login(userlogin: any) {
     const user = await this.userRepository.findUserById(userlogin.id);
-    const payload = { id: user.id};
+    const payload = { id: user.id };
     return {
-      accessToken: this.jwtService.sign(payload)
-  }
+      accessToken: this.jwtService.sign(payload),
+    };
   }
   public getCookieWithJWT(token: any) {
     return `Authentication=${token};HttpOnly;Path=/;Max-Age=60s`;
   }
 
-  public getAwayCookie(){
+  public getAwayCookie() {
     return `Authentication=;HttpOnly;Path=/,Max-Age=0`;
-}
+  }
   async registerUser(newUser: User) {
     const userExist = await this.userService.find(newUser);
     if (userExist) {
@@ -78,23 +78,25 @@ export class AuthService {
   }
   //getUserList --> paginate
   // paginate 직접 구현
-  async paginate(page: number=1):Promise<any>{ 
-        const take=5;
-        const [users,total]=await this.userRepository.findAndCount({
-            take,
-            skip:(page-1)*take, 
-        });
-        return {
-            data: users.map(user=>{
-                const {password,role, ...data}=user;
-                return data;
-            }),
-            meta:{
-                total, // 총 데이터 개수
-                page, // 현재 페이지
-                last_page:Math.ceil(total/take), // 마지막 페이지
-            }
-        }
-      }
-
+  async paginate(page: number = 1): Promise<any> {
+    const take = 5;
+    const [users, total] = await this.userRepository.findAndCount({
+      take,
+      skip: (page - 1) * take,
+    });
+    return {
+      data: users.map((user) => {
+        const { password, role, ...data } = user;
+        return data;
+      }),
+      meta: {
+        total, // 총 데이터 개수
+        page, // 현재 페이지
+        last_page: Math.ceil(total / take), // 마지막 페이지
+      },
+    };
+  }
+  async deleteUser(id: string): Promise<any> {
+    return this.userRepository.delete({ id: id });
+  }
 }
