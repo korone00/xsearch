@@ -7,7 +7,7 @@ from flask import Flask, request
 class MilvusPredict(MilvusSearch):
     def __init__(self):
         super().__init__()
-    
+        
     def setCollectionName(self, collection_name):
         self.COLLECTION_NAME = collection_name
         
@@ -33,31 +33,8 @@ class MilvusPredict(MilvusSearch):
         path = img_path
         dc = p_search(path)
         json_data = dc.get_dict()
-        
-       
-        #json file download
-        '''
-        json_data = json.dumps(json_data)
-        with open('jsonfile.json', 'w') as f:
-            f.write(json_data)
-        '''
             
         return json_data
-
-
-def xsearch_engine(img_path, collection_name):
-    milvus = MilvusPredict()
-    
-    collection = milvus.connect(collection_name)
-    
-    collection.load()
-    jsons = milvus.search(img_path)
-    
-    # Disconnect database
-    collection.release()
-    
-    #return json data
-    return jsons
     
 # Search for example query image(s)
 if __name__ == '__main__':
@@ -65,5 +42,5 @@ if __name__ == '__main__':
     img_path = 'reverse_image_search/test/apiary/*.JPEG'
     collection_name = 'reverse_image_search' #collection_name_example
 
-    jsons = xsearch_engine(img_path, collection_name) #return json
-    print(jsons)
+    # jsons = xsearch_engine(img_path, collection_name) #return json
+    #  print(jsons)

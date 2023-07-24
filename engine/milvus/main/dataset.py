@@ -71,6 +71,7 @@ class MilvusSearch:
         
     # Load image path
     def load_image(self, x):
+        #local file path
         script_dir = os.path.dirname(os.path.abspath(__file__))
         os.chdir(script_dir)
         
@@ -130,12 +131,12 @@ class MilvusSearch:
         else:
             print(f"No such collection: '{collection_name}'")
         
-    def create_milvus_collection(self, collection_name, dim):
-        
+    def create_milvus_collection(self, collection_name):
+        collection_name = self.COLLECTION_NAME
         fields = [
             FieldSchema(name='path', dtype=DataType.VARCHAR, description='path to image', max_length=500, 
                         is_primary=True, auto_id=False),
-            FieldSchema(name='embedding', dtype=DataType.FLOAT_VECTOR, description='image embedding vectors', dim=dim)
+            FieldSchema(name='embedding', dtype=DataType.FLOAT_VECTOR, description='image embedding vectors', dim=self.DIM)
         ]
         
         schema = CollectionSchema(fields=fields, description='image search')
@@ -151,23 +152,9 @@ class MilvusSearch:
         
         return collection
     
-    def connect(self, collection_name):
+    def connect(self):
         self.setEnv()
         connections.connect(host=self.HOST, port=self.PORT)
-        
-        # Create collection
-        for cname in self.COLLECTION_LIST:        
-            if (cname == collection_name ) and (utility.has_collection(collection_name)):
-                self.COLLECTION_NAME = collection_name
-                collection = Collection(self.COLLECTION_NAME)
-                print(f'{self.COLLECTION_NAME} named collection is already existed.')
-                return collection
-            
-        self.COLLECTION_NAME = collection_name
-        collection = self.create_milvus_collection(self.COLLECTION_NAME, self.DIM)
-        print(f'A new collection created: {self.COLLECTION_NAME}')
-        
-        return collection
     
     def setEnv(self):
         self.HOST = '127.0.0.1'
@@ -177,11 +164,10 @@ class MilvusSearch:
         #self.PORT = os.environ.get("milvusPORT")
                     
 #main function of dataset.py
-def dataLoader():
+def dataLoader(collection_name):
     ## Prepration Data
     #create MilvusSearch class instance
     milvus = MilvusSearch()
-    #set environment
    
     script_dir = os.path.dirname(os.path.abspath(__file__))
     os.chdir(script_dir)
@@ -201,9 +187,8 @@ def dataLoader():
     
     # path to csv (column_1 indicates image path) OR a pattern of image paths
     INSERT_SRC = os.path.join(script_dir, unzip_dir, 'reverse_image_search.csv')
-    #milvus connection
-    collection = milvus.connect('reverse_image_search')
     
+    collection = milvus.create_milvus_collection(collection_name)
     milvus.insert(INSERT_SRC) #insert id, path, label
     
     # Check collection

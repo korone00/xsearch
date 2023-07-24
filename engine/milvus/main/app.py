@@ -1,11 +1,11 @@
 from dotenv import load_dotenv
-import os
-from flask import Flask, request, jsonify
+from flask import Flask
 from dataset import dataLoader
-from model import xsearch_engine
-from flask_restx import Api, Resource
+from model import MilvusPredict
+from flask_restx import Api
 from search import search
-from upload import upload, UploadResource
+from upload import upload
+from pymilvus import utility
 
 app = Flask(__name__)
 api = Api(app, version='1.0', title='XSearch Engine API',
@@ -14,10 +14,22 @@ api = Api(app, version='1.0', title='XSearch Engine API',
 api.add_namespace(search)
 api.add_namespace(upload)
 
-# @app.before_first_request
-# def initialize_engine():
-#     print("Initializing engine...")
-#     dataLoader()
+collection_name = 'reverse_image_search' 
+
+@app.before_first_request
+def initialize_engine():
+    print("Initializing engine...")
+    milvus = MilvusPredict()
+    milvus.connect()
+    if utility.has_collection(collection_name):
+        # Get collection
+        milvus.setCollectionName(collection_name)
+        # #test
+        # img_path = 'C:/Users/Minhyeok/Desktop/test branch/xsearch_dev/xsearch_dev/engine/milvus/main/dddd.JPEG' # 상대경로로는 안되는데 절대 경로로는 실행됨.
+        # jsons = milvus.search(img_path) #return json
+        # print(jsons)
+    else:
+        dataLoader()
 
 if __name__ == '__main__':
     #load_dotenv()
