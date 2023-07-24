@@ -28,15 +28,9 @@ https://hub.docker.com/_/postgres?tab=tags
 If you, succeed you can check the postgres image in Docker desktop images
 you can choose two options to make container
 
-3-1.  command
-     ```
-     # Run a Postgres container with a custom name 'postgres', a password '1234',
-     # and a mounted volume to persist data even after container shutdown
-     $ docker run -d --name postgres -e POSTGRES_PASSWORD=1234 -p 5432:5432 -v pgdata:/var/lib/postgresql/data postgres
-     ```
 
 
-3-2. Click the run button, and you will check optional settings
+3-1. Click the run button, and you will check optional settings
 |text|type|
 |---|---|
 |container name|postgres|
@@ -74,37 +68,6 @@ TablePlus : https://tableplus.com/
 </p>
 this is a exam images
 
-<p align="center">
- <img src = "./readmeimgs/tablequery.png">
-</p>
-and run all this query, if you are succeed, you are going to connect nest js web
-
-
-4-2. Database command:I(don't need to do this)
-   - Connect to the PostgreSQL container:
-
-     ```bash
-     $ docker exec -it postgres psql -U postgres
-     ```
-
-   - Inside the PostgreSQL interactive shell, create a new database and table:
-
-     ```sql
-     CREATE DATABASE xsearch;
-     \c xsearch;
-     CREATE TABLE users (
-       id varchar(50),
-       password varchar(50),
-       name varchar(100),
-       email varchar(100)
-     );
-
-     INSERT INTO users (id, password, name, email)
-     VALUES ('asd', '123', 'eric', 'eric@');
-     INSERT INTO users (id, password, name, email)
-     VALUES ('qwe', '123', 'john', 'john@');
-     ```
-
 5. Install Postman:(don't need to do this)
    - Download and install Postman from: https://www.postman.com/downloads/
 
@@ -132,7 +95,26 @@ and run all this query, if you are succeed, you are going to connect nest js web
 
 To run the Nest.js backend server:
 you need to run container actions, and npm run start.
-and 
+
+# dotenv settings
+If you don't have an .env file in a subdocument of the backend folder, create one and add an example like the following
+```
+DB_HOST=localhost
+# postgres is for Docker container run
+DB_PORT=5432
+DB_USERNAME=postgres
+DB_PASSWORD=0927
+DB_DATABASE=xsearch
+
+ACCESS_TOKEN_EXPIRATION=60s
+JWT_SECRET_KEY=secretKey
+```
+
+<p align="center">
+ <img src = "./readmeimgs/swaggerapi.png">
+</p>
+
+Your backend database server should now be up and running, and you can start developing and testing your application
 
 ***visit "localhost:3000/api"***
 
@@ -145,22 +127,115 @@ $ npm run start
 # Watch mode (for automatic restart on file changes)
 $ npm run start:dev
 ```
+
+# nestjs docker container 
+
+If you want to create and use nestjs as an image on your docker desktop, follow the steps below
+
+1. First, create a Dockerfile and a .dockerignore, docker-compose.yml file and fill in the contents below.
+
+```
+# Dockerfile
+# Base image
+FROM node:18
+
+# Create app directory
+RUN mkdir -p /var/app
+WORKDIR /usr/src/app
+
+# Bundle app source
+COPY . .
+
+# Install app dependencies
+RUN npm install
+
+# If you are using it for distribution, save it as a RUN npm ci.
+# RUN npm ci
+
+# Creates a "dist" folder with the production build
+RUN npm run build
+
+# Expose the port to run the application on
+EXPOSE 3000
+
+# Start the server using the production build
+CMD [ "node", "dist/main.js" ]
+
+```
+
+```
+# .dockerignore
+.git
+*Dockerfile*
+node_modules
+# npm-debug.log
+# dist
+# .dockerignore
+```
+
+```
+# docker-compose.yml
+
+version: '3.8'
+services:
+  api:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    depends_on:
+      - postgres
+    volumes:
+      - .:/usr/src/app
+      - node-modules:/usr/src/app/node_modules
+    environment: 
+      POSTGRES_DB: ${DB_DATABASE}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_HOST: ${DB_HOST}
+      POSTGRES_PORT: ${DB_PORT}
+      DATABASE_URL: postgres://${DB_USER}:${DB_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${DB_DATABASE}
+      NODE_ENV: development
+      PORT: 3000
+    ports:
+      - "${SERVER_PORT:-8090}:3000"
+    command: npm run start:dev
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_DB: ${DB_DATABASE}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - '${DB_EXTERNAL_PORT:-35000}:5432'
+
+volumes:
+  node-modules:
+
+```
+
+and, you need to change 
+
+2. And in the project root folder, type the above command 
+```bash
+$ docker-compose up -d
+```
 <p align="center">
- <img src = "./readmeimgs/swaggerapi.png">
+ <img src = "./readmeimgs/postgresnestjs.png">
+</p>
+you can check this iamge.
+
+3. and you can get images and container
+***visit "http://localhost:8090/api"***
+
+and also you need to set new database
+<p align="center">
+ <img src = "./readmeimgs/TablePlustDB.png">
 </p>
 
+you can also get swagger and page with out command npm run start:dev!
 
-Your backend database server should now be up and running, and you can start developing and testing your application
+<p align="center">
+ <img src = "./readmeimgs/postgresnestjs.png">
+</p>
 
-# dotenv settings
-If you don't have an .env file in a subdocument of the backend folder, create one and add an example like the following
-```
-DB_HOST=localhost
-DB_PORT=5432
-DB_USERNAME=postgres
-DB_PASSWORD=0927
-DB_DATABASE=xsearch
-
-ACCESS_TOKEN_EXPIRATION='60s'
-JWT_SECRET_KEY='secretKey'
-```
+you can check swagger at localhost:8090, not 3000!

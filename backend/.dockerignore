@@ -1,0 +1,6 @@
+.git
+*Dockerfile*
+node_modules
+# npm-debug.log
+# dist
+# .dockerignore

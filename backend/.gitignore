@@ -4,7 +4,7 @@
 
 #upload images
 uploads/
-
+  
 # Logs
 logs
 *.log
