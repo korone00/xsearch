@@ -1,9 +1,8 @@
 .DS_Store
 .env
-#chroma
-imgs/
-vittest.ipynb
 
+#chroma
+chroma/
 
 #milvus
 __pycache__/
@@ -21,4 +20,3 @@ volumes/
 #minio
 storage/
 results/
-

@@ -4,7 +4,6 @@ from dataset import dataLoader
 from model import MilvusPredict
 from flask_restx import Api
 from search import search
-from upload import upload
 from pymilvus import utility
 
 app = Flask(__name__)
@@ -12,7 +11,6 @@ api = Api(app, version='1.0', title='XSearch Engine API',
           description='An API for performing image similarity search with XSearch Engine')
 
 api.add_namespace(search)
-api.add_namespace(upload)
 
 collection_name = 'reverse_image_search' 
 
