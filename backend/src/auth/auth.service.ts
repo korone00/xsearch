@@ -10,6 +10,7 @@ import { JwtService } from '@nestjs/jwt';
 import { UserService } from 'src/users/users.service';
 import { User } from 'src/users/entities/user.entity';
 import { UpdateUserDto } from 'src/users/entities/user.updatedto';
+import { PaginateQuery, Paginated, paginate } from 'nestjs-paginate';
 
 @Injectable()
 export class AuthService {
@@ -30,7 +31,7 @@ export class AuthService {
     const matching = await bcrypt.compare(password, user.password);
     if (matching) {
       const { password, ...result } = user;
-      return result; // user의 정보가 password 뺴고 다 result에 담김
+      return result; 
     } else {
       throw new ForbiddenException({
         statusCode: HttpStatus.FORBIDDEN,
@@ -38,10 +39,6 @@ export class AuthService {
         error: 'Forbidden',
       });
     }
-  }
-  async invalidateAccessToken(user: any) {
-    const accessToken = this.jwtService.sign({ id: user.id, expiresIn: 0 }); // token expiresIn to 0
-    // await this.userService.updateUserToken(user.id, accessToken);
   }
 
   async login(userlogin: any) {
@@ -96,6 +93,20 @@ export class AuthService {
         last_page: Math.ceil(total / take), // 마지막 페이지
       },
     };
+  }
+  public findAll(query: PaginateQuery): Promise<Paginated<User>> {
+    return paginate(query, this.userRepository, {
+      sortableColumns: ['id', 'name'],
+      // 정렬 가능한 컬럼으로, 'sortBy=?'에서 사용할 수 있는 값들이다. 즉, id와 name으로만 정렬 가능
+      nullSort: 'last', // 정렬할 때 null 값이 있는 데이터들은 마지막에 위치.
+      defaultSortBy: [['id', 'ASC']], // 기본 정렬 방법
+      searchableColumns: ['id', 'name', 'email'],
+      // 'search=?' 로 검색 가능한 컬럼. 즉, id와 name 중 ?가 있으면 그 값을 가져온다.
+      select: ['id', 'name', 'email', 'role'],
+      // 파라미터에서 'select=?,?...' 안 해도 기본적으로 가져오는 정보들
+      filterableColumns: {}, // 이게 뭔지 대표님께 여쭤보기
+      maxLimit: 5,
+    });
   }
   async deleteUser(id: string): Promise<any> {
     return this.userRepository.delete({ id: id });

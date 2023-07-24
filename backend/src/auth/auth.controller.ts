@@ -24,6 +24,7 @@ import { Response } from 'express';
 import { RoleGuard } from './role.guard';
 import { Roles } from './roles';
 import { UpdateUserDto } from 'src/users/entities/user.updatedto';
+import { Paginate, PaginateQuery, Paginated } from 'nestjs-paginate';
 
 @Controller('auth')
 @ApiTags('auth API')
@@ -70,6 +71,7 @@ export class AuthController {
   userProfile(@Req() req) {
     return req.user;
   }
+
   @Roles('admin')
   @UseGuards(JwtAuthGuard, RoleGuard)
   @ApiBearerAuth('access-token')
@@ -79,8 +81,8 @@ export class AuthController {
   })
   @ApiCreatedResponse({ description: '사용자 전체 목록' })
   @Get('userlist')
-  async getUserList(@Query('page') page: number = 1): Promise<User[]> {
-    return await this.authService.paginate(page);
+  public findAll(@Paginate() query: PaginateQuery): Promise<Paginated<User>> {
+    return this.authService.findAll(query);
   }
   @UseGuards(LocalAuthGuard)
   @ApiOperation({
