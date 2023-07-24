@@ -3,7 +3,6 @@ from flask_restx import Resource, Namespace, fields
 from model import MilvusPredict
 from dataset import dataLoader
 from pymilvus import utility
-from app import App
 
 search = Namespace(name='search', description='Search similar image from milvus DB')
 

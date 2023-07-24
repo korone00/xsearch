@@ -11,6 +11,7 @@ from search import search
 app = Flask(__name__)
 api = Api(app, version='1.0', title='XSearch Engine API',
           description='An API for performing image similarity search with XSearch Engine')
+
 api.add_namespace(search)
 
 
@@ -21,9 +22,9 @@ def initialize_engine():
 
 class App():
     def __init__(self):
-        self.flaskHOST = '127.0.0.1'
-        self.flaskPORT = '5000'
-        self.collection_name = 'reverse_image_search' 
+        self.flaskHOST = None
+        self.flaskPORT = None
+        self.collection_name = 'reverse_image_search'
         self.milvus = None
     
     def set_env(self):

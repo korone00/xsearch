@@ -17,6 +17,7 @@ class minioSearch(minioLoader):
         
         save_path = os.path.join(self.script_dir,'results', os.path.basename(img_path))
         self.save_path = save_path
+        print('complete set_imgpath',save_path)
         
     def get_image(self, img_path):
         try:

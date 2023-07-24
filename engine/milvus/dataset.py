@@ -103,7 +103,6 @@ class MilvusSearch:
         else:
             raise ValueError(f"Invalid input {x}")
     
-    
     def insert(self, insert_src):
         p_embed = (
             pipe.input('src')
@@ -157,11 +156,9 @@ class MilvusSearch:
         connections.connect(host=self.HOST, port=self.PORT)
     
     def setEnv(self):
-        self.HOST = '127.0.0.1'
-        self.PORT = '19530'
-        #load_dotenv()
-        #self.HOST = os.environ.get("milvusHOST")
-        #self.PORT = os.environ.get("milvusPORT")
+        load_dotenv()
+        self.HOST = os.environ.get("milvusHOST")
+        self.PORT = os.environ.get("milvusPORT")
                     
 #main function of dataset.py
 def dataLoader(collection_name):
