@@ -3,6 +3,7 @@ from flask_restx import Resource, Namespace, fields
 from model import MilvusPredict
 from dataset import dataLoader
 from pymilvus import utility
+from app import App
 
 search = Namespace(name='search', description='Search similar image from milvus DB')
 
@@ -14,21 +15,15 @@ photo_model = search.model('Photo', {
 
 
 @search.route('', methods=['POST'])
-class SearchPhoto(Resource):
+class Search(Resource):
     @search.expect(photo_model)
     def post(self):
         #data = search.payload
         data = request.get_json()  # Get the JSON data sent by the client
         img_path = data['img_path']
-        print(data)
         # Process the information received from NestJS /upload endpoint
         # For example, you can use the photo information to perform a search
         # and return the results as JSON
-        
-        search_results = {
-            'results': ['result1', 'result2', 'result3'],
-            # Add more search results as needed
-        }
         
         milvus = MilvusPredict()
         milvus.connect()
@@ -47,8 +42,8 @@ class SearchPhoto(Resource):
             dataLoader()
             
         # Do something with the image_path...
-        img_path_sample = 'reverse_image_search/test/apiary/*.JPEG'
-        result = milvus.search(img_path_sample)
+        #img_path_sample = 'reverse_image_search/test/apiary/*.JPEG'
+        result = milvus.search(img_path)
 
         # Return the search results as JSON
         return jsonify(result)
