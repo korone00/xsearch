@@ -1,56 +1,50 @@
 import os
 from dotenv import load_dotenv
-from flask import Flask
+from flask import Flask, request, jsonify
 from flask_restx import Resource, Namespace, fields
-from dataset import dataLoader
-from model import MilvusPredict
+from milvus import dataLoader
 from flask_restx import Api
-from pymilvus import utility
-from search import search
 
 app = Flask(__name__)
 api = Api(app, version='1.0', title='XSearch Engine API',
           description='An API for performing image similarity search with XSearch Engine')
+
+search = Namespace(name='search', description='Search similar image from milvus DB')
+
+photo_model = search.model('Photo', {
+    'filename': fields.String,
+    'content_type': fields.String,
+    'size': fields.Integer,
+})
+
+#define collection_name
+collection_name = 'reverse_image_search'
+
+#data load with collection name and milvus connect
+milvus_instance = dataLoader(collection_name)
+
+#image load with bucket name(not yet.)
+
+#define search function
+@search.route('', methods=['POST'])
+class Search(Resource):
+    @search.expect(photo_model)
+    def post(self):
+        #data = search.payload
+        data = request.get_json()  # Get the JSON data sent by the client
+        img_path = data['img_path'] #get query image path
+            
+        #img_path_sample = 'reverse_image_search/test/apiary/*.JPEG'
+        result = milvus_instance.search(img_path)
+
+        # Return the search results as JSON
+        return jsonify(result)
+    
+#add search endpoint
 api.add_namespace(search)
 
-
-@app.before_first_request
-def initialize_engine():
-    app_instance = App()
-    app_instance.initialize_milvus()
-
-class App():
-    def __init__(self):
-        self.flaskHOST = '127.0.0.1'
-        self.flaskPORT = '5000'
-        self.collection_name = 'reverse_image_search' 
-        self.milvus = None
-    
-    def set_env(self):
-        load_dotenv()
-        self.flaskHOST = os.environ.get("flaskIP")
-        self.flaskPORT = os.environ.get("flaskPORT")
-
-    def initialize_milvus(self):
-        print("Initializing engine...")
-        self.milvus = MilvusPredict()
-        
-        #self.set_env()
-        self.milvus.connect()
-        
-        if utility.has_collection(self.collection_name):
-            # Get collection
-            self.milvus.setCollectionName(self.collection_name)
-            # #test
-            # img_path = 'C:/Users/Minhyeok/Desktop/test branch/xsearch_dev/xsearch_dev/engine/milvus/main/dddd.JPEG' # 상대경로로는 안되는데 절대 경로로는 실행됨.
-            # jsons = milvus.search(img_path) #return json
-            # print(jsons)
-            
-        else:
-            dataLoader()
-            
-if __name__ == '__main__':
-    initialize_engine()
-    
-    
-        
+#connect flask
+load_dotenv()
+flaskHOST = os.environ.get("flaskHOST")
+flaskPORT = os.environ.get("flaskPORT")
+app.run(host = flaskHOST, port = flaskPORT , debug=True)

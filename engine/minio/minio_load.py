@@ -1,6 +1,7 @@
 import os
 from minio import Minio
 from minio.error import S3Error
+from dotenv import load_dotenv
 import requests
 from requests.exceptions import RequestException
 import zipfile
@@ -8,27 +9,27 @@ from zipfile import BadZipFile
 
 class minioLoader():
     def __init__(self):
-        self.address = "127.0.0.1:9000"
-        self.access_key = "YVBEDpDv5r7mXK53zqOr"
-        self.secret_key ="JAVY3ydROz0g4Y26jhAPW7EHfSuBu49JyCCL6zaG"
         self.client = None
         self.bucket_name = None
         self.scrip_dir = None
         
         
     def set_minio(self):
+        load_dotenv()
         self.client = Minio(
-            self.address,
-            access_key=self.access_key,
-            secret_key=self.secret_key,
+            os.environ.get("MINIO_address"),
+            access_key=os.environ.get("MINIO_access_key"),
+            secret_key=os.environ.get("MINIO_secret_key"),
             secure=False,
         )
-    
+        print('complete set minio')
+
     def set_bucket(self, bucket_name):
         self.bucket_name = bucket_name
         try:
             if not self.client.bucket_exists(bucket_name):
                 self.client.make_bucket(bucket_name)
+            print('complete set bucket')
                 
         except S3Error as err:
             print(err)
@@ -141,5 +142,6 @@ if __name__ == '__main__':
     
     download_link = "https://github.com/towhee-io/examples/releases/download/data/reverse_image_search.zip"
     dataLoader.set_path(download_link)
-    
+    dataLoader.download_file(dataLoader.script_dir, dataLoader.save_path)
+    dataLoader.unzip_file(dataLoader.save_path)
     dataLoader.load_minio()
