@@ -34,6 +34,7 @@
     "axios": "^1.4.0",
     "bcrypt": "^5.1.0",
     "class-validator": "^0.14.0",
+    "fs": "^0.0.1-security",
     "hbs": "^4.2.0",
     "nestjs-paginate": "^8.1.7",
     "passport": "^0.6.0",
