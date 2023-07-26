@@ -1,4 +1,6 @@
 
+# Welcome to backend setting! this is easier than you think!
+
 ## Setting up the Development Environment
 
 1. Install Docker:
@@ -59,7 +61,7 @@ TablePlus : https://tableplus.com/
    - Host: Hostname or IP address of the Postgres running in Docker (localhost)
    - Port: The port of the PostgreSQL running on (default: 5432)
    - User: The username (default: postgres)
-   - Password: 0927.
+   - Password: 0927
    - Database: Name of the database to use
 
   After completing the settings, click the "Test" button to verify the connection, then click "Connect" to finalize the connection.
@@ -100,7 +102,8 @@ you need to run container actions, and npm run start.
 If you don't have an .env file in a subdocument of the backend folder, create one and add an example like the following
 ```
 DB_HOST=localhost
-# postgres is for Docker container run
+# localhost is for nest js npm run start:dev
+# postgres is for docker container
 DB_PORT=5432
 DB_USERNAME=postgres
 DB_PASSWORD=0927
@@ -130,112 +133,29 @@ $ npm run start:dev
 
 # nestjs docker container 
 
-If you want to create and use nestjs as an image on your docker desktop, follow the steps below
-
-1. First, create a Dockerfile and a .dockerignore, docker-compose.yml file and fill in the contents below.
-
-```
-# Dockerfile
-# Base image
-FROM node:18
-
-# Create app directory
-RUN mkdir -p /var/app
-WORKDIR /usr/src/app
-
-# Bundle app source
-COPY . .
-
-# Install app dependencies
-RUN npm install
-
-# If you are using it for distribution, save it as a RUN npm ci.
-# RUN npm ci
-
-# Creates a "dist" folder with the production build
-RUN npm run build
-
-# Expose the port to run the application on
-EXPOSE 3000
-
-# Start the server using the production build
-CMD [ "node", "dist/main.js" ]
-
-```
-
-```
-# .dockerignore
-.git
-*Dockerfile*
-node_modules
-# npm-debug.log
-# dist
-# .dockerignore
-```
-
-```
-# docker-compose.yml
-
-version: '3.8'
-services:
-  api:
-    build:
-      dockerfile: Dockerfile
-      context: .
-    depends_on:
-      - postgres
-    volumes:
-      - .:/usr/src/app
-      - node-modules:/usr/src/app/node_modules
-    environment: 
-      POSTGRES_DB: ${DB_DATABASE}
-      POSTGRES_USER: ${DB_USERNAME}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-      POSTGRES_HOST: ${DB_HOST}
-      POSTGRES_PORT: ${DB_PORT}
-      DATABASE_URL: postgres://${DB_USER}:${DB_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${DB_DATABASE}
-      NODE_ENV: development
-      PORT: 3000
-    ports:
-      - "${SERVER_PORT:-8090}:3000"
-    command: npm run start:dev
-  postgres:
-    image: postgres
-    environment:
-      POSTGRES_DB: ${DB_DATABASE}
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-    ports:
-      - '${DB_EXTERNAL_PORT:-35000}:5432'
-
-volumes:
-  node-modules:
-
-```
-
 and, you need to change 
 
 2. And in the project root folder, type the above command 
 ```bash
 $ docker-compose up -d
+# IF you want to delete cash, because you adjust package, type docker-compose build --no-cache
 ```
+
+you can check this image in docker desktop.
+
 <p align="center">
- <img src = "./readmeimgs/postgresnestjs.png">
+ <img src = "./readmeimgs/dockerfinally.png">
 </p>
-you can check this iamge.
 
 3. and you can get images and container
-***visit "http://localhost:8090/api"***
+***visit "http://localhost:3000/api"***
 
 and also you need to set new database
+
 <p align="center">
- <img src = "./readmeimgs/TablePlustDB.png">
+ <img src = "./readmeimgs/tablescon.png">
 </p>
 
 you can also get swagger and page with out command npm run start:dev!
-
-<p align="center">
- <img src = "./readmeimgs/postgresnestjs.png">
-</p>
 
 you can check swagger at localhost:8090, not 3000!

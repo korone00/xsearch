@@ -1,26 +1,18 @@
-# Base image
-FROM node:18
+FROM node:18 as builder
 
-# alphin의 경우 linux 배포용이라 크기가 작다. 따라서 개발용 node:18을 사용하고 배포용으로 alphine을 사용하면 될 것 같다 
-
-# Create app directory
-RUN mkdir -p /var/app
-WORKDIR /usr/src/app
-
-# Bundle app source
+WORKDIR /app
 COPY . .
+RUN npm install || npm run build
+# As for alpine, it's small because it's for linux distribution, so I think you can use node:18 for development and alpine for deployment
 
-# Install app dependencies
-RUN npm install
 
-# If you are using it for distribution, save it as a RUN npm ci.
-# RUN npm ci
+FROM node:18-alpine
+WORKDIR /app
+RUN mkdir -p /app
+RUN mkdir -p /app/dist
+COPY --from=builder /app/package*.json ./
+# COPY --from=builder /app/public ./public/
+RUN npm install --only=production
+COPY --from=builder /app/dist ./dist/
 
-# Creates a "dist" folder with the production build
-RUN npm run build
-
-# Expose the port to run the application on
-EXPOSE 3000
-
-# Start the server using the production build
-CMD [ "node", "dist/main.js" ]
+CMD [ "node", "dist/main" ]
