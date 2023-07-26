@@ -2,7 +2,8 @@
 .env
 
 #chroma
-chroma/
+imgs/
+vittest.ipynb
 
 #milvus
 __pycache__/
@@ -16,6 +17,7 @@ train/
 volumes/
 .ipynb
 .csv
+minio/
 
 #minio
 storage/
