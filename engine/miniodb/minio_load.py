@@ -115,7 +115,7 @@ class minioLoader():
                 print(file)
                 if file.lower().endswith(".jpg") or file.lower().endswith(".png") or file.lower().endswith(".jpeg"):
                     file_path = os.path.join(subdir, file)
-
+                    print(file_path)
                     s3_key = os.path.relpath(file_path, folder_path).replace("\\", "/")
 
                     try:
@@ -138,7 +138,7 @@ class minioLoader():
 if __name__ == '__main__':
     dataLoader = minioLoader()
     dataLoader.set_minio()
-    dataLoader.set_bucket('images')
+    dataLoader.set_bucket('images4')
     
     download_link = "https://github.com/towhee-io/examples/releases/download/data/reverse_image_search.zip"
     dataLoader.set_path(download_link)
