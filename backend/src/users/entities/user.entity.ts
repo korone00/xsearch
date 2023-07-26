@@ -36,11 +36,18 @@ export class User extends BaseEntity {
   email: string;
 
   @ApiProperty({
-    example:'user',
-    description:'role',
-    required:false,
-})    
-@Column()
-role:string;
+    example: '010-5917-7550',
+    description: 'phone',
+    required: true,
+  })
+  @Column()
+  phone: string;
 
+  @ApiProperty({
+    example: 'user',
+    description: 'role',
+    required: false,
+  })
+  @Column()
+  role: string;
 }

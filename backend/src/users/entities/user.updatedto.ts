@@ -25,4 +25,11 @@ export class UpdateUserDto {
   @IsString()
   @IsOptional()
   email?: string;
+  @ApiProperty({
+    example: '010-0000-0000',
+    description: 'phone',
+  })
+  @IsString()
+  @IsOptional()
+  phone?: string;
 }
