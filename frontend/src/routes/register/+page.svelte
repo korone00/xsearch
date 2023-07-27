@@ -1,7 +1,6 @@
 <script>
 	import { Input, Label, Checkbox, Button, A, Radio } from 'flowbite-svelte';
-	// import { ActionData, PageData } from './$types'; // 내일 대표님께 여쭤보기
-	export let form; //:ActionData
+	export let form;
 	$: {
 		console.log('test');
 	}
@@ -55,7 +54,6 @@
 			placeholder="•••••••••"
 			required
 		/>
-		<!--로직 구현해야함-->
 	</div>
 	<Checkbox checked color="purple" class="mb-6 space-x-1 text-indigo-400" required
 		>I agree with the <A href="/" class="text-indigo-300 hover:underline">terms and conditions</A
