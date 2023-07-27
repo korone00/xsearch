@@ -74,9 +74,74 @@ class MilvusDB():
         script_dir = os.path.dirname(os.path.abspath(__file__))
         os.chdir(script_dir)
         
-        x = x.lower()
+        if x.lower().endswith('csv'):
+            if not os.path.exists(x):
+                raise FileNotFoundError(f"{x} does not exist.")
+            
+            with open(x) as f:
+                reader = csv.reader(f)
+                headers = next(reader)  # Skip the header
+                
+                if len(headers) < 4 :
+                    raise ValueError("minio id doesn't exist in this csv files.")
+                
+                for item in reader:
+                    if len(item) < 4:
+                        raise ValueError("Invalid CSV format.")
+                    
+                    # minio_id = item[3]
+                    # print(minio_id)
+                    img_path = os.path.join(script_dir, self.unzip_dir, item[1])  # Construct absolute path from relative path
+                    #print(img_path)
+                    if not os.path.isfile(img_path):
+                        raise FileNotFoundError(f"Image file does not exist: {img_path}")
+                    
+                    yield img_path
+                        
+        elif (x.lower().endswith(".jpg") or x.lower().endswith(".png") or x.lower().endswith(".jpeg")):
+            for item in glob(x):
+                if not os.path.isfile(item):
+                    raise FileNotFoundError(f"Image file does not exist: {item}")
+                
+                yield item
         
-        if x.endswith('csv'):
+        # elif urlparse(x).scheme in ["http", "https"]: #search일 경우에만 사용
+        #     print(x)
+        #     for item in glob(x):
+        #         try:
+        #             # 이미지 다운로드
+        #             response = requests.get(x)
+        #             status =  response.raise_for_status()
+        #             print(status)
+                    
+        #             minio_id='a' #empty minio_id
+        #             img_path = os.path.join(os.path.dirname(script_dir), self.query_dir, 'query.JPEG')
+                    
+            
+        #         except RequestException as e:
+        #             print(f"Failed to download the file. Error: {e}")
+                
+        #         #폴더가 없을 경우 폴더 생성
+        #         os.makedirs(os.path.dirname(img_path), exist_ok=True)
+                
+        #         # 파일로 저장
+        #         with open(img_path, 'wb') as f:
+        #             f.write(response.content)
+                
+        #         if not os.path.isfile(img_path):
+        #             raise FileNotFoundError(f"Image file does not exist: {img_path}")
+                
+        #         yield minio_id, img_path #절대경로
+
+        
+        else:
+            raise ValueError(f"Invalid input {x}")
+    
+    def get_id(self, x):
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        os.chdir(script_dir)
+        
+        if x.lower().endswith('csv'):
             if not os.path.exists(x):
                 raise FileNotFoundError(f"{x} does not exist.")
             
@@ -93,62 +158,22 @@ class MilvusDB():
                     
                     minio_id = item[3]
                     
-                    img_path = os.path.join(os.path.dirname(script_dir), self.unzip_dir, item[1])  # Construct absolute path from relative path
-                    
-                    if not os.path.isfile(img_path):
-                        raise FileNotFoundError(f"Image file does not exist: {img_path}")
-                    
-                    yield minio_id, img_path
-                        
-        elif (x.endswith(".jpg") or x.endswith(".png") or x.endswith(".jpeg")):
-            for item in glob(x):
-                if not os.path.isfile(item):
-                    raise FileNotFoundError(f"Image file does not exist: {item}")
-                minio_id = str(uuid.uuid4())
-                yield minio_id, item
+                    yield minio_id
         
-        elif urlparse(x).scheme in ["http", "https"]: #search일 경우에만 사용
-            for item in glob(x):
-                try:
-                    # 이미지 다운로드
-                    response = requests.get(x)
-                    response.raise_for_status()
-                    
-                    minio_id='' #empty minio_id
-                    img_path = os.path.join(os.path.dirname(script_dir), self.query_dir, 'query.JPEG')
-                    
             
-                except RequestException as e:
-                    print(f"Failed to download the file. Error: {e}")
-                
-                #폴더가 없을 경우 폴더 생성
-                os.makedirs(os.path.dirname(img_path), exist_ok=True)
-                
-                # 파일로 저장
-                with open(img_path, 'wb') as f:
-                    f.write(response.content)
-                
-                if not os.path.isfile(img_path):
-                    raise FileNotFoundError(f"Image file does not exist: {img_path}")
-                
-                yield minio_id, img_path #절대경로
-
-        
-        else:
-            raise ValueError(f"Invalid input {x}")
-        
     
     #insert image vector to milvusDB
     def insert(self, insert_src):
         p_embed = (
             pipe.input('src')
-                .flat_map('src', ('minio_id','img_path'), self.load_image) #반복 가능한 객체 출력 가능
+                .flat_map('src', 'img_path', self.load_image) #반복 가능한 객체 출력 가능
+                .flat_map('src', 'id', self.get_id)
                 .map('img_path', 'img', ops.image_decode())
                 .map('img', 'vec', ops.image_embedding.timm(model_name=self.MODEL, device=self.DEVICE))
         )
         
         p_insert = (
-            p_embed.map(('minio_id', 'vec'), 'mr', ops.ann_insert.milvus_client(
+            p_embed.map(('id', 'vec'), 'mr', ops.ann_insert.milvus_client(
                         host=self.HOST,
                         port=self.PORT,
                         collection_name=self.COLLECTION_NAME
@@ -156,13 +181,12 @@ class MilvusDB():
             .output('mr')
         )
         
-        p_insert(insert_src)
+        p_insert(insert_src)        
     
-    #using img url, search the similarity image
-    def search(self, img_url):
+    def search(self, img_path):
         p_embed = (
-            pipe.input('url')
-                .flat_map('url', ('minio_id','img_path'), self.load_image) #img_path는 절대경로
+            pipe.input('src')
+                .flat_map('src', 'img_path', self.load_image)
                 .map('img_path', 'img', ops.image_decode())
                 .map('img', 'vec', ops.image_embedding.timm(model_name=self.MODEL, device=self.DEVICE))
         )
@@ -171,15 +195,18 @@ class MilvusDB():
             p_embed.map('vec', ('search_res'), ops.ann_search.milvus_client(
                         host=self.HOST, port=self.PORT, limit=self.TOPK,
                         collection_name=self.COLLECTION_NAME))
-                    .map('search_res', ('pred_minioID'), lambda x: [str(Path(y[0]).resolve()) for y in x])
+                    .map('search_res', ('pred'), lambda x: [str(Path(y[0]).resolve()) for y in x])
                     .map('search_res', ('score'), lambda x: [str(y[1]) for y in x])
         )
         
-        p_search = p_search_pre.output('img_path', 'pred_minioID', 'score')
+        p_search = p_search_pre.output('img_path', 'pred', 'score')
         
-        dc = p_search(img_url)
+        dc = p_search(img_path)
         json_data = dc.get_dict()
-            
+        
+        json_data['pred'] = [x[-37:] for x in json_data['pred']]
+        
+           
         return json_data
         
         
@@ -241,7 +268,7 @@ def _dataLoader(milvus, collection_name):
     os.chdir(script_dir)
     
     # Specify the path where you want to save the downloaded file
-    save_path = os.path.join(os.path.dirname(script_dir),"reverse_image_search.zip")
+    save_path = os.path.join(script_dir,"reverse_image_search.zip")
 
     # Check if the file already exists before downloading
     if not os.path.exists(save_path):
@@ -252,7 +279,7 @@ def _dataLoader(milvus, collection_name):
     unzip_dir = unzip_file(save_path)
     
     # path to csv (column_1 indicates image path) OR a pattern of image paths
-    INSERT_SRC = os.path.join(os.path.dirname(script_dir), unzip_dir, 'output.csv')
+    INSERT_SRC = os.path.join(script_dir, unzip_dir, 'output.csv')
     
     if not os.path.exists(INSERT_SRC):
         raise FileNotFoundError(f"{INSERT_SRC} does not exist.")
@@ -272,7 +299,8 @@ def dataLoader(collection_name):
     milvus = MilvusDB(collection_name)
     milvus.connect()
     
-    # if utility.has_collection(collection_name): #test
+    #debugging
+    # if utility.has_collection(collection_name):
     #     utility.drop_collection(collection_name)
             
     if utility.has_collection(collection_name):

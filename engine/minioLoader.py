@@ -66,12 +66,12 @@ class MinioDB():
                     # 백슬래시를 슬래시로 바꿈
                     img_path = img_path.replace('\\', '/')
 
-                    print(img_path)
+                    #print(img_path)
                     
                     if not os.path.isfile(img_path):
                         raise FileNotFoundError(f"Image file does not exist: {img_path}")
                     
-                    minio_id = item[3] + '.JPEG'#uuid + file format
+                    minio_id = item[3] #uuid + file format
                     
                     try:
                     # Open image and convert to bytes
@@ -127,6 +127,21 @@ class MinioDB():
                 
         except S3Error as err:
             print(f"error: {err}")
+            
+    def get_image(self, minio_id):
+        try:
+            data = self.client.get_object("images", minio_id)
+            script_dir = os.path.dirname(os.path.abspath(__file__))
+            os.chdir(script_dir)
+            
+            save_path = os.path.join(script_dir,'results', str(os.path.basename(minio_id))+'.JPEG')
+            os.makedirs(os.path.dirname(save_path), exist_ok=True)
+
+            with open(save_path, "wb") as file:
+                file.write(data.read())
+                
+        except S3Error as err:
+            print(f"error: {err}")
         
 #add minio_id 
 def create_csv(input_csv, output_csv, folder):
@@ -148,7 +163,7 @@ def create_csv(input_csv, output_csv, folder):
 
         # 각 줄에 랜덤 값을 추가
         for row in reader:
-            minio_id = str(uuid.uuid4())
+            minio_id = 'a' + str(uuid.uuid4()).replace('-','_')
             row.append(minio_id)
             writer.writerow(row)
     
@@ -209,7 +224,7 @@ def _imageLoader(minio):
     script_dir = os.path.dirname(os.path.abspath(__file__))
     os.chdir(script_dir)
     
-    save_path = os.path.join(os.path.dirname(script_dir), "reverse_image_search.zip")
+    save_path = os.path.join(script_dir, "reverse_image_search.zip")
     
             # Check if the file already exists before downloading
     print(save_path)
@@ -222,7 +237,7 @@ def _imageLoader(minio):
     unzip_dir = unzip_file(save_path) #zip foler path
     
     try:
-        folder_path = os.path.join(os.path.dirname(script_dir), unzip_dir) # folder 경로만
+        folder_path = os.path.join(script_dir, unzip_dir) # folder 경로만
         
         if not os.path.exists(folder_path):
             raise Exception(f"Directory does not exist: {folder_path}.")
@@ -240,8 +255,6 @@ def _imageLoader(minio):
         
     except Exception as e:
         print(f'Error: {e}')
-    
-    
 
 
 #main imageLoader function
@@ -249,7 +262,7 @@ def imageLoader(bucket_name):
     minio = MinioDB(bucket_name)
     _minio_instance = minio.connect()
     
-    # # #test
+    # #debugging
     # if _minio_instance.bucket_exists(bucket_name):
     #     _minio_instance.remove_bucket(bucket_name)
     
@@ -269,13 +282,10 @@ def imageLoader(bucket_name):
     return minio  #Minio class instance
 
 
-
-
-
 #main function
 if __name__ == '__main__':
     #test
-    bucket_name = 'images'
+    bucket_name = 'baseimages'
     minio_instance = imageLoader(bucket_name)
     
     #TEST
