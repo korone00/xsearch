@@ -9,6 +9,7 @@ services:
       - .env
     depends_on:
       - postgres
+      - s3
     ports:
       - 3000:3000
   postgres:
@@ -18,7 +19,20 @@ services:
       - .env
     environment:
       POSTGRES_DB: ${DB_DATABASE}
-      POSTGRES_USER: ${DB_USER}
+      POSTGRES_USER: ${DB_USERNAME}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
     ports:
       - 5432:5432
+  s3:
+    image: minio/minio
+    ports:
+      - 9000:9000
+      - 9001:9001
+    environment:
+      MINIO_ROOT_USER: admin
+      MINIO_ROOT_PASSWORD: sodeimmcd
+    volumes:
+      - ./storage/minio:/data
+    command: server /data --console-address ":9001"
+
+
