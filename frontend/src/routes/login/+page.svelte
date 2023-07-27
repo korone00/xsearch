@@ -12,15 +12,16 @@
 	</div>
 
 	<div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-		<form class="space-y-5" action="#" method="POST">
+		<form class="space-y-5" action="?/login" method="POST">
 			<div>
 				<Label for="id" class="mb-2.5 text-indigo-400">Your id</Label>
-				<Input id="id" type="text" placeholder="Your id here" size="md" />
+				<Input id="id" name="id" type="text" placeholder="Your id here" size="md" />
 			</div>
 			<div>
 				<Label for="password" class="mb-2.5 text-indigo-400">Your password</Label>
 				<Input
 					id="password"
+					name="password"
 					type={show ? 'text' : 'password'}
 					placeholder="Your password here"
 					size="lg"

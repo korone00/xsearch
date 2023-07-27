@@ -40,6 +40,7 @@
 		"flowbite": "^1.7.0",
 		"flowbite-svelte": "^0.39.3",
 		"svelte-routing": "^1.11.0",
-		"tailwind-merge": "^1.14.0"
+		"tailwind-merge": "^1.14.0",
+		"tslog": "^4.8.2"
 	}
 }
