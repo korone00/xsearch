@@ -38,6 +38,6 @@ export const actions: Actions = {
 		);
 
 		logger.debug(`actions register redirect to /login`);
-		throw redirect(302, '/login'); // register 성공하면 login으로 redirect
+		throw redirect(302, '/login'); // login으로 redirect
 	}
 } satisfies Actions;

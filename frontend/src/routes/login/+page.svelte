@@ -1,6 +1,9 @@
 <script>
+	import { error } from '@sveltejs/kit';
 	import { Label, Input } from 'flowbite-svelte';
 	let show = false;
+	export let form;
+	import { enhance } from '$app/forms';
 </script>
 
 <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
@@ -12,7 +15,7 @@
 	</div>
 
 	<div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-		<form class="space-y-5" action="?/login" method="POST">
+		<form use:enhance class="space-y-5" action="?/login" method="POST">
 			<div>
 				<Label for="id" class="mb-2.5 text-indigo-400">Your id</Label>
 				<Input id="id" name="id" type="text" placeholder="Your id here" size="md" />
@@ -70,6 +73,7 @@
 					>Sign in</button
 				>
 			</div>
+			{#if form?.error}<p class="error text-red-500">${form.error}</p>{/if}
 		</form>
 
 		<div class="mt-5 text-center text-sm">
