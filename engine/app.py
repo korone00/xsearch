@@ -1,4 +1,5 @@
 import os
+import glob
 from dotenv import load_dotenv
 from flask import Flask, request, jsonify
 from flask_restx import Resource, Namespace, fields, Api
@@ -58,6 +59,15 @@ class Search(Resource):
         img_path_result = 'results/*.JPEG'
         result = milvus_instance.search(img_path_result)
 
+
+        #remove files in results
+        folder_path = './results/*'
+
+        files = glob.glob(folder_path)
+
+        for f in files:
+            os.remove(f)
+            
         # Return the search results as JSON
         return jsonify(result)
     
