@@ -2,7 +2,7 @@
 	import { Input, Label, Checkbox, Button, A, Radio } from 'flowbite-svelte';
 	export let form;
 	$: {
-		console.log('test');
+		console.log('loading 완료');
 	}
 	let colors = 'purple';
 </script>
