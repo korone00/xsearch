@@ -6,6 +6,8 @@ import { UserModule } from './users/users.modules';
 import { AuthModule } from './auth/auth.module';
 import { UploadModule } from './modules/search/upload/upload.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { DateController } from './date/date.controller';
+
 
 @Module({
   imports: [
@@ -31,7 +33,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
     UserModule,
     AuthModule,
   ],
-  controllers: [AppController],
+  controllers: [AppController,DateController],
   providers: [AppService],
 })
 export class AppModule {}
