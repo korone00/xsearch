@@ -7,6 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { UploadModule } from './modules/search/upload/upload.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { DateController } from './modules/date/date.controller';
+import { LoggerModule } from './modules/logging/logger.module';
 
 
 @Module({
@@ -32,6 +33,7 @@ import { DateController } from './modules/date/date.controller';
     }),
     UserModule,
     AuthModule,
+    LoggerModule
   ],
   controllers: [AppController,DateController],
   providers: [AppService],
