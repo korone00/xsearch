@@ -38,6 +38,8 @@
     "form-data": "^4.0.0",
     "fs": "^0.0.1-security",
     "hbs": "^4.2.0",
+    "moment": "^2.29.4",
+    "nest-winston": "^1.9.3",
     "nestjs-paginate": "^8.1.7",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.1",
@@ -51,7 +53,8 @@
     "uuid": "^9.0.0",
     "v1": "^1.0.0",
     "v3": "^0.0.0",
-    "v5": "^0.1.2"
+    "v5": "^0.1.2",
+    "winston": "^3.10.0"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.1.10",

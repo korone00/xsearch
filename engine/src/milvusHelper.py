@@ -153,6 +153,16 @@ class MilvusHelper():
                     raise FileNotFoundError(f"Image file does not exist: {img_path}")
 
                 yield img_path  # 절대경로
+        
+        elif self.is_supported_image_extension(x):
+            script_dir = os.path.dirname(os.path.abspath(__file__))
+            os.chdir(script_dir)
+            
+            img_path = os.path.join("..", "..", "backend", "uploads",
+            os.path.basename(x))
+            
+            yield img_path
+            
         else:
             raise ValueError(f"Invalid input {x}")
     

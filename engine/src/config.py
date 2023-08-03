@@ -20,7 +20,7 @@ MINIO_secret_key = os.getenv("MINIO_secret_key", "PbqcBTLXE3sSzOqVZj0SjYlg4UWsZj
 # MINIO_secret_key = os.getenv("MINIO_secret_key", "Insert MinIo secret key")
 
 ############### FLASK Configuration ################
-FLASK_HOST = os.getenv("FLASK_HOST", "127.0.0.1")
+FLASK_HOST = os.getenv("FLASK_HOST", "0.0.0.0")
 FLASK_PORT = os.getenv("FLASK_PORT", "5000")
 
 

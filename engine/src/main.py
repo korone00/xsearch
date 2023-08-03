@@ -56,10 +56,10 @@ class Search(Resource):
         data = request.get_json()
         
         #get query image path, get collection_name
-        file_name = data['filename']
-        img_path = data['img_path'] 
-        collection_name = data['collection_name']
-        
+        file_name = data.get('filename')
+        img_path = data.get('img_path') 
+        collection_name = data.get('collection_name')
+
         
         #search
         result = milvus_client.search(img_path=img_path,collection_name=collection_name)
