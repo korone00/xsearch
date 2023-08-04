@@ -8,6 +8,9 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
+  // Enable CORS
+  app.enableCors();
+
   const viewsPath = join(__dirname, '..', 'views');
   app.setBaseViewsDir(viewsPath);
   app.setViewEngine('hbs');

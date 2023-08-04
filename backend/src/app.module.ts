@@ -8,6 +8,7 @@ import { UploadModule } from './modules/search/upload/upload.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { DateController } from './modules/date/date.controller';
 import { LoggerModule } from './modules/logging/logger.module';
+import { MinioModule } from "./miniocon/minio.module"; // Import the MinioModule
 
 
 @Module({
@@ -33,7 +34,8 @@ import { LoggerModule } from './modules/logging/logger.module';
     }),
     UserModule,
     AuthModule,
-    LoggerModule
+    LoggerModule,
+    MinioModule,
   ],
   controllers: [AppController,DateController],
   providers: [AppService],

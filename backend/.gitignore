@@ -39,3 +39,6 @@ lerna-debug.log*
 
 # Ignore .env file
 .env
+
+#minio
+/storage

@@ -159,3 +159,47 @@ and also you need to set new database
 you can also get swagger and page with out command npm run start:dev!
 
 you can check swagger at localhost:8090, not 3000!
+
+
+# Guide to Connect NestJS with Docker Compose
+
+This guide illustrates how to connect a NestJS application with Postgres and Minio services using Docker Compose.
+
+## Step 1: Run Docker Compose
+
+Start the Postgres and Minio services using Docker Compose. You can do this by entering the following command in your terminal:
+
+```bash
+docker-compose up -d
+```
+<p align="center">
+ <img src = "./readmeimgs/miniopost.png">
+</p>
+## Step 2: Launch NestJS
+
+Next, launch the NestJS application. 
+
+> **Note**: Minio does not support creating a bucket using Docker Compose. Therefore, before proceeding with this step, ensure that a bucket is already created in Minio.
+
+<p align="center">
+ <img src = "./readmeimgs/minio.png">
+</p>
+
+## Step 3: Verification via Swagger API
+
+To verify if NestJS is running and connecting properly, use the Swagger API. Through this, you can check if uploaded images are displayed correctly.
+
+<p align="center">
+ <img src = "./readmeimgs/minioupload.png">
+</p>
+
+you can also check on minio api
+<p align="center">
+ <img src = "./readmeimgs/miniocheck.png">
+</p>
+
+## Troubleshooting
+
+If you encounter any issues with the connection, check and modify the access permissions of your Minio bucket, if necessary. If the issue persists, reach out to your supervisor or the person responsible for assistance.
+
+Through these steps, you can connect your NestJS application with Postgres and Minio services using Docker Compose. We hope this guide is helpful to you!
