@@ -45,6 +45,7 @@
     "multer-s3": "^3.0.1",
     "nest-winston": "^1.9.3",
     "nestjs-minio": "^2.5.0",
+    "winston-daily-rotate-file": "^4.7.1",
     "nestjs-paginate": "^8.1.7",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.1",
