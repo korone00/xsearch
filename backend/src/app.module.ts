@@ -7,8 +7,12 @@ import { AuthModule } from './auth/auth.module';
 import { UploadModule } from './modules/search/upload/upload.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { DateController } from './modules/date/date.controller';
-import { LoggerModule } from './modules/logging/logger.module';
 import { MinioModule } from "./miniocon/minio.module"; // Import the MinioModule
+import * as winston from 'winston';
+import {
+  WinstonModule,
+  utilities as nestWinstonModuleUtilities,
+} from 'nest-winston';
 
 
 @Module({
@@ -34,9 +38,19 @@ import { MinioModule } from "./miniocon/minio.module"; // Import the MinioModule
     }),
     UserModule,
     AuthModule,
-    LoggerModule,
+    // LoggerModule,
     MinioModule,
+    WinstonModule.forRoot({
+      transports: [
+        new winston.transports.Console({
+          level: process.env.NODE_ENV === 'production' ? 'info' : 'silly',
+          format: winston.format.combine(
+            winston.format.timestamp(),
+            nestWinstonModuleUtilities.format.nestLike('MyApp',{prettyPrint:true}),
+          )})
   ],
+})
+],
   controllers: [AppController,DateController],
   providers: [AppService],
 })
