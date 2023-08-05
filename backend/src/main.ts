@@ -4,9 +4,12 @@ import { join } from 'path';
 import * as hbs from 'hbs';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { winstonLogger } from '../utils/winston.util';
 
 async function bootstrap() {
-  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule,{
+    logger:winstonLogger,
+  });
 
   // Enable CORS
   app.enableCors();
