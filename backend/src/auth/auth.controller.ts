@@ -80,7 +80,7 @@ export class AuthController {
     description: '사용자 전체 목록 (only for Admin)',
   })
   @ApiCreatedResponse({ description: '사용자 전체 목록' })
-  @Get('userlist')
+  @Get('users')
   public findAll(@Paginate() query: PaginateQuery): Promise<Paginated<User>> {
     return this.authService.findAll(query);
   }

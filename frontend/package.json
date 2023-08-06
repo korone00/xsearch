@@ -37,8 +37,10 @@
 	"type": "module",
 	"dependencies": {
 		"@popperjs/core": "^2.11.8",
+		"dotenv": "^16.3.1",
 		"flowbite": "^1.7.0",
 		"flowbite-svelte": "^0.39.3",
+		"svelte-kit-cookie-session": "^3.4.1",
 		"svelte-routing": "^1.11.0",
 		"tailwind-merge": "^1.14.0",
 		"tslog": "^4.8.2"
