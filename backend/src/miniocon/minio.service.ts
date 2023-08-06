@@ -1,21 +1,13 @@
-import { Injectable } from '@nestjs/common'
+import { Injectable, Inject } from '@nestjs/common'
 import * as Minio from 'minio'
 import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class MinioService {
-  private minioClient: Minio.Client
   private bucketName: string
 
-  constructor(private readonly configService: ConfigService) {
-    this.minioClient = new Minio.Client({
-      endPoint: this.configService.get('MINIO_ENDPOINT'),
-      port: Number(this.configService.get('MINIO_PORT')),
-      useSSL: this.configService.get('MINIO_USE_SSL') === 'true',
-      accessKey: this.configService.get('MINIO_ACCESS_KEY'),
-      secretKey: this.configService.get('MINIO_SECRET_KEY')
-    })
-    this.bucketName = this.configService.get('MINIO_BUCKET_NAME')
+  constructor(private readonly configService: ConfigService, @Inject('MINIO') private minioClient: Minio.Client) {
+    this.bucketName = configService.get<string>('MINIO_BUCKET_NAME')
   }
 
   async createBucketIfNotExists() {
