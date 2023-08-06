@@ -1,5 +1,6 @@
 import { error } from '@sveltejs/kit';
-
+// import { BASE_PATH } from '$env/static/private';
+// const base = `${BASE_PATH}`;
 const base = 'http://localhost:3000';
 async function send({
 	method,
@@ -20,7 +21,8 @@ async function send({
 	}
 
 	if (token) {
-		requestHeaders.set('Authorization', `Token ${token}`);
+		requestHeaders.set('Authorization', 'Bearer ' + token);
+		console.log(requestHeaders.get('Authorization'));
 	}
 
 	const res = await fetch(`${base}/${path}`, {
@@ -40,4 +42,8 @@ export function post(path: any, data: any, token: any) {
 	return send({ method: 'POST', path, data, token });
 }
 
+export function get(path: any, token: any) {
+	const data = null;
+	return send({ method: 'GET', path, data, token });
+}
 // get, delete, update 추가

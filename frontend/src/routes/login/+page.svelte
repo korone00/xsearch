@@ -1,5 +1,4 @@
 <script>
-	import { error } from '@sveltejs/kit';
 	import { Label, Input } from 'flowbite-svelte';
 	let show = false;
 	export let form;

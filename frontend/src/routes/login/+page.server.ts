@@ -10,10 +10,9 @@ export const load = async ({}) => {
 };
 
 export const actions: Actions = {
-	login: async ({ request }) => {
+	login: async ({ request, locals, cookies }) => {
 		const data = await request.formData();
 		logger.debug(`actions login START`);
-		console.log('log1');
 		const body = await api.post(
 			'auth/login',
 			{
@@ -22,10 +21,12 @@ export const actions: Actions = {
 			},
 			''
 		);
-		console.log(body);
 		if (body.errors) {
 			return fail(body.error, body);
 		}
+		console.log(body.accessToken);
+		cookies.set('jwt', body.accessToken, { path: '/' });
+
 		throw redirect(307, '/'); // main으로 redirect
 	}
 } satisfies Actions;
