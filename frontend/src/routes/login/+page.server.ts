@@ -25,7 +25,11 @@ export const actions: Actions = {
 			return fail(body.error, body);
 		}
 		console.log(body.accessToken);
-		cookies.set('jwt', body.accessToken, { path: '/' });
+		cookies.set('jwt', body.accessToken, {
+			httpOnly: true,
+			path: '/',
+			maxAge: 60 * 60 * 24
+		});
 
 		throw redirect(307, '/'); // main으로 redirect
 	}
