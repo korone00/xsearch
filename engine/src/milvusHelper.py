@@ -171,7 +171,7 @@ class MilvusHelper():
         p_embed = (
             pipe.input('src')
                 .flat_map('src', ('img_path','minio_id'), self.load_image_path) #반복 가능한 객체 출력 가능
-                .map('img_path', 'img', ops.image_decode.cv2('rgb'))
+                .map('img_path', 'img', ops.image_decode.cv2_rgb())
                 .map('img', 'vec', ops.image_embedding.timm(model_name='resnet50'))
         )
         
@@ -190,7 +190,7 @@ class MilvusHelper():
         p_embed = (
             pipe.input('src')
                 .flat_map('src', 'img_path', self.load_image_path)
-                .map('img_path', 'img', ops.image_decode.cv2('rgb'))
+                .map('img_path', 'img', ops.image_decode.cv2_rgb())
                 .map('img', 'vec', ops.image_embedding.timm(model_name='resnet50'))
         )
         

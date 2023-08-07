@@ -1,0 +1,9 @@
+flask==2.3.2
+requests==2.31.0
+towhee==1.1.1
+opencv-python-headless==4.8.0.74
+pillow==10.0.0
+python-dotenv==1.0.0
+pymilvus==2.2.11
+minio==7.1.15
+flask_restx==1.1.0
