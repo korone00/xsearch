@@ -1,11 +1,12 @@
 import type { Actions } from '@sveltejs/kit';
-import * as api from '../../lib/api';
+import * as api from '../../../lib/api';
 import { Logger } from 'tslog';
 const logger = new Logger({ name: 'userList' });
 
-export const load = async ({ cookies }) => {
+export const load = async ({ cookies, params }) => {
+	const page = Number(params.page);
 	logger.debug(`load START`);
-	const loadData = await api.get('auth/users', cookies.get('jwt'));
+	const loadData = await api.get(`auth/users?page=${page}`, cookies.get('jwt'));
 	return loadData;
 };
 
