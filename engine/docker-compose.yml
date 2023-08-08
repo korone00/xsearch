@@ -1,0 +1,13 @@
+version: "3.5"
+services:
+  engine:
+    image: engine
+    ports:
+      - 5000:5000
+    volumes:
+      - ./src:/app/src
+    networks:
+      - netnet
+networks:
+  netnet:
+    external: true
