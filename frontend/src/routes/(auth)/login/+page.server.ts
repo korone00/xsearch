@@ -5,9 +5,6 @@ const logger = new Logger({ name: 'login' });
 
 export const load = async ({ locals }) => {
 	logger.debug(`load START`);
-	locals.session.set({
-		aaa: 're'
-	});
 	logger.debug(`load END`);
 };
 
@@ -27,12 +24,11 @@ export const actions: Actions = {
 			return fail(body.error, body);
 		}
 		console.log(body.accessToken);
-		cookies.set('jwt', body.accessToken, {
-			httpOnly: true,
-			path: '/',
-			maxAge: 60 * 60 * 24
-		});
 
+		await locals.session.set({
+			jwt: body.accessToken
+		});
+		console.log(locals.session.data);
 		throw redirect(307, '/'); // main으로 redirect
 	}
 } satisfies Actions;
