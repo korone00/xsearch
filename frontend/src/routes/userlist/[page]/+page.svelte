@@ -48,7 +48,7 @@
 </script>
 
 <Table hoverable={true}>
-	<TableHead>
+	<TableHead class="text-indigo-600">
 		<TableHeadCell>ID</TableHeadCell>
 		<TableHeadCell>Name</TableHeadCell>
 		<TableHeadCell>Email</TableHeadCell>
@@ -69,7 +69,7 @@
 				<TableBodyCell>
 					<a
 						href="/tables"
-						class="font-medium text-primary-600 hover:underline dark:text-primary-500"
+						class="font-medium text-indigo-600 hover:underline dark:text-indigo-500"
 					>
 						Edit
 					</a>
@@ -78,4 +78,9 @@
 		{/each}
 	</TableBody>
 </Table>
-<Pagination {pages} on:previous={previous} on:next={next} />
+<Pagination
+	class="flex justify-center items-center mt-6"
+	{pages}
+	on:previous={previous}
+	on:next={next}
+/>
