@@ -1,5 +1,8 @@
 # minio storage
-/storage
+storage/
 
 # env file
 .env
+
+# volumes
+volumes/

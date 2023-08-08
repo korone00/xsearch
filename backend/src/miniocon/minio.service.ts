@@ -17,15 +17,15 @@ export class MinioService {
     }
   }
 
-  async uploadFile(file: Express.Multer.File) {
-    const fileName = `${Date.now()}-${file.originalname}`
-    await this.minioClient.putObject(
-      this.bucketName,
-      fileName,
-      file.buffer,
-      file.size
-    )
-    return fileName
+  async uploadFile(file: Express.Multer.File): Promise<string> {
+    const fileName = 'your-desired-file-name';
+    const bucketName = 'your-bucket-name';
+
+    await this.minioClient.putObject(bucketName, fileName, file.buffer);
+
+    const url = await this.minioClient.presignedUrl('GET', bucketName, fileName, 24 * 60 * 60);
+
+    return url;
   }
 
   async getFileUrl(fileName: string) {
