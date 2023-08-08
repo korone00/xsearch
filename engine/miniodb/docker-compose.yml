@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 services:
   s3:
     image: minio/minio
@@ -11,3 +11,8 @@ services:
     volumes:
       - ./storage/minio:/data
     command: server /data --console-address ":9001"
+
+networks:
+  default:
+    external:
+      name: netnet

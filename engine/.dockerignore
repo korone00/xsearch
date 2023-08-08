@@ -1,0 +1,11 @@
+__pycache__/
+chromadb/
+milvus/
+milvusdb/
+miniodb/
+readmeimgs/
+results/
+reverse_image_search/
+.env
+.env.example
+reverse_image_search.zip

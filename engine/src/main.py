@@ -9,6 +9,8 @@ from flask_restx import Resource, Namespace, fields, Api
 from milvusHelper import MilvusHelper
 from minioHelper import MinioHelper
 
+import dataset
+
 
 #flask, swagger run
 app = Flask(__name__)
