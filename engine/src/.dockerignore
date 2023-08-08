@@ -1,6 +1,0 @@
-__pycache__/
-logs/
-.env
-docker-compose.yml
-README.md
-Dockerfile
