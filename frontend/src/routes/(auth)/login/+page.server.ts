@@ -3,7 +3,7 @@ import { Logger } from 'tslog';
 import * as api from '../../../lib/api';
 const logger = new Logger({ name: 'login' });
 
-export const load = async ({ locals }) => {
+export const load = async ({}) => {
 	logger.debug(`load START`);
 	logger.debug(`load END`);
 };
