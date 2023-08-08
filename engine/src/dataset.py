@@ -60,19 +60,19 @@ def get_minio_id(csv_path):
     except Exception as e:
         print(f"Error: {e}")
 
-os.chdir(os.path.dirname(os.path.realpath(__file__)))
+abspath = os.path.dirname(os.path.realpath(__file__))
 #local img dataset preprocessing
 try:
-    if not os.path.exists(folder_name):
+    if not os.path.exists(os.path.join(abspath, folder_name)):
         # Create reverse_image_search folder
-        os.makedirs(folder_name)
+        os.makedirs(os.path.join(abspath , folder_name))
 
         # Download file
         response = requests.get(download_link)
         if response.status_code != 200:
             raise Exception("Failed to download file.")
 
-        zip_path = os.path.join(folder_name, "reverse_image_search.zip")
+        zip_path = os.path.join(abspath, folder_name, "reverse_image_search.zip")
 
         # Save zip file
         with open(zip_path, "wb") as f:
@@ -80,19 +80,19 @@ try:
 
         # Extract zip file
         with zipfile.ZipFile(zip_path, 'r') as zip_ref:
-            zip_ref.extractall(folder_name)
-
+            zip_ref.extractall(os.path.join(abspath , folder_name))
+        
         # Remove reverse_image_search.zip file
         os.remove(zip_path)
 
         # Remove "exception", "object" folders
         for dir_name in ["exception", "object"]:
-            shutil.rmtree(os.path.join(folder_name, dir_name))
+            shutil.rmtree(os.path.join(abspath , folder_name, dir_name))
     else:
         print(f"already exists {folder_name} folder.")
         
     try:
-        folder_path = folder_name  # folder 경로만
+        folder_path = os.path.join(abspath , folder_name)  # folder 경로만
 
         if not os.path.exists(folder_path):
             raise Exception(f"Directory does not exist: {folder_path}.")
@@ -109,7 +109,7 @@ except Exception as e:
 #insert imgs to minio
 try:
     minio_client = MinioHelper()
-    csv_path = os.path.join(collection_name, "output.csv").replace('\\','/')
+    csv_path = os.path.join(abspath , collection_name, "output.csv").replace('\\','/')
     #if bucket exists, then pass upload
     if not minio_client.client.bucket_exists(bucket_name):
         minio_client.set_bucket(bucket_name)

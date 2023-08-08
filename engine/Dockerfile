@@ -1,9 +1,14 @@
 # Use the official Python slim-buster image as the base image
 FROM python:3.10-slim-buster
 
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
 # Set the working directory inside the container
 WORKDIR /app/src
 COPY . /app
+
+ENV PYTHONPATH /app
 
 # Copy the engine code from the GitHub repository
 RUN pip install opencv-python
@@ -15,7 +20,7 @@ RUN pip install --no-cache-dir -r /app/requirements.txt
 
 # Set the environment variables for the Flask app
 ENV FLASK_APP=main.py
-ENV FLASK_RUN_HOST=192.168.0.238
+ENV FLASK_RUN_HOST=172.30.208.1
 
 # Expose the port on which the Flask API will run
 EXPOSE 5000

@@ -69,7 +69,7 @@ class MinioHelper():
         try:
             data = self.client.get_object(bucket_name, minio_id)
             script_dir = os.path.dirname(os.path.abspath(__file__))
-            os.chdir(script_dir)
+            #os.chdir(script_dir)
 
             save_path = os.path.join(script_dir,'results', str(os.path.basename(minio_id))+'.JPEG')
             os.makedirs(os.path.dirname(save_path), exist_ok=True)
