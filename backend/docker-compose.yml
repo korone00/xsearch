@@ -12,6 +12,7 @@ services:
       - s3
     ports:
       - 3000:3000
+
   postgres:
     container_name: postgresDB
     image: postgres
@@ -23,6 +24,7 @@ services:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
     ports:
       - 5432:5432
+
   s3:
     image: minio/minio
     ports:
@@ -31,8 +33,6 @@ services:
     environment:
       MINIO_ROOT_USER: "${MINIO_ROOT_USER}"
       MINIO_ROOT_PASSWORD: "${MINIO_ROOT_PASSWORD}"
-      MINIO_ENDPOINT: "${MINIO_ENDPOINT}"
-      MINIO_BUCKET: "${MINIO_BUCKET}"
     volumes:
       - ./storage/minio:/data
     command: server /data --console-address ":9001"

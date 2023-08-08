@@ -16,4 +16,4 @@ COPY --from=builder /app/package*.json ./
 RUN npm install --only=production
 COPY --from=builder /app/dist ./dist/
 
-CMD [ "node", "dist/main" ]
+CMD [ "node", "dist/src/main" ]

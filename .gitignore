@@ -1,0 +1,5 @@
+# minio storage
+/storage
+
+# env file
+.env

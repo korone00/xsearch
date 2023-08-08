@@ -1,4 +1,4 @@
-DB_HOST=localhost
+DB_HOST=postgres
 # localhost is for nest js npm run start:dev
 # postgres is for docker container
 DB_PORT=5432
@@ -14,7 +14,6 @@ flaskPORT= 5000
 milvusHOST= 127.0.0.1
 milvusPORT= 19530
 
-server = 192.168.1000.5
 
 MINIO_ENDPOINT='localhost'
 MINIO_PORT=9000

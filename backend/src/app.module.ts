@@ -15,7 +15,7 @@ import { LoggerMiddleware } from './modules/logging/logger.middleware';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: '.env',
+      envFilePath: '../.env',
       isGlobal: true, // allow to all modules to use ConfigService
     }),
     UploadModule,
