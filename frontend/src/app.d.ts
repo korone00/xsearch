@@ -5,7 +5,9 @@ declare global {
 		// interface Error {}
 		//interface PageData {}
 		// interface Platform {}
-		//interface Locals {}
+		interface Locals {
+			session: import('svelte-kit-cookie-session').Session<SessionData>;
+		}
 	}
 }
 

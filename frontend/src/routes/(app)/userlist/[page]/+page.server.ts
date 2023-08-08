@@ -1,5 +1,5 @@
 import type { Actions } from '@sveltejs/kit';
-import * as api from '../../../lib/api';
+import * as api from '../../../../lib/api';
 import { Logger } from 'tslog';
 const logger = new Logger({ name: 'userList' });
 

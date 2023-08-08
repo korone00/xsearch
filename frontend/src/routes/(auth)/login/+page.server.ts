@@ -1,11 +1,13 @@
 import { type Actions, fail, redirect } from '@sveltejs/kit';
 import { Logger } from 'tslog';
-import * as api from '../../lib/api';
+import * as api from '../../../lib/api';
 const logger = new Logger({ name: 'login' });
 
-export const load = async ({}) => {
+export const load = async ({ locals }) => {
 	logger.debug(`load START`);
-	// ...
+	locals.session.set({
+		aaa: 're'
+	});
 	logger.debug(`load END`);
 };
 
