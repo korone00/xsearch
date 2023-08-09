@@ -9,17 +9,24 @@ DB_DATABASE=postgres
 ACCESS_TOKEN_EXPIRATION=60s
 JWT_SECRET_KEY=secretKey
 
-flaskHOST= engine
-flaskPORT= 5000
-milvusHOST= milvus
-milvusPORT= 19530
-
+#minio
 MINIO_ENDPOINT=s3
 MINIO_PORT=9000
-
+MINIO_ADDRESS = s3:9000
+MINIO_USE_SSL=false
+MINIO_IMAGE_BUCKET = baseimages
+MINIO_QUERY_BUCKET = xsearchimgs
+MINIO_ROOT_USER = admin
+MINIO_ROOT_PASSWORD = xsearchdbs
 MINIO_ACCESS_KEY=admin
 MINIO_SECRET_KEY=sodeimmcd
-MINIO_USE_SSL=false
-MINIO_BUCKET_NAME=xsearchimgs
-MINIO_ROOT_USER = admin
-MINIO_ROOT_PASSWORD = sodeimmcd
+
+#milvus
+MILVUS_HOST = milvus
+MILVUS_PORT = 19530
+
+#flask
+FLASK_HOST = engine
+FLASK_PORT = 5000
+
+  

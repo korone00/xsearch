@@ -1,23 +1,47 @@
 import os
+from dotenv import load_dotenv
 from minio import Minio
 from minio.error import S3Error
-from config import MINIO_address, MINIO_access_key, MINIO_secret_key
 from datetime import timedelta
+
 
 
 class MinioHelper():
     def __init__(self):
-        self.bucket_name = None
+        self.MINIO_ADDRESS = None
+        self.MINIO_access_key = None
+        self.MINIO_secret_key = None
+        self.bucket_name = None  
+        self.query_bucket_name = None     
+        self.set_env()
+        
         self.client = Minio(
-            MINIO_address,
-            access_key=MINIO_access_key,
-            secret_key=MINIO_secret_key,
+            self.MINIO_address,
+            access_key=self.MINIO_access_key,
+            secret_key=self.MINIO_secret_key,
             secure=False,
         )
+
+    def set_env(self):
+        load_dotenv()
+        self.MINIO_address = str(os.getenv('MINIO_ADDRESS'))
+        self.MINIO_access_key= str(os.getenv('MINIO_ACCESS_KEY'))
+        self.MINIO_secret_key = str(os.getenv('MINIO_SECRET_KEY'))
+        self.bucket_name = str(os.getenv('MINIO_IMAGE_BUCKET'))
 
     def set_bucket(self, bucket_name):
         try:
             self.bucket_name = bucket_name
+            if not self.client.bucket_exists(bucket_name):
+                self.client.make_bucket(bucket_name)
+            print('complete set bucket')
+                
+        except S3Error as err:
+            print(err)
+    
+    def set_query_bucket(self, bucket_name):
+        try:
+            self.query_bucket_name = bucket_name
             if not self.client.bucket_exists(bucket_name):
                 self.client.make_bucket(bucket_name)
             print('complete set bucket')
@@ -71,7 +95,7 @@ class MinioHelper():
             script_dir = os.path.dirname(os.path.abspath(__file__))
             #os.chdir(script_dir)
 
-            save_path = os.path.join(script_dir,'results', str(os.path.basename(minio_id))+'.JPEG')
+            save_path = os.path.join(script_dir, 'results', str(os.path.basename(minio_id))+'.JPEG')
             os.makedirs(os.path.dirname(save_path), exist_ok=True)
 
             with open(save_path, "wb") as file:
@@ -82,5 +106,5 @@ class MinioHelper():
             
 if __name__ == '__main__':
     min = MinioHelper()
-    BUCKET_NAME = 'baseimages'
-    min.delete_bucket(BUCKET_NAME)
+    bucket_name= 'baseimages'
+    min.delete_bucket(bucket_name)

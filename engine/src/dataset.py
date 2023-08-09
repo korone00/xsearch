@@ -1,4 +1,5 @@
 import os
+from dotenv import load_dotenv
 import csv
 import uuid
 import requests
@@ -8,12 +9,13 @@ import shutil
 from milvusHelper import MilvusHelper
 from minioHelper import MinioHelper
 
-
+load_dotenv()
 
 #setting variables
 download_link = "https://github.com/towhee-io/examples/releases/download/data/reverse_image_search.zip"
 temp_csv = 'output.csv'
-bucket_name = 'baseimages'
+bucket_name = str(os.getenv('MINIO_IMAGE_BUCKET'))
+query_bucket_name = str(os.getenv('MINIO_QUERY_BUCKET'))
 folder_name = "reverse_image_search"
 input_csv = 'reverse_image_search.csv'
 collection_name = "reverse_image_search" 
@@ -118,7 +120,12 @@ try:
             print("image load to min.io successfully!")
     else:
         minio_client.set_bucket(bucket_name)
-        print(f"{minio_client.bucket_name} already exists") 
+        print(f"{minio_client.bucket_name} already exists")
+
+    if not minio_client.client.bucket_exists(query_bucket_name):
+        minio_client.set_query_bucket(query_bucket_name)
+        print(f"{minio_client.query_bucket_name} already exists")
+
 except Exception as e:
         print(f"Error: {e}")
 
@@ -138,7 +145,7 @@ try:
         
 
         #insert embedding vector to milvus DB
-        milvus_client.insert(insert_src=output_csv_path, collection_name=collection_name)
+        milvus_client.insert(output_csv_path)
         print("milvus_client setting")
 except Exception as e:
     print(f"Error: {e}")

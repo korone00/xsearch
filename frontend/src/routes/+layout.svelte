@@ -20,7 +20,7 @@
 <svelte:window bind:innerWidth={width} />
 
 <div class="flex min-h-screen bg-white">
-	<div class="flex flex-col p-4 mx-auto w-full">
+	<div class="flex flex-col mx-auto w-full">
 		<!-- <div class="my-4 w-full flex justify-end">
 			<div class="flex items-center space-x-4">
 				<Avatar id="user-drop" size="xs" />
