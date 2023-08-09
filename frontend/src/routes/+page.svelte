@@ -89,18 +89,18 @@
 		</div>
 	</nav>
 
-	<div class="container mx-auto h-screen">
+	<div class="container mx-auto h-screen ">
 		<!-- bg-[url('https://flowbite.s3.amazonaws.com/docs/jumbotron/conference.jpg')] -->
-		<div class="text-center px-3 lg:px-10 p-20">
+		<div class="text-center px-3 lg:px-10 p-20 bg-gradient-to-r from-gray-300 via-gray-500 to-gray-700">
 			<h1 class="my-4 text-2xl md:text-3xl lg:text-5xl font-black leading-tight">
 				Xsearch : Best Way to find image
 			</h1>
-			<p class="leading-normal text-gray-800 text-base md:text-xl lg:text-2xl mb-8">
+			<p class="leading-normal text-indigo-900 text-base md:text-xl lg:text-3xl mb-8 font-extrabold ">
 				You can find images At Once
 			</p>
 
 			<button
-				class="mx-auto lg:mx-0 hover:bg-blue-800 rounded-lg border p-4 border-blue-900 hover:text-white text-gray-800 font-extrabold rounded my-2 md:my-6 py-4 px-8 shadow-lg w-48"
+				class="mx-auto lg:mx-0 border p-10 border-black bg-white hover:bg-gradient-to-r from-indigo-100 via-indigo-200 to-indigo-400 rounded-lg  hover:font-extrabold  text-gray-800 rounded my-2 md:my-6 py-4 px-8 shadow-lg w-48 hover:bolder-0"
 			>
 				<a href="/login"> Get Started </a>
 			</button>
@@ -119,7 +119,7 @@
 	</div>
 
 	<!-- sample  -->
-
+	<div class="scroll-down"></div>
 	<Info />
 
 	<h2 class="w-full my-2 text-5xl font-black leading-tight text-center text-gray-800">
@@ -906,3 +906,72 @@
 		}
 	</script> -->
 </body>
+
+<style>
+	.scroll-down {
+	position: absolute;
+	left: 50%;
+	bottom: 10px;
+	display: block;
+	text-align: center;
+	font-size: 20px;
+	z-index: 100;
+	text-decoration: none;
+	text-shadow: 0;
+	width: 13px;
+	height: 13px;
+	border-bottom: 2px solid #000; /* 이 부분을 검은색으로 변경 */
+	border-right: 2px solid #000; /* 이 부분을 검은색으로 변경 */
+	z-index: 9;
+	left: 50%;
+	-webkit-transform: translate(-50%, 0%) rotate(45deg);
+	-moz-transform: translate(-50%, 0%) rotate(45deg);
+	transform: translate(-50%, 0%) rotate(45deg);
+	-webkit-animation: fade_move_down 4s ease-in-out infinite;
+	-moz-animation: fade_move_down 4s ease-in-out infinite;
+	animation: fade_move_down 4s ease-in-out infinite;
+}
+
+/*animated scroll arrow animation*/
+@-webkit-keyframes fade_move_down {
+	0% {
+		-webkit-transform: translate(0, -10px) rotate(45deg);
+		opacity: 0;
+	}
+	50% {
+		opacity: 1;
+	}
+	100% {
+		-webkit-transform: translate(0, 10px) rotate(45deg);
+		opacity: 0;
+	}
+}
+@-moz-keyframes fade_move_down {
+	0% {
+		-moz-transform: translate(0, -10px) rotate(45deg);
+		opacity: 0;
+	}
+	50% {
+		opacity: 1;
+	}
+	100% {
+		-moz-transform: translate(0, 10px) rotate(45deg);
+		opacity: 0;
+	}
+}
+@keyframes fade_move_down {
+	0% {
+		transform: translate(0, -10px) rotate(45deg);
+		opacity: 0;
+	}
+	50% {
+		opacity: 1;
+	}
+	100% {
+		transform: translate(0, 10px) rotate(45deg);
+		opacity: 0;
+	}
+}
+
+</style>
+
