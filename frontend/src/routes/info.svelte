@@ -1,4 +1,4 @@
-<section class="bg-white border-b py-8">
+<section class="bg-white py-8">
 	<div class="container mx-auto flex flex-wrap pt-4 pb-12">
 		<h2 class="w-full my-2 text-5xl font-black leading-tight text-center text-gray-800">About</h2>
 		<div class="w-full mb-4">
