@@ -2,14 +2,17 @@
 	export let data;
 	import { page } from '$app/stores';
 	import { Sidebar, SidebarGroup, SidebarItem, SidebarWrapper } from 'flowbite-svelte';
-	$: activeUrl = $page.url.pathname;
-	console.log(`activeUrl:${activeUrl}`);
+	let activeUrl: string;
+	$: {
+		activeUrl = $page.url.pathname;
+		console.log(`activeUrl:${activeUrl}`);
+	}
 </script>
 
 <Sidebar>
 	<SidebarWrapper>
 		<SidebarGroup>
-			<SidebarItem label="Home" href="/" active={activeUrl === '/'}>
+			<SidebarItem label="Home" href="/home" active={activeUrl === '/home'}>
 				<svelte:fragment slot="icon">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
