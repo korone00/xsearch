@@ -23,12 +23,11 @@ export const actions: Actions = {
 		if (body.errors) {
 			return fail(body.error, body);
 		}
-		console.log(body.accessToken);
 
 		await locals.session.set({
 			jwt: body.accessToken
 		});
-		console.log(locals.session.data);
-		throw redirect(307, '/'); // main으로 redirect
+
+		throw redirect(307, '/home'); // main으로 redirect
 	}
 } satisfies Actions;
