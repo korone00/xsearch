@@ -40,9 +40,5 @@
 		<main class="w-full h-full mx-auto">
 			<slot />
 		</main>
-
-		<div class="flex justify-end">
-			<Label>XSearch</Label>
-		</div>
 	</div>
 </div>
