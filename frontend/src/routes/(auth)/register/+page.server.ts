@@ -2,7 +2,7 @@ import { redirect, type Actions, fail } from '@sveltejs/kit';
 import { Logger } from 'tslog';
 import type { PageServerLoad } from './$types';
 const logger = new Logger({ name: 'register' });
-import * as api from '../../lib/api';
+import * as api from '../../../lib/api';
 
 export const load = (async ({ parent, url, locals }) => {
 	logger.debug(`load START`);

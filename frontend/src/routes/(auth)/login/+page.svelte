@@ -80,7 +80,7 @@
 		</div>
 		<p class="mt-5 text-center text-sm text-gray-500">
 			Not a member?
-			<a href="../register" class="font-semibold leading-6 text-indigo-500 hover:text-indigo-400"
+			<a href="/register" class="font-semibold leading-6 text-indigo-500 hover:text-indigo-400"
 				>Sign up in 1 minute!</a
 			>
 		</p>
