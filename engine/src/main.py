@@ -1,7 +1,6 @@
 import os
+from dotenv import load_dotenv
 from glob import glob
-
-from config import FLASK_HOST, FLASK_PORT
 
 from flask import Flask, request, jsonify
 from flask_restx import Resource, Namespace, fields, Api
@@ -34,20 +33,9 @@ photo_model = search.model('Photo', {
 })
 
 
-
-#define bucket_name
-bucket_name = 'baseimages'
-#define collection_name
-collection_name = 'reverse_image_search'
-
-
-
 #client setting
 minio_client = MinioHelper()
 milvus_client = MilvusHelper()
-minio_client.set_bucket(bucket_name)
-
-
 
 #search route
 @search.route('', methods=['POST'])
@@ -60,13 +48,9 @@ class Search(Resource):
         #get query image path, get collection_name
         file_name = data.get('filename')
         img_path = data.get('img_path') 
-        collection_name = data.get('collection_name')
-
         
         #search
-        result = milvus_client.search(img_path=img_path,collection_name=collection_name)
-        minio_client.get_image(bucket_name,img_path)
-        
+        result = milvus_client.search(img_path) #json_data    
         
         #remove files in results
         folder_path = './results/*'
@@ -74,11 +58,12 @@ class Search(Resource):
         for f in files:
             os.remove(f)
             
-        
         # Return the search results as JSON
         return jsonify(result)
     
 
 if __name__ == '__main__':
+    FLASK_HOST = str(os.getenv('FLASK_HOST'))
+    FLASK_PORT = int(os.getenv('FLASK_PORT'))
     app.run(host = FLASK_HOST, port = FLASK_PORT , debug=True)
     
