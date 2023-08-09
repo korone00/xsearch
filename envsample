@@ -12,12 +12,9 @@ JWT_SECRET_KEY=secretKey
 #minio
 MINIO_ENDPOINT=s3
 MINIO_PORT=9000
-MINIO_ADDRESS = s3:9000
-MINIO_USE_SSL=false
-MINIO_IMAGE_BUCKET = baseimages
-MINIO_QUERY_BUCKET = xsearchimgs
-MINIO_ROOT_USER = admin
-MINIO_ROOT_PASSWORD = xsearchdbs
+# also you need to change minio_endpoint => s3
+# postgres is for docker container
+
 MINIO_ACCESS_KEY=admin
 MINIO_SECRET_KEY=sodeimmcd
 

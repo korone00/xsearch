@@ -118,7 +118,7 @@ class MilvusHelper():
         if x.lower().endswith('csv'): 
             # file path
             script_dir = os.path.join(os.path.abspath(os.curdir), 'reverse_image_search')
-            #os.chdir(script_dir)
+            # os.chdir(script_dir)
             if not os.path.exists(x):
                 raise FileNotFoundError(f"{x} does not exist.")
             
@@ -149,7 +149,7 @@ class MilvusHelper():
         elif urlparse(x).scheme in ["http", "https"]:  # search일 경우에만 사용
             # local file path
             script_dir = os.path.dirname(os.path.abspath(__file__))
-            #os.chdir(script_dir)
+            # os.chdir(script_dir)
             if not self.is_supported_image_extension(x):
                 print(f"Unsupported image extension in URL {x}")
             else:
@@ -177,7 +177,7 @@ class MilvusHelper():
         
         elif self.is_supported_image_extension(x):
             script_dir = os.path.dirname(os.path.abspath(__file__))
-            #os.chdir(script_dir)
+            # os.chdir(script_dir)
             
             img_path = os.path.join("..", "..", "backend", "uploads",
             os.path.basename(x))

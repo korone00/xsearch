@@ -1,6 +1,7 @@
 import { Injectable, Inject } from '@nestjs/common'
 import * as Minio from 'minio'
 import { ConfigService } from '@nestjs/config';
+import axios from 'axios';
 
 @Injectable()
 export class MinioService {
@@ -24,8 +25,17 @@ export class MinioService {
     await this.minioClient.putObject(bucketName, fileName, file.buffer);
 
     const url = await this.minioClient.presignedUrl('GET', bucketName, fileName, 24 * 60 * 60);
+    
+    const response = await axios.post('http://127.0.0.1:5000/search', {
+      filename: "",
+      collection_name: "reverse_image_search",
+      img_path: url,
+      category: ""
+    });
 
-    return url;
+    const responseData = response.data;
+
+    return responseData;
   }
 
   async getFileUrl(fileName: string) {

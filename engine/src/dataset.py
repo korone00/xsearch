@@ -83,7 +83,7 @@ try:
         # Extract zip file
         with zipfile.ZipFile(zip_path, 'r') as zip_ref:
             zip_ref.extractall(os.path.join(abspath , folder_name))
-        
+
         # Remove reverse_image_search.zip file
         os.remove(zip_path)
 
