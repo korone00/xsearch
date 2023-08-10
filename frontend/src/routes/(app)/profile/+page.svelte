@@ -1,26 +1,40 @@
 <script>
-	import { Card, MenuButton, Dropdown, DropdownItem, Avatar, Button } from 'flowbite-svelte';
+	import {
+		Card,
+		MenuButton,
+		Dropdown,
+		DropdownItem,
+		Avatar,
+		Listgroup,
+		ListgroupItem
+	} from 'flowbite-svelte';
 	export let data;
+	let properties = ['name', 'phone', 'email']; // 사용자 정보 추가
 </script>
 
 <div class="flex justify-center items-center">
-	<Card padding="sm">
+	<Card padding="sm" class="min-w-[360px]">
 		<div class="flex justify-end">
 			<MenuButton />
 			<Dropdown class="w-36">
-				<DropdownItem>Edit</DropdownItem>
-				<DropdownItem>Delete</DropdownItem>
-				<!--delete는 관리자에게만 보이게-->
+				<DropdownItem href="/edit" class="text-base font-semibold">Edit</DropdownItem>
+				{#if data.role === 'admin'}
+					<DropdownItem href="/delete" class="text-base font-semibold">Delete</DropdownItem>
+				{/if}
 			</Dropdown>
 		</div>
 		<div class="flex flex-col items-center pb-4">
 			<Avatar size="lg" />
-			<!--src="" 추가해야함-->
 			<h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{data.id}</h5>
 			<span class="text-sm text-gray-500 dark:text-gray-400">{data.role}</span>
-			<div class="flex mt-4 space-x-3 lg:mt-6">
-				<Button>Add friend</Button>
-				<Button color="light" class="dark:text-white">Message</Button>
+			<div class="mt-8">
+				<Listgroup>
+					{#each properties as property}
+						<ListgroupItem class="text-base font-medium hover:bg-gray-100">
+							{data[property]}
+						</ListgroupItem>
+					{/each}
+				</Listgroup>
 			</div>
 		</div>
 	</Card>
