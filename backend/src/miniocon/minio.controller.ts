@@ -11,7 +11,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { MinioService } from './minio.service';
 import { ApiBody, ApiConsumes, ApiParam } from '@nestjs/swagger';
 
-@Controller()
+@Controller('image')
 export class MinioController {
   constructor(private readonly minioService: MinioService) {}
 
