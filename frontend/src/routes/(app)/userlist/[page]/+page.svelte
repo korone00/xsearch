@@ -68,7 +68,7 @@
 				<TableBodyCell>{item.role}</TableBodyCell>
 				<TableBodyCell>
 					<a
-						href="/tables"
+						href="/profile?userId={item.id}"
 						class="font-medium text-indigo-600 hover:underline dark:text-indigo-500"
 					>
 						Edit

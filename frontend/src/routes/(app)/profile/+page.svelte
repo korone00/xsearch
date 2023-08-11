@@ -17,8 +17,8 @@
 		<div class="flex justify-end">
 			<MenuButton />
 			<Dropdown class="w-36">
-				<DropdownItem href="/edit" class="text-base font-semibold">Edit</DropdownItem>
-				{#if data.role === 'admin'}
+				<DropdownItem href="/profile/edit" class="text-base font-semibold">Edit</DropdownItem>
+				{#if data.accessRole === 'admin'}
 					<DropdownItem href="/delete" class="text-base font-semibold">Delete</DropdownItem>
 				{/if}
 			</Dropdown>

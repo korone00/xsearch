@@ -22,9 +22,7 @@ async function send({
 
 	if (token) {
 		requestHeaders.set('Authorization', 'Bearer ' + token);
-		console.log(requestHeaders.get('Authorization'));
 	}
-
 	const res = await fetch(`${base}/${path}`, {
 		method: method,
 		headers: requestHeaders,

@@ -8,6 +8,7 @@ declare global {
 		interface Locals {
 			session: import('svelte-kit-cookie-session').Session<SessionData>;
 			userId: string;
+			role: string;
 		}
 	}
 }

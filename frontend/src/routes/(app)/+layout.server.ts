@@ -14,6 +14,7 @@ export const load = async ({ locals }: any) => {
 		logger.debug(`login 완료`);
 		const decoded = jwt_decode(valid) as TokenClaims;
 		locals.userId = decoded.id;
+		console.log(decoded);
 		return decoded;
 	} else {
 		logger.debug(`login 필요`);
