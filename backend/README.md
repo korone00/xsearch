@@ -38,7 +38,7 @@ you can choose two options to make container
 |container name|postgres|
 |Hostport|5432|
 |Volumes Host Path|{path you want to}|
-|Environment variables(Variables:Values)|POSTGRES_PASSWORD:1234|
+|Environment variables(Variables:Values)|POSTGRES_PASSWORD:0927|
 |Environment variables(Variables:Values)|POSTGRES_DB:xsearch|
 <p align="center">
  <img src = "./readmeimgs/dockercontainer.png">
