@@ -2,9 +2,7 @@ version: "3.8"
 services:
   backend:
     container_name: backend
-    build:
-      dockerfile: Dockerfile
-      context: ./backend
+    image: rlafosem/xsearch_backend
     env_file:
       - ./.env
     depends_on:
@@ -15,9 +13,7 @@ services:
 
   frontend:
     container_name: frontend
-    build:
-      dockerfile: Dockerfile
-      context: ./frontend
+    image: rlafosem/xsearch_frontend
     ports:
       - 80:5137
     depends_on:
@@ -51,9 +47,7 @@ services:
 
   engine:
     container_name: engine
-    build:
-      dockerfile: Dockerfile
-      context: ./engine/
+    image: rlafosem/xsearch_engine
     ports:
       - 5000:5000
     env_file:
