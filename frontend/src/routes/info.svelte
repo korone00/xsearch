@@ -12,9 +12,8 @@
 				<a href="#" class="flex flex-wrap no-underline hover:no-underline">
 					<!-- <p class="w-full text-gray-600 text-xs md:text-sm px-6 mt-6">GETTING STARTED</p> -->
 					<div class="w-full font-bold text-2xl text-gray-800 px-6">Easy To Use</div>
-					<p class="text-gray-600 text-base px-6 mb-5">
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at ipsum eu nunc
-						commodo posuere et sit amet ligula.
+					<p class="text-gray-600 text-base px-6 mb-5 p-5 text-lg">
+						If you just upload the image, Xsearch will do it all automatically.
 					</p>
 				</a>
 			</div>
@@ -25,9 +24,9 @@
 				<a href="#" class="flex flex-wrap no-underline hover:no-underline">
 					<!-- <p class="w-full text-gray-600 text-xs md:text-sm px-6 mt-6">GETTING STARTED</p> -->
 					<div class="w-full font-bold text-2xl text-gray-800 px-6">High Performance</div>
-					<p class="text-gray-600 text-base px-6 mb-5">
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at ipsum eu nunc
-						commodo posuere et sit amet ligula.
+					<p class="text-gray-600 text-base px-6 mb-5 p-5 text-lg">
+						Xsearch introduces the latest technology by applying several of the most performing
+						databases and algorithms today.
 					</p>
 				</a>
 			</div>
@@ -38,9 +37,9 @@
 				<a href="#" class="flex flex-wrap no-underline hover:no-underline">
 					<!-- <p class="w-full text-gray-600 text-xs md:text-sm px-6 mt-6">GETTING STARTED</p> -->
 					<div class="w-full font-bold text-2xl text-gray-800 px-6">AI Technology</div>
-					<p class=" text-gray-600 text-base px-6 mb-5">
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at ipsum eu nunc
-						commodo posuere et sit amet ligula.
+					<p class=" text-gray-600 text-base px-6 mb-5 p-5 text-lg">
+						Xsearch performs very well by extracting image features using Resnet, one of the
+						high-performance ai models in the image field.
 					</p>
 				</a>
 			</div>
