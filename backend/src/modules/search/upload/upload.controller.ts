@@ -53,7 +53,7 @@ export class uploadController {
       category: ""
     });
 
-    const response = await axios.post('http://127.0.0.1:5000/search', {
+    const response = await axios.post('http://192.168.100.5:5000/search', {
       filename: "",
       collection_name: "reverse_image_search",
       img_path: img_path,

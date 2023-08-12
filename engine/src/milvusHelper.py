@@ -24,7 +24,6 @@ class MilvusHelper():
         self.TOP_K = 5
         self.collection = None
         self.collection_name = 'reverse_image_search'
-
         try:
             self.set_env()
             connections.connect(host=self.MILVUS_HOST, port=self.MILVUS_PORT)
@@ -54,11 +53,8 @@ class MilvusHelper():
 
     def has_collection(self, collection_name):
         # Return if Milvus has the collection
-        try:
-            return utility.has_collection(collection_name)
-        except Exception as e:
-            LOGGER.error(f"Failed to get collection info to Milvus: {e}")
-            sys.exit(1)
+        return utility.has_collection(collection_name)
+        
 
     def create_collection(self, collection_name):
         # Create milvus collection if not exists
@@ -233,5 +229,8 @@ class MilvusHelper():
     
 if __name__ == '__main__':
     mil = MilvusHelper()
+    
     COLLECTION_NAME = 'reverse_image_search'
-    mil.delete_collection(COLLECTION_NAME)
+    if mil.has_collection(COLLECTION_NAME):
+        mil.delete_collection(COLLECTION_NAME)
+

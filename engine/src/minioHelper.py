@@ -14,19 +14,18 @@ class MinioHelper():
         self.bucket_name = None  
         self.query_bucket_name = None     
         self.set_env()
-        
         self.client = Minio(
-            self.MINIO_address,
-            access_key=self.MINIO_access_key,
-            secret_key=self.MINIO_secret_key,
+            self.MINIO_ADDRESS,
+            access_key=self.MINIO_ACCESS_KEY,
+            secret_key=self.MINIO_SECRET_KEY,
             secure=False,
         )
 
     def set_env(self):
         load_dotenv()
-        self.MINIO_address = str(os.getenv('MINIO_ADDRESS'))
-        self.MINIO_access_key= str(os.getenv('MINIO_ACCESS_KEY'))
-        self.MINIO_secret_key = str(os.getenv('MINIO_SECRET_KEY'))
+        self.MINIO_ADDRESS = str(os.getenv('MINIO_ADDRESS'))
+        self.MINIO_ACCESS_KEY= str(os.getenv('MINIO_ACCESS_KEY'))
+        self.MINIO_SECRET_KEY = str(os.getenv('MINIO_SECRET_KEY'))
         self.bucket_name = str(os.getenv('MINIO_IMAGE_BUCKET'))
 
     def set_bucket(self, bucket_name):
@@ -107,4 +106,5 @@ class MinioHelper():
 if __name__ == '__main__':
     min = MinioHelper()
     bucket_name= 'baseimages'
-    min.delete_bucket(bucket_name)
+    if min.client.bucket_exists(bucket_name):
+        min.delete_bucket(bucket_name)

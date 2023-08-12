@@ -25,5 +25,6 @@ ENV FLASK_RUN_HOST=172.30.208.1
 # Expose the port on which the Flask API will run
 EXPOSE 5000
 
-# Set the entry point for the application (start the Flask server)
+RUN chmod +x run_scripts.sh
+
 CMD ["./run_scripts.sh"]
