@@ -854,8 +854,9 @@
 		</section>
 	</div>
 
+	<div class="h-[300px]" />
 	<section
-		class="gradient w-full mx-auto text-center pt-6 pb-12 h-screen flex justify-center items-center md:mt-20 bg-img-bottom"
+		class="gradient w-full mx-auto text-center pt-6 pb-12 h-screen flex justify-center items-center md:mt-5 bg-img-bottom"
 	>
 		<div>
 			<div class="inline-flex items-center justify-center w-full pb-10">
