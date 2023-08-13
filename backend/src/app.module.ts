@@ -1,4 +1,4 @@
-import { Module ,Logger,MiddlewareConsumer,NestModule} from '@nestjs/common';
+import { Module, Logger, MiddlewareConsumer, NestModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -7,11 +7,9 @@ import { AuthModule } from './auth/auth.module';
 import { UploadModule } from './modules/search/upload/upload.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { DateController } from './modules/date/date.controller';
-import { MinioModule } from "./miniocon/minio.module"; // Import the MinioModule
+import { MinioModule } from './miniocon/minio.module'; // Import the MinioModule
 import { LoggerMiddleware } from './modules/logging/logger.middleware';
-import { MilvusModule } from "./milvuscon/milvus.module"; // Import the MilvusModule
-
-
+import { MilvusModule } from './milvuscon/milvus.module'; // Import the MilvusModule
 
 @Module({
   imports: [
@@ -40,10 +38,8 @@ import { MilvusModule } from "./milvuscon/milvus.module"; // Import the MilvusMo
     // MilvusModule
   ],
 
-  
-  controllers: [AppController,DateController],
+  controllers: [AppController, DateController],
   providers: [AppService],
-
 })
 export class AppModule {}
 

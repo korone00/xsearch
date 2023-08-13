@@ -1,4 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { HttpService } from '@nestjs/axios';
@@ -13,7 +14,10 @@ import {
 @Controller()
 @ApiTags('Get Data API')
 export class GetMilvusController {
-  constructor(private httpService: HttpService) {}
+  constructor(
+    private httpService: HttpService,
+    private configService: ConfigService,
+  ) {}
   @ApiOperation({
     summary: 'Get Milvus Data API',
     description: 'MilvusDB의 json파일을 가져온다.',
@@ -33,9 +37,8 @@ export class GetMilvusController {
   })
   @Get('getdata')
   async getData(): Promise<any> {
-    const response = await this.httpService
-      .get('http://127.0.0.1:5000/search')
-      .toPromise();
+    const apiUrl = this.configService.get<string>('MILVUS_API_URL');
+    const response = await this.httpService.get(apiUrl).toPromise();
     return response.data;
   }
 }

@@ -2,8 +2,37 @@
   import { onMount } from 'svelte';
   import { Bar } from 'svelte-chartjs';
 	import chartjs from 'chart.js@2.6.0';
-
+  
 	let chartCanvas;
+  let jsonData = [];
+  
+  let dataExample = [
+    { minio_uuid: '123', pred: 'A', score: 0.8, timestamp: '2023-08-13' },
+    { minio_uuid: '124', pred: 'B', score: 0.6, timestamp: '2023-08-14' },
+    { minio_uuid: '125', pred: 'C', score: 0.9, timestamp: '2023-08-15' }
+  ]; // 예시 검색 기록 데이터
+
+  let userId = '';
+  function getLoggedInUserId() {
+    // 세션에서 사용자 ID를 가져오는 코드
+    return sessionStorage.getItem('userId');
+    //토큰에서 사용자 ID를 가져오는 코드
+    // const token = localStorage.getItem('accessToken');
+    // if (token) {
+    // // 토큰 해독 및 사용자 ID 추출
+    // const payload = JSON.parse(atob(token.split('.')[1]));
+    // return payload.userId;
+    // } else {
+    // return null;
+   }
+
+
+async function fetchData() {
+    userId=getLoggedInUserId(); 
+
+    const response = await fetch('http://localhost:3000/getdata'); // NestJS 서버 주소로 변경-> 향후 변수명으로 수정
+    jsonData = await response.json();
+  }
 
   let visitData = [5, 10, 8, 12, 6]; // 예시 방문 횟수 데이터-> 동적으로 수정해야할 부분
 
@@ -33,11 +62,6 @@
 		});
 	});
 
-  let jsonData = [
-    { minio_uuid: '123', pred: 'A', score: 0.8, timestamp: '2023-08-13' },
-    { minio_uuid: '124', pred: 'B', score: 0.6, timestamp: '2023-08-14' },
-    { minio_uuid: '125', pred: 'C', score: 0.9, timestamp: '2023-08-15' }
-  ]; // 예시 검색 기록 데이터-> 동적으로 수정해야할 부분
 </script>
 
 <main>
