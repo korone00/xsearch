@@ -28,11 +28,11 @@ services:
   s3:
     image: minio/minio
     ports:
-      - "${MINIO_PORT}:${MINIO_PORT}"
+      - '${MINIO_PORT}:${MINIO_PORT}'
       - 9001:9001
     environment:
-      MINIO_ROOT_USER: "${MINIO_ROOT_USER}"
-      MINIO_ROOT_PASSWORD: "${MINIO_ROOT_PASSWORD}"
+      MINIO_ROOT_USER: '${MINIO_ROOT_USER}'
+      MINIO_ROOT_PASSWORD: '${MINIO_ROOT_PASSWORD}'
     volumes:
       - ./storage/minio:/data
     command: server /data --console-address ":9001"
