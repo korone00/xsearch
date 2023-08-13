@@ -1,0 +1,34 @@
+DB_HOST=localhost
+# localhost is for nest js npm run start:dev
+# postgres is for docker container
+DB_PORT=5432
+DB_USERNAME=postgres
+DB_PASSWORD=0927
+DB_DATABASE=postgres
+
+ACCESS_TOKEN_EXPIRATION=60s
+JWT_SECRET_KEY=secretKey
+
+flaskHOST= 127.0.0.1
+flaskPORT= 5000
+milvusHOST= 127.0.0.1
+milvusPORT= 19530
+
+server = 192.168.1000.5
+
+MINIO_ENDPOINT='localhost'
+MINIO_PORT=9000
+
+MINIO_ACCESS_KEY=admin
+MINIO_SECRET_KEY=sodeimmcd
+MINIO_USE_SSL=false
+MINIO_BUCKET_NAME=xsearchimgs
+MINIO_ROOT_USER=admin
+MINIO_ROOT_PASSWORD=sodeimmcd
+
+
+
+MILVUS_COLLECTION_NAME=
+MILVUS_HOST= 
+MILVUS_PORT=
+
