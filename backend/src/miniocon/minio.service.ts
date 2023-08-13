@@ -5,31 +5,28 @@ import axios from 'axios';
 
 @Injectable()
 export class MinioService {
-  private bucketName: string
+  private imageBucket: string;
+  private queryBucket: string;
 
   constructor(private readonly configService: ConfigService, @Inject('MINIO') private minioClient: Minio.Client) {
-    this.bucketName = configService.get<string>('MINIO_BUCKET_NAME')
-  }
-
-  async createBucketIfNotExists() {
-    const bucketExists = await this.minioClient.bucketExists(this.bucketName)
-    if (!bucketExists) {
-      await this.minioClient.makeBucket(this.bucketName, 'eu-west-1')
-    }
+    this.imageBucket = configService.get<string>('MINIO_IMAGE_BUCKET');
+    this.queryBucket = configService.get<string>('MINIO_QUERY_BUCKET');
   }
 
   async uploadFile(file: Express.Multer.File): Promise<string> {
-    const fileName = 'your-desired-file-name';
-    const bucketName = 'your-bucket-name';
-
-    await this.minioClient.putObject(bucketName, fileName, file.buffer);
-
-    const url = await this.minioClient.presignedUrl('GET', bucketName, fileName, 24 * 60 * 60);
+    const fileName = 'your-desired-file-name'; 
+    const FLASK_HOST = this.configService.get<string>('FLASK_HOST');
     
-    const response = await axios.post('http://127.0.0.1:5000/search', {
+    // save this image to minio queryBucket
+    await this.minioClient.putObject(this.queryBucket, fileName, file.buffer);
+
+    // Get URL for uploaded image
+    const imageUrl = await this.minioClient.presignedUrl('GET', this.imageBucket, fileName, 24 * 60 * 60);
+    
+    const response = await axios.post(`http://${FLASK_HOST}:5000/search`, {
       filename: "",
       collection_name: "reverse_image_search",
-      img_path: url,
+      img_path: imageUrl,
       category: ""
     });
 
@@ -39,10 +36,10 @@ export class MinioService {
   }
 
   async getFileUrl(fileName: string) {
-    return await this.minioClient.presignedUrl('GET', this.bucketName, fileName)
+    return await this.minioClient.presignedUrl('GET', this.queryBucket, fileName, 24 * 60 * 60)
   }
 
   async deleteFile(fileName: string) {
-    await this.minioClient.removeObject(this.bucketName, fileName)
+    await this.minioClient.removeObject(this.queryBucket, fileName)
   }
 }

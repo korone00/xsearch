@@ -30,7 +30,6 @@ export class MinioController {
     },
   })
   async uploadBookCover(@UploadedFile() file: Express.Multer.File) {
-    await this.minioService.createBucketIfNotExists();
     const fileName = await this.minioService.uploadFile(file);
     return fileName;
   }
