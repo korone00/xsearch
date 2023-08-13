@@ -3,6 +3,9 @@ services:
   backend:
     container_name: backend
     image: rlafosem/xsearch_backend
+    #build:
+      #dockerfile: Dockerfile
+      #context: ./backend
     env_file:
       - ./.env
     depends_on:
@@ -14,6 +17,9 @@ services:
   frontend:
     container_name: frontend
     image: rlafosem/xsearch_frontend
+      #build:
+      #dockerfile: Dockerfile
+      #context: ./frontend
     ports:
       - 80:5137
     depends_on:
@@ -48,6 +54,9 @@ services:
   engine:
     container_name: engine
     image: rlafosem/xsearch_engine
+      #build:
+      #dockerfile: Dockerfile
+      #context: ./engine
     ports:
       - 5000:5000
     env_file:
