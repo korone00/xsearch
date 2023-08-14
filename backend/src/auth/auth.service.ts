@@ -44,12 +44,14 @@ export class AuthService {
   async login(userlogin: any) {
     const user = await this.userRepository.findUserById(userlogin.id);
     const payload = { id: user.id, role: user.role };
+    const accesstoken = this.jwtService.sign(payload);
+    console.log(accesstoken);
     return {
-      accessToken: this.jwtService.sign(payload),
+      accessToken: accesstoken,
     };
   }
   async registerUser(newUser: User) {
-    const userExist = await this.userService.find(newUser);
+    const userExist = await this.userService.find(newUser.id);
     if (userExist) {
       // 중복 회원 검사
       throw new HttpException(
@@ -78,6 +80,9 @@ export class AuthService {
       filterableColumns: {},
       maxLimit: 5,
     });
+  }
+  async getUser(userId: string): Promise<User> {
+    return await this.userService.find(userId);
   }
   async deleteUser(id: string): Promise<any> {
     return this.userRepository.delete({ id: id });

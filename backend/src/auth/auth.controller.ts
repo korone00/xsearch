@@ -25,6 +25,7 @@ import { RoleGuard } from './role.guard';
 import { Roles } from './roles';
 import { UpdateUserDto } from 'src/users/entities/user.updatedto';
 import { Paginate, PaginateQuery, Paginated } from 'nestjs-paginate';
+import { userId } from 'src/users/entities/user.id';
 
 @Controller('auth')
 @ApiTags('auth API')
@@ -36,11 +37,6 @@ export class AuthController {
   @Post('login')
   async login(@Body() userlogin: UserDto, @Res() response: Response) {
     const token = await this.authService.login(userlogin);
-    response.setHeader('Authorization', 'Bearer' + token.accessToken); //그냥 token으로 주면 Bearer가 붙지 않음
-    response.cookie('jwt', token.accessToken, {
-      httpOnly: true,
-      maxAge: 24 * 60 * 60 * 1000,
-    });
     response.send(token);
   } //new version
 
@@ -70,6 +66,11 @@ export class AuthController {
   @ApiCreatedResponse({ description: '사용자 profile' })
   userProfile(@Req() req) {
     return req.user;
+  }
+
+  @Post('profile2')
+  async userProfileAd(@Body() userId: userId): Promise<any> {
+    return await this.authService.getUser(userId.userId);
   }
 
   @Roles('admin')
