@@ -105,7 +105,7 @@ class MilvusHelper():
     def is_supported_image_extension(self, url: str, allowed_extensions: List[str] = None) -> bool:
         if allowed_extensions is None:
             allowed_extensions = [".png", ".jpg", ".jpeg", ".bmp", ".gif"]
-
+        url = urlparse(url).path
         file_ext = os.path.splitext(url)[1].lower()
         return file_ext in allowed_extensions
     

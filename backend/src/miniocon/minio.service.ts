@@ -14,16 +14,16 @@ export class MinioService {
   }
 
   async uploadFile(file: Express.Multer.File): Promise<string> {
-    const fileName = 'your-desired-file-name'; 
-    const FLASK_HOST = this.configService.get<string>('FLASK_HOST');
+    const fileName = 'your-desired-file-name.jpeg'; 
+    const SERVER_ADDRESS = this.configService.get<string>('SERVER_ADDRESS');
     
     // save this image to minio queryBucket
     await this.minioClient.putObject(this.queryBucket, fileName, file.buffer);
 
     // Get URL for uploaded image
-    const imageUrl = await this.minioClient.presignedUrl('GET', this.imageBucket, fileName, 24 * 60 * 60);
+    const imageUrl = await this.minioClient.presignedUrl('GET', this.queryBucket, fileName, 24 * 60 * 60);
     
-    const response = await axios.post(`http://${FLASK_HOST}:5000/search`, {
+    const response = await axios.post(`http://${SERVER_ADDRESS}:5000/search`, {
       filename: "",
       collection_name: "reverse_image_search",
       img_path: imageUrl,

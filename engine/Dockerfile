@@ -18,6 +18,7 @@ RUN apt-get install -y libglib2.0-0
 RUN pip install --no-cache-dir -r /app/requirements.txt
 # Add other dependencies if needed
 
+
 # Set the environment variables for the Flask app
 ENV FLASK_APP=main.py
 ENV FLASK_RUN_HOST=172.30.208.1
