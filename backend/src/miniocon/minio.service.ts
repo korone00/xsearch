@@ -14,7 +14,7 @@ export class MinioService {
   }
 
   async uploadFile(file: Express.Multer.File): Promise<string> {
-    const fileName = 'your-desired-file-name.jpeg'; 
+    const fileName = `${Date.now()}-${file.originalname}`; 
     const SERVER_ADDRESS = this.configService.get<string>('SERVER_ADDRESS');
     
     // save this image to minio queryBucket

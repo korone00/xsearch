@@ -30,8 +30,9 @@ export class MinioController {
     },
   })
   async uploadBookCover(@UploadedFile() file: Express.Multer.File) {
-    const fileName = await this.minioService.uploadFile(file);
-    return fileName;
+    console.log("image/covers endpoint hit!");
+    const filedata = await this.minioService.uploadFile(file);
+    return filedata;
   }
 
   @Get('covers/:fileName')
