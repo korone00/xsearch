@@ -9,7 +9,7 @@ const __dirname = decodeURI(
   );  
 
 const logger = new Logger({ name: 'search' });
-const envPath = path.join(__dirname, '..', '..', '..', '..', '..', '.env');
+const envPath = path.join(__dirname, '..', '..', '..', '..', '..', '.env'); // get a .env file where xsearch folder
 const envRaw = fs.readFileSync(envPath, 'utf-8');
 
 const env: { [key: string]: string } = envRaw.split('\n').reduce<{ [key: string]: string }>((acc, line) => {
@@ -19,6 +19,9 @@ const env: { [key: string]: string } = envRaw.split('\n').reduce<{ [key: string]
 }, {});
 
 const NESTJS_ENDPOINT = env['NESTJS_ENDPOINT'];
+const NESTJS_PORT = env['NESTJS_PORT'];
+
+const NESTJS_ADDRESS = `http://${NESTJS_ENDPOINT}:${NESTJS_PORT}/image/covers`;
 
 // export const load = async ({}) => {
 // 	logger.debug(`load START`);
@@ -27,7 +30,7 @@ const NESTJS_ENDPOINT = env['NESTJS_ENDPOINT'];
 // };
 
 export const actions: Actions = {
-	search: async ({ request }) => {
+	search: async ({ request, fetch }) => {
 	  console.log('actions post called');
 	  
 	  const formData = await request.formData();
@@ -47,10 +50,10 @@ export const actions: Actions = {
 	  const uploadFormData = new FormData();
 	  uploadFormData.append('file', file);
 
-	  console.log("Sending request to ", NESTJS_ENDPOINT);
-	  const response = await fetch(NESTJS_ENDPOINT, {
-		 method: 'POST',
-		 body: uploadFormData
+	  console.log("Sending request to ", NESTJS_ADDRESS);
+	  const response = await fetch(NESTJS_ADDRESS, {
+		method: 'POST',
+		body: uploadFormData
 	  });
 	  console.log("Request sent.");
 
