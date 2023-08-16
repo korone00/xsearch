@@ -44,6 +44,7 @@
 		"flowbite-svelte": "^0.39.3",
 		"flowbite-svelte-icons": "^0.3.6",
 		"jwt-decode": "^3.1.2",
+		"secure-env": "^1.2.0",
 		"svelte-kit-cookie-session": "^3.4.1",
 		"svelte-routing": "^1.11.0",
 		"tailwind-merge": "^1.14.0",
