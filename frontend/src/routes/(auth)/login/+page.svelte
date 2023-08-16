@@ -1,5 +1,5 @@
 <script>
-	import { Label, Input } from 'flowbite-svelte';
+	import { Label, Input, Card } from 'flowbite-svelte';
 	let show = false;
 	export let form;
 	import { enhance } from '$app/forms';
@@ -12,8 +12,7 @@
 			Sign in to your account
 		</h2>
 	</div>
-
-	<div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+	<Card class="px-6 mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
 		<form use:enhance class="space-y-5" action="?/login" method="POST">
 			<div>
 				<Label for="id" class="mb-2.5 text-indigo-400">Your id</Label>
@@ -84,5 +83,5 @@
 				>Sign up in 1 minute!</a
 			>
 		</p>
-	</div>
+	</Card>
 </div>
