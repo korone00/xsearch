@@ -35,10 +35,13 @@ export class AuthController {
   @ApiCreatedResponse({ description: '사용자 login' })
   @UseGuards(LocalAuthGuard)
   @Post('login')
-  async login(@Body() userlogin: UserDto, @Res() response: Response) {
-    const token = await this.authService.login(userlogin);
-    response.send(token);
-  } //new version
+  async login(@Req() req, @Res() response: Response) {
+    if (req.user instanceof Error) response.send(req.user);
+    else {
+      const token = await this.authService.login(req.user);
+      response.send(token);
+    }
+  }
 
   @ApiOperation({ summary: 'register API', description: '사용자 register' })
   @ApiCreatedResponse({ description: '사용자 register' })
@@ -105,11 +108,8 @@ export class AuthController {
   })
   @ApiCreatedResponse({ description: '사용자 정보 수정' })
   @Put('modify') // not using parameters
-  async modifyUser(
-    @Req() req,
-    @Body() modifyInfo: UpdateUserDto,
-  ): Promise<User> {
+  async modifyUser(@Body() modifyInfo: UpdateUserDto): Promise<User> {
     // 수정된 객체 반환
-    return await this.authService.modify(req.user.id, modifyInfo);
+    return await this.authService.modify(modifyInfo.id, modifyInfo);
   }
 }

@@ -43,6 +43,7 @@
 		"dotenv": "^16.3.1",
 		"flowbite": "^1.8.1",
 		"flowbite-svelte": "^0.39.3",
+		"flowbite-svelte-blocks": "^0.4.7",
 		"flowbite-svelte-icons": "^0.3.6",
 		"jwt-decode": "^3.1.2",
 		"secure-env": "^1.2.0",

@@ -71,7 +71,7 @@
 					>Sign in</button
 				>
 			</div>
-			{#if form?.error}<p class="error text-red-500">${form.error}</p>{/if}
+			{#if form?.incorrect}<p class="error text-red-500">{form.message}</p>{/if}
 		</form>
 
 		<div class="mt-5 text-center text-sm">
