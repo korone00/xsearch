@@ -4,9 +4,18 @@ import { MinioController } from './minio.controller';
 import { Client, ClientOptions } from 'minio';
 import { Provider } from '@nestjs/common/interfaces';
 import { ConfigService } from '@nestjs/config';
+import { RawResponseDataService } from './rawresponsedata.service';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { rawResponseData } from 'src/users/entities/fileresponsedto.entity';
+import { HistoryDataService } from './searchistory.serveice';
+import { historyData } from 'src/users/entities/user.history';
 
 @Global()
 @Module({
+  imports: [
+    TypeOrmModule.forFeature([rawResponseData]),
+    TypeOrmModule.forFeature([historyData]),
+  ],
   providers: [
     {
       provide: 'MINIO',
@@ -24,6 +33,8 @@ import { ConfigService } from '@nestjs/config';
       inject: [ConfigService],
     },
     MinioService,
+    RawResponseDataService,
+    HistoryDataService
   ],
   controllers: [MinioController],
   exports: [MinioService],

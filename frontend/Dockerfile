@@ -1,21 +1,11 @@
-FROM node:18-alpine AS builder
-
-WORKDIR /app
-COPY ./package*.json ./
-RUN npm install
-COPY . .
-RUN npm run build
-
 FROM node:18-alpine
 
 WORKDIR /app
-COPY --from=builder /app/build .
-COPY --from=builder /app/package*.json ./
 
-# For Dockerfiles in development environments, you can copy the entire set of node_modules installed during the build phase
-COPY --from=builder /app/node_modules ./node_modules
+COPY ./package*.json ./
+RUN npm install
+COPY . .
 
-# RUN npm install --only=production
+EXPOSE 5137
 
-EXPOSE 5173
-CMD ["node", "."]
+CMD ["npm", "run", "dev"]
