@@ -1,79 +1,34 @@
-# Guide about Docker Compose
+# 🔎 XSearch
+제조 데이터 분석을 위한 유사 이미지 검색 엔진 서비스
 
-This guide illustrates how to use a xsearch using Docker Compose.
+## 📋 Table of Contents
++ [About](#about)
++ [Architecture](#architecture)
+  + [Frontend](#frontend---상세보기-wiki-페이지)
+  + [Backend](#backend---상세보기-wiki-페이지)
+  + [Engine](#engine---상세보기-wiki-페이지)
++ [Works](#works)
++ [Technology](#technology)
 
-> **Note**: This documentation is a docker container created using docker compose, so if you want to create a separate container for frontend, backend, and engine, please read the documentation in the README within each subfolder!
+## 📁 About
+XSearch는 제조 현장에서 부품 및 자재에 대한 정보를 쉽게 찾을 수 있는 웹 서비스를 제공한다.
+## 📚 Architecture
 
-## Step 1: Make .env fie
-If you don't have .env file or update that, you need to change the .env file where root directory
-
-<p align="center">
- <img src = "./readmeimgs/dotenv.png">
-</p>
-
-What you need to know about the path to HOST is that in docker compose you can name each container HOST, but if you don't, you'll need to write localhost or another IP address!
-
-## Step 2: Run Docker Compose
-
-Start the Postgres and Minio services using Docker Compose. You can do this by entering the following command in your terminal:
-
-```bash
-docker-compose up -d
-```
-
-### That screen should then appear in your docker container!
-
-<p align="center">
- <img src = "./readmeimgs/docker container.png">
-</p>
-
-## Step 3: Make minio bucket
-
-> **Note**: Minio does not support creating a bucket using Docker Compose. Therefore, before proceeding with this step, ensure that Access Policy option set public in Minio.
-
-
-
-<p align="center">
- <img src = "./readmeimgs/make two bucket.png">
-</p>
-Create buckets named xsearchimgs and baseimages, one for the base images and one to store them in!
-
-## Step 3-1: adjust Buckets option
-
-<p align="center">
- <img src = "./readmeimgs/make sure access policy is private.png">
-</p>
-Among the options for bucket, make sure to set access policy to private!
-
-## Step 3-2: Make Access Key
-
-The access key is the key you created to make sure that no one else has access to the minio you created. You must create this key!
-
-<p align="center">
- <img src = "./readmeimgs/minio access key.png">
-</p>
-
-This is covered in the 
-```
-MINIO_ACCESS_KEY=user
-MINIO_SECRET_KEY=q1w2e3r4
-
-```
-so be sure to check it before creating it.
-
-# Now you can check docker desktop
-
-<p align="center">
- <img src = "./readmeimgs/container.png">
-</p>
-
-> **Notice**: you can visit localhost(or HOST you set)/(you set front end's PORT)
-can check screen!
-
-<p align="center">
- <img src = "./readmeimgs/frontend screen.png">
-</p>
-
-## Troubleshooting
-
-If you encounter any issues with the connection, check and modify the access permissions of your Minio bucket, if necessary. If the issue persists, reach out to your supervisor or the person responsible for assistance.
+### 🌐 Frontend - [상세보기 wiki 페이지](https://github.com/korone00/xsearch/wiki/Architecture#frontend-%EC%A0%95%EC%9B%85-%EA%B0%80%EC%9D%80)
+사용자가 접근할 수 있는 웹페이지를 제공한다.   
+SveltKit과 Tailwind를 이용하여 제작하였다.
+### 💾 Backend - [상세보기 wiki 페이지](https://github.com/korone00/xsearch/wiki/Architecture#backend)
+사용자 정보 및 데이터셋에 대한 관리를 한다.    
+NestJs를 이용하였고 Postgres DB와 Minio Storage를 함께 사용하였다.
+### ⚡ Engine - [상세보기 wiki 페이지](https://github.com/korone00/xsearch/wiki/Architecture#engine)
+이미지 데이터 셋을 Vectorize 및 Feature extraction을 진행하여 Vector DB에 저장한다. 사용자가 제공하는 이미지에 대해서도 똑같은 과정을 거쳐 유사한 이미지를 검색한다. Python과 Milvus DB, towhee Library를 사용하였다.
+## Works - [상세보기 wiki 페이지]()
+작동방식설명
+## Technology - [상세보기 wiki 페이지](https://github.com/korone00/xsearch/wiki/Technology)
++ CI/CD using Docker and Github Action
++ JWT Auth process
++ Minio online storage for manage image dataset
++ Image Embedding process
++ Feature extraction using ResNet 50
++ Similar image search using L2
++ Statistics
