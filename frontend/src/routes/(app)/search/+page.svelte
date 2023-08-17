@@ -1,7 +1,16 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import { Card, Label, Input, Button, Fileupload } from 'flowbite-svelte';
+	// import { page } from '@sveltejs/kit/assets/runtime/app/stores';
+    import { onMount } from 'svelte';
 	let value: any;
+
+    let imageUrls = [];
+
+//    onMount(async () => {
+//        const response = await fetch(page.url); // 페이지 URL에 따른 응답을 가져옴
+//        imageUrls = await response.json(); // 응답을 JSON으로 파싱하여 imageUrls에 저장
+//    });
 </script>
 
 
@@ -16,6 +25,7 @@
 			</Label>
 			
 			<Button type="submit" class="w-full">Search</Button>
+
 		</Card>
 	</form>
 </section>

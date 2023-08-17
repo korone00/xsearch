@@ -22,12 +22,7 @@ const NESTJS_ENDPOINT = env['NESTJS_ENDPOINT'];
 const NESTJS_PORT = env['NESTJS_PORT'];
 
 const NESTJS_ADDRESS = `http://${NESTJS_ENDPOINT}:${NESTJS_PORT}/image/covers`;
-
-// export const load = async ({}) => {
-// 	logger.debug(`load START`);
-// 	// ...  
-// 	logger.debug(`load END`);
-// };
+let imageUrls = [];
 
 export const actions: Actions = {
 	search: async ({ request, fetch }) => {
@@ -40,7 +35,6 @@ export const actions: Actions = {
 		console.log('No file found in formData.');
 		return { status: 400, body: 'No file provided' };
 	  }
-  
 	  // check file is png or jpg
 	  if (file.type !== 'image/png' && file.type !== 'image/jpeg') {
 		console.log('Invalid file type:', file.type);
@@ -55,32 +49,18 @@ export const actions: Actions = {
 		method: 'POST',
 		body: uploadFormData
 	  });
-	  console.log("Request sent.");
 
-	//   try {
-	// 	const response = await fetch(NESTJS_ENDPOINT, {
-	// 	  method: 'POST',
-	// 	  body: uploadFormData
-	// 	});
-  
-	// 	if (!response.ok) {
-	// 	  throw new Error(`Failed to upload file. Status: ${response.status}`);
-	// 	}
-  
-	// 	const result = await response.json();
-	// 	logger.debug('File uploaded:', result);
-  
-	// 	return {
-	// 	  status: 200,
-	// 	  body: result
-	// 	};
-	//   } catch (error: any) {
-	// 	logger.error('Error uploading file:', error.message);
-	// 	return { status: 500, body: 'Failed to upload file' };
-	//   } finally {
-	// 	logger.debug(`upload END`);
-	//   }
+	  console.log("Request sent.");
+	  console.log(response);
+	  
+	  const data = await response.json();
+
+	  if(data && Array.isArray(data)) {
+		  imageUrls = data; // 이미지 URL 배열을 저장
+		  return { status: 200, body: data }; // 클라이언트에게 반환
+	  } else {
+		  return { status: 500, body: 'Error processing response from NESTJS server.' };
+	  }
 	}
   };
-  
   

@@ -3,7 +3,6 @@ Dockerfile
 .git
 .gitignore
 README.md
-.svelte-kit
 .npmrc
 .prettierrc
 .eslintrc.cjs

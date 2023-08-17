@@ -2,6 +2,7 @@ import { Injectable, Inject } from '@nestjs/common'
 import * as Minio from 'minio'
 import { ConfigService } from '@nestjs/config';
 import axios from 'axios';
+import { rawResponseData } from '../users/entities/fileresponsedto.entity';
 
 @Injectable()
 export class MinioService {
@@ -13,7 +14,7 @@ export class MinioService {
     this.queryBucket = configService.get<string>('MINIO_QUERY_BUCKET');
   }
 
-  async uploadFile(file: Express.Multer.File): Promise<string> {
+  async uploadFile(file: Express.Multer.File): Promise<rawResponseData> {
     const fileName = `${Date.now()}-${file.originalname}`; 
     const SERVER_ADDRESS = this.configService.get<string>('SERVER_ADDRESS');
     
