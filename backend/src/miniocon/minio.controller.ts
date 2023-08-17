@@ -21,9 +21,9 @@ export class MinioController {
   constructor(private readonly minioService: MinioService,
     private readonly rawDataService: RawResponseDataService) {}
   
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   @Post('covers')
-  @ApiBearerAuth('access-token')
+  // @ApiBearerAuth('access-token')
   @UseInterceptors(FileInterceptor('file'))
   @ApiConsumes('multipart/form-data')
   @ApiBody({
