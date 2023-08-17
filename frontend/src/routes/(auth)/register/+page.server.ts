@@ -31,7 +31,7 @@ export const actions: Actions = {
 					name: data.get('name'),
 					email: data.get('email'),
 					phone: data.get('phone'),
-					role: data.get('role')
+					role: 'user'
 				},
 				''
 			)

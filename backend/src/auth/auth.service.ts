@@ -22,7 +22,7 @@ export class AuthService {
   async validateUser(id: string, password: string): Promise<any> {
     const user = await this.userRepository.findUserById(id);
     if (!user) {
-      throw new ForbiddenException({
+      return new ForbiddenException({
         statusCode: HttpStatus.FORBIDDEN,
         message: [`아이디가 존재하지 않습니다. 회원가입을 시작하세요!`],
         error: 'Forbidden',
@@ -30,10 +30,10 @@ export class AuthService {
     }
     const matching = await bcrypt.compare(password, user.password);
     if (matching) {
-      const { password, ...result } = user;
-      return result;
+      const { id } = user;
+      return id;
     } else {
-      throw new ForbiddenException({
+      return new ForbiddenException({
         statusCode: HttpStatus.FORBIDDEN,
         message: [`아이디 또는 비밀번호가 일치하지 않습니다.`],
         error: 'Forbidden',
@@ -41,13 +41,11 @@ export class AuthService {
     }
   }
 
-  async login(userlogin: any) {
-    const user = await this.userRepository.findUserById(userlogin.id);
+  async login(userId: string) {
+    const user = await this.userRepository.findUserById(userId);
     const payload = { id: user.id, role: user.role };
-    const accesstoken = this.jwtService.sign(payload);
-    console.log(accesstoken);
     return {
-      accessToken: accesstoken,
+      accessToken: this.jwtService.sign(payload),
     };
   }
   async registerUser(newUser: User) {
