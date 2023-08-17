@@ -6,20 +6,24 @@ import {
   Delete,
   UploadedFile,
   UseInterceptors,
-  Body
+  Body,
+  UseGuards
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { MinioService } from './minio.service';
-import { ApiBody, ApiConsumes, ApiParam } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiConsumes, ApiParam } from '@nestjs/swagger';
 import { rawResponseData } from '../users/entities/fileresponsedto.entity';
 import { RawResponseDataService } from './rawresponsedata.service';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @Controller('image')
 export class MinioController {
   constructor(private readonly minioService: MinioService,
     private readonly rawDataService: RawResponseDataService) {}
   
+  @UseGuards(JwtAuthGuard)
   @Post('covers')
+  @ApiBearerAuth('access-token')
   @UseInterceptors(FileInterceptor('file'))
   @ApiConsumes('multipart/form-data')
   @ApiBody({
@@ -35,6 +39,7 @@ export class MinioController {
   })
   async uploadBookCover(@UploadedFile() file: Express.Multer.File) {
     console.log("image/covers endpoint hit!");
+    console.log(file)
     // Save the image to minio and put it into engine to get raw data
     const filedata: rawResponseData = await this.minioService.uploadFile(file);
 
@@ -43,8 +48,7 @@ export class MinioController {
 
     // Get a presigned URL for a similar image and return it
     const fileurl = this.getBookCover(filedata);
-    console.log()
-    // return {imgUrls: fileUrls};
+    console.log(fileurl)
     return fileurl
   }
 
