@@ -20,14 +20,17 @@ export const actions: Actions = {
 			},
 			''
 		);
-		if (body.errors) {
-			return fail(body.error, body);
+		logger.debug(body);
+		if (body.status == 403) {
+			const message = body.response.message;
+			logger.debug(message);
+			return fail(body.status, { message, incorrect: true });
 		}
 
 		await locals.session.set({
 			jwt: body.accessToken
 		});
 
-		throw redirect(307, '/home'); // main으로 redirect
+		throw redirect(302, '/home'); // main으로 redirect
 	}
 } satisfies Actions;
