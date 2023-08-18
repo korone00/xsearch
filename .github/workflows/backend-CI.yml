@@ -29,5 +29,11 @@ jobs:
       - name: Docker remove backend image
         run: docker rmi -f rlafosem/xsearch_backend
 
+      - name: Create .env file
+        run: |
+         jq -r 'to_entries|map("\(.key)=\(.value|tostring)")|.[]' <<< "$SECRETS_CONTEXT" > .env
+        env:
+         SECRETS_CONTEXT: ${{ toJson(secrets) }}
+
       - name: Docker restart backend
         run: docker compose up -d
