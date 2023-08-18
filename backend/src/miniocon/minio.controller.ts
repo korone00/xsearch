@@ -57,8 +57,8 @@ export class MinioController {
   async getBookCover(@Body() fileData: rawResponseData): Promise<string[]> {
     await this.rawDataService.saveData(fileData);
     const predictions = fileData.pred.map(async (predName: string) => {
-      const convertedName = predName.replace(/_/g, '-') + '.jpeg';
-      return await this.minioService.getFileUrl(convertedName);
+      //const convertedName = predName.replace(/_/g, '-') + '.jpeg';
+      return await this.minioService.getFileUrl(predName);
     });
     return await Promise.all(predictions);
   }

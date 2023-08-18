@@ -1,7 +1,7 @@
 import { error } from '@sveltejs/kit';
 // import { BASE_PATH } from '$env/static/private';
 // const base = `${BASE_PATH}`;
-const base = 'http://localhost:3000';
+const base = 'http://192.168.100.5:3000';
 async function send({
     method,
     path,

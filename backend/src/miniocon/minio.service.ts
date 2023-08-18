@@ -37,7 +37,7 @@ export class MinioService {
   }
 
   async getFileUrl(fileName: string) {
-    return await this.minioClient.presignedUrl('GET', this.queryBucket, fileName, 24 * 60 * 60)
+    return await this.minioClient.presignedUrl('GET', this.imageBucket, fileName, 24 * 60 * 60)
   }
 
   async deleteFile(fileName: string) {
