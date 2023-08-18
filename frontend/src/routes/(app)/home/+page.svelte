@@ -2,7 +2,7 @@
 	import { onMount, createEventDispatcher } from 'svelte';
 	import { Tabs, TabItem } from 'flowbite-svelte';
 	import { Icon } from 'flowbite-svelte-icons';
-	export const data;
+	export const data=null;
 	let ApexCharts;
   
 	let areaChart1: HTMLElement | null = null;
