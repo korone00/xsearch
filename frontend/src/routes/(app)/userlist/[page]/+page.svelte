@@ -47,37 +47,52 @@
 	};
 </script>
 
-<Table hoverable={true}>
-	<TableHead class="text-indigo-600">
-		<TableHeadCell>ID</TableHeadCell>
-		<TableHeadCell>Name</TableHeadCell>
-		<TableHeadCell>Email</TableHeadCell>
-		<TableHeadCell>Phone</TableHeadCell>
-		<TableHeadCell>Role</TableHeadCell>
-		<TableHeadCell>
-			<span class="sr-only">Edit</span>
-		</TableHeadCell>
-	</TableHead>
-	<TableBody class="divide-y">
-		{#each data.data as item (item.id)}
-			<TableBodyRow>
-				<TableBodyCell>{item.id}</TableBodyCell>
-				<TableBodyCell>{item.name}</TableBodyCell>
-				<TableBodyCell>{item.email}</TableBodyCell>
-				<TableBodyCell>{item.phone}</TableBodyCell>
-				<TableBodyCell>{item.role}</TableBodyCell>
-				<TableBodyCell>
-					<a
-						href="/profile?userId={item.id}"
-						class="font-medium text-indigo-600 hover:underline dark:text-indigo-500"
-					>
-						Edit
-					</a>
-				</TableBodyCell>
-			</TableBodyRow>
-		{/each}
-	</TableBody>
-</Table>
+<div class="m-20">
+	<h1 class="mb-4 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl">
+		<span class="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400"
+			>User</span
+		> Profiles
+	</h1>
+	<p class="text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400 mt-10 mb-5">
+		This is a list of users. Only admins can see this page. Admins can edit member information or
+		delete account information for members who have requested to leave.
+	</p>
+</div>
+<div class="m-10">
+	<Table hoverable={true}>
+		<TableHead
+			class="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400 text-xl font-semibold"
+		>
+			<TableHeadCell>ID</TableHeadCell>
+			<TableHeadCell>Name</TableHeadCell>
+			<TableHeadCell>Email</TableHeadCell>
+			<TableHeadCell>Phone</TableHeadCell>
+			<TableHeadCell>Role</TableHeadCell>
+			<TableHeadCell>
+				<span class="sr-only">Edit</span>
+			</TableHeadCell>
+		</TableHead>
+		<TableBody class="divide-y">
+			{#each data.data as item (item.id)}
+				<TableBodyRow>
+					<TableBodyCell>{item.id}</TableBodyCell>
+					<TableBodyCell>{item.name}</TableBodyCell>
+					<TableBodyCell>{item.email}</TableBodyCell>
+					<TableBodyCell>{item.phone}</TableBodyCell>
+					<TableBodyCell>{item.role}</TableBodyCell>
+					<TableBodyCell>
+						<a
+							href="/profile?userId={item.id}"
+							class="font-semibold text-emerald-600 hover:underline"
+						>
+							Edit
+						</a>
+					</TableBodyCell>
+				</TableBodyRow>
+			{/each}
+		</TableBody>
+	</Table>
+</div>
 <Pagination
 	class="flex justify-center items-center mt-6"
 	{pages}

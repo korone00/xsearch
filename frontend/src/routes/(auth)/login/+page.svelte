@@ -8,18 +8,20 @@
 <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
 	<div class="sm:mx-auto sm:w-full sm:max-w-sm">
 		<img class="mx-auto h-10 w-auto" src="/xsearchlogo.png" alt="Your Company" />
-		<h2 class="mt-5 text-center text-2xl font-bold leading-9 tracking-tight text-indigo-500">
+		<h2
+			class="mt-5 text-center text-2xl font-bold leading-9 tracking-tight text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400"
+		>
 			Sign in to your account
 		</h2>
 	</div>
 	<Card class="px-6 mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
 		<form use:enhance class="space-y-5" action="?/login" method="POST">
 			<div>
-				<Label for="id" class="mb-2.5 text-indigo-400">Your id</Label>
+				<Label for="id" class="mb-2.5 text-sky-600 font-semibold">Your id</Label>
 				<Input id="id" name="id" type="text" placeholder="Your id here" size="md" />
 			</div>
 			<div>
-				<Label for="password" class="mb-2.5 text-indigo-400">Your password</Label>
+				<Label for="password" class="mb-2.5 text-sky-600 font-semibold">Your password</Label>
 				<Input
 					id="password"
 					name="password"
@@ -67,7 +69,7 @@
 			<div class="mt-7">
 				<button
 					type="submit"
-					class="flex w-full justify-center rounded-md bg-indigo-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:text-indigo-500 hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+					class="flex w-full justify-center rounded-md px-3 py-1.5 text-sm font-semibold bg-gradient-to-r to-emerald-600 from-sky-400 leading-6 text-white shadow-sm hover:text-sky-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
 					>Sign in</button
 				>
 			</div>
@@ -75,11 +77,11 @@
 		</form>
 
 		<div class="mt-5 text-center text-sm">
-			<a href="#" class="font-semibold text-indigo-500 hover:text-indigo-400">Forgot password?</a>
+			<a href="#" class="font-semibold text-sky-600 hover:text-sky-200">Forgot password?</a>
 		</div>
 		<p class="mt-5 text-center text-sm text-gray-500">
 			Not a member?
-			<a href="/register" class="font-semibold leading-6 text-indigo-500 hover:text-indigo-400"
+			<a href="/register" class="font-semibold leading-6 text-sky-600 hover:text-sky-200"
 				>Sign up in 1 minute!</a
 			>
 		</p>

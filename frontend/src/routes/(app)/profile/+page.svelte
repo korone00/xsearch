@@ -12,7 +12,27 @@
 	let properties = ['name', 'phone', 'email']; // 사용자 정보 추가
 </script>
 
-<div class="flex justify-center items-center">
+<div class="m-20">
+	<h1 class="mb-4 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl">
+		<span class="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400"
+			>Your</span
+		> Profile
+	</h1>
+	<p class="text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400 mt-10 mb-5">
+		<span class="text-2xl font-extrabold text-black">Hello, {data.id} 🖐️</span>. Here is your
+		account information. You can easily edit the info. Just click the edit button!
+	</p>
+	<p class="text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">
+		The more often you change your password, the better. For administrator accounts, changing your
+		password is mandatory due to the risk of your initial password being compromised. P.S. To cancel
+		your membership, contact site administrator.
+	</p>
+	<br />
+	<p class="text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">
+		P.S. To cancel your membership, contact site administrator.
+	</p>
+</div>
+<div class="flex justify-center items-center mt-10">
 	<Card padding="sm" class="min-w-[360px]">
 		<div class="flex justify-end">
 			<MenuButton />
