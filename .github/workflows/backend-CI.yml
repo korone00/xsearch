@@ -30,4 +30,4 @@ jobs:
         run: docker rmi -f rlafosem/xsearch_backend
 
       - name: Docker restart backend
-        run: docker run -d -p 3000:3000 --name backend rlafosem/xsearch_backend
+        run: cd ../xsearch/ && docker compose up -d
