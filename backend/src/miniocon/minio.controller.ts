@@ -7,7 +7,7 @@ import {
   UploadedFile,
   UseInterceptors,
   Body,
-  UseGuards
+  UseGuards,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { MinioService } from './minio.service';
@@ -18,9 +18,11 @@ import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @Controller('image')
 export class MinioController {
-  constructor(private readonly minioService: MinioService,
-    private readonly rawDataService: RawResponseDataService) {}
-  
+  constructor(
+    private readonly minioService: MinioService,
+    private readonly rawDataService: RawResponseDataService,
+  ) {}
+
   // @UseGuards(JwtAuthGuard)
   @Post('covers')
   // @ApiBearerAuth('access-token')
@@ -38,8 +40,9 @@ export class MinioController {
     },
   })
   async uploadBookCover(@UploadedFile() file: Express.Multer.File) {
-    console.log("image/covers endpoint hit!");
-    console.log(file)
+    console.log('image/covers endpoint hit!');
+    console.log(file);
+
     // Save the image to minio and put it into engine to get raw data
     const filedata: rawResponseData = await this.minioService.uploadFile(file);
 
@@ -48,8 +51,8 @@ export class MinioController {
 
     // Get a presigned URL for a similar image and return it
     const fileurl = this.getBookCover(filedata);
-    console.log(fileurl)
-    return fileurl
+    console.log(fileurl);
+    return fileurl;
   }
 
   @Post('data')
@@ -57,7 +60,7 @@ export class MinioController {
   async getBookCover(@Body() fileData: rawResponseData): Promise<string[]> {
     await this.rawDataService.saveData(fileData);
     const predictions = fileData.pred.map(async (predName: string) => {
-      //const convertedName = predName.replace(/_/g, '-') + '.jpeg';
+      // const convertedName = predName.replace(/_/g, '-') + '.jpeg';
       return await this.minioService.getFileUrl(predName);
     });
     return await Promise.all(predictions);
@@ -72,5 +75,14 @@ export class MinioController {
   async deleteBookCover(@Param('fileName') fileName: string) {
     await this.minioService.deleteFile(fileName);
     return fileName;
+  }
+
+  @Post('cevers/geturl')
+  @ApiParam({
+    name: 'fillname',
+  })
+  async geturl(@Param('fileName') fileName: string) {
+    const link = await this.minioService.getFileUrl(fileName);
+    return link;
   }
 }
