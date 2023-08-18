@@ -19,19 +19,15 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Docker Hub pubilsh # (4)
+      - name: Docker Hub pubilsh
         run: docker push rlafosem/xsearch_backend
 
       
-      - name: WAS 인스턴스 접속 및 애플리케이션 실행 # (5)
-        uses: appleboy/ssh-action@v0.1.6
-        with:
-          host: ${{ secrets.WAS_HOST }}
-          username: ${{ secrets.WAS_USERNAME }}
-          password: ${{ secrets.WAS_PASSWORD }}
-          port: ${{ secrets.WAS_SSH_PORT }}
-          script: |
-            docker stop $(docker ps -a -q) 
-            docker rm $(docker ps -a -q) 
-            docker pull rlafosem/xsearch_backend
-            docker run -d -p 3000:3000 --name backend rlafosem/xsearch_backend
+      - name: Docker stop backend container
+        run: docker stop backend
+
+      - name: Docker remove backend image
+        run: docker rmi -f rlafosem/xsearch_backend
+
+      - name: Docker restart backend
+        run: docker run -d -p 3000:3000 --name backend rlafosem/xsearch_backend
