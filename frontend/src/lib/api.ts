@@ -55,4 +55,8 @@ export function get(path: any, token: any) {
 	const data = null;
 	return send({ method: 'GET', path, data, token });
 }
+
+export function put(path: any, data: any, token: any) {
+	return send({ method: 'PUT', path, data, token });
+}
 // get, delete, update 추가
