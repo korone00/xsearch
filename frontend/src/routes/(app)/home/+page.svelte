@@ -1,17 +1,25 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { onMount, createEventDispatcher } from 'svelte';
 	import { Tabs, TabItem } from 'flowbite-svelte';
 	import { Icon } from 'flowbite-svelte-icons';
-	export let data;
-	import ApexCharts from 'apexcharts';
-
+	export const data;
+	let ApexCharts;
+  
 	let areaChart1: HTMLElement | null = null;
 	let areaChart2: HTMLElement | null = null;
 	let areaChart3: HTMLElement | null = null;
-
+  
 	let donutChart1: HTMLElement | null = null;
-
-	onMount(() => {
+	let canRender = false;
+  
+	const loadApexCharts = async () => {
+	  const module = await import('apexcharts');
+	  ApexCharts = module.default;  
+	}
+  
+	onMount(async () => {
+		await loadApexCharts();
+		canRender = true;
 		let donutOptions = {
 			series: [35.1, 23.5, 2.4, 5.4],
 			colors: ['#1C64F2', '#16BDCA', '#FDBA8C', '#E74694'],
