@@ -1,0 +1,37 @@
+name: Backend CD
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: repository Checkout
+        uses: actions/checkout@v3
+
+      - name: docker image build
+        run: docker build -t rlafosem/xsearch_backend .
+
+      - name: docker hub login
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Docker Hub pubilsh # (4)
+        run: docker push rlafosem/xsearch_backend
+
+      
+      - name: WAS 인스턴스 접속 및 애플리케이션 실행 # (5)
+        uses: appleboy/ssh-action@v0.1.6
+        with:
+          host: ${{ secrets.WAS_HOST }}
+          username: ${{ secrets.WAS_USERNAME }}
+          password: ${{ secrets.WAS_PASSWORD }}
+          port: ${{ secrets.WAS_SSH_PORT }}
+          script: |
+            docker stop $(docker ps -a -q) 
+            docker rm $(docker ps -a -q) 
+            docker pull rlafosem/xsearch_backend
+            docker run -d -p 3000:3000 --name backend rlafosem/xsearch_backend
