@@ -28,15 +28,12 @@ jobs:
 
       - name: Docker remove backend image
         run: docker rmi -f rlafosem/xsearch_backend
-
+      
       - name: Create .env file
         run: |
           VARIABLES_JSON=${{ secrets.ENV_VARIABLES }}
           VARIABLES=$(echo $VARIABLES_JSON | jq -r 'to_entries|map("\(.key)=\(.value|tostring)")|.[]')
-          for VAR in ${VARIABLES[@]}; do
-            echo $VAR >> .env
-          done
-
+          echo "$VARIABLES" > .env
 
       - name: Docker restart backend
         run: docker compose up -d
