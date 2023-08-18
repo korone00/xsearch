@@ -38,7 +38,7 @@ you can choose two options to make container
 |container name|postgres|
 |Hostport|5432|
 |Volumes Host Path|{path you want to}|
-|Environment variables(Variables:Values)|POSTGRES_PASSWORD:0927|
+|Environment variables(Variables:Values)|POSTGRES_PASSWORD:1234|
 |Environment variables(Variables:Values)|POSTGRES_DB:xsearch|
 <p align="center">
  <img src = "./readmeimgs/dockercontainer.png">
@@ -203,3 +203,56 @@ you can also check on minio api
 If you encounter any issues with the connection, check and modify the access permissions of your Minio bucket, if necessary. If the issue persists, reach out to your supervisor or the person responsible for assistance.
 
 Through these steps, you can connect your NestJS application with Postgres and Minio services using Docker Compose. We hope this guide is helpful to you!
+
+# Description of the backend API in Swagger
+
+## default API 
+
+### /image/covers(Post)
+you can upload file if mimetype of the file is jpg|jpeg|png|gif. If you upload file with 'try it out' button,
+you can check the uploaded file in your minio bucket. and if file uploaded in your minio bucket, minio will send url transformed uuid.
+Multer is a Node. js middleware for handling multipart/form-data that makes the otherwise painstaking process of uploading files in Node. js much easier. 
+multer helps you receive files from the front end, save them, and upload them to the backend.
+Through the minioService, If there is no bucket in minio, first create a bucket through the 'createBucketIfNotExists' method and then upload the file. When minio converts the uuid of the uploaded file to url and returns it to the backend, it saves it to 'img_path' and sends 'img_path' to flask. 
+
+### /image/data(Post)
+The API can store file data using the class rawDataService's saveData and receive the url of the file through the minioService.getFileUrl function.
+
+### /image/covers/{filename}(Delete)
+
+you can delete the file at 'Delete:/covers/{filename}'through the minioService.deleteFile function.
+
+## auth API
+
+### /auth/login(Post)
+
+users can log in to the Xsearch page with this API.
+When a user enters an ID and password, an ID in the registered member information and a token are sent if it matches the password. This API checks the user repository for membership through the validateUser function of authservice, which is a class, checks the hash functioned password through bcrypt as a matching function, and checks whether the IDs match. If the registered member information matches the entered information, the jwt access token is issued through the login function.
+
+### /auth/register(Post)
+
+This API allows a user to register user information and checks for duplicate members and stores user information through the class UserService.
+### /auth/logout(Post)
+
+This API logs the user out of the page.
+The @ApiBearAuth() decorator was used to allow token authentication to proceed. When you set up the decorator @ApiBearAuth ('access-token') , the API must send JWT token information together. When logging out, res.cookie was used to store the jwt token value in cookies, and the expiration date was set to 0 through maxage.
+
+### /auth/profile(Get)
+
+This API retrieves user information.
+
+### /auth/profile2(Get)
+
+This API retrieves userID through getUser of authService class.
+
+### /auth/users(Get)
+
+This API retrieves Full list of users(only for Admin).
+
+### /auth/delete(Post)
+
+This API deletes the id that exists in the user repository through the deleteUser function of authservice when you enter the user ID and password.
+
+### /auth/modify(Put)
+
+This API finds user information in the repository through the user ID and stores newinfo to return the modified user information.
