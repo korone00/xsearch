@@ -93,6 +93,6 @@ export class AuthService {
       ...user,
       ...modifyInfo,
     };
-    return await this.userRepository.save(newInfo);
+    return await this.userService.save(newInfo);
   }
 }
