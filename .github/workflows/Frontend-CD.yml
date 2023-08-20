@@ -11,6 +11,12 @@ jobs:
       - name: repository Checkout
         uses: actions/checkout@v3
 
+      - name: Docker stop frontend container
+        run: docker stop frontend
+
+      - name: Docker remove frontend image
+        run: docker rmi -f rlafosem/xsearch_frontend
+
       - name: docker image build
         run: docker build -t rlafosem/xsearch_frontend ./frontend
 
@@ -22,12 +28,6 @@ jobs:
 
       - name: Docker Hub pubilsh
         run: docker push rlafosem/xsearch_frontend
-
-      - name: Docker stop frontend container
-        run: docker stop frontend
-
-      - name: Docker remove frontend image
-        run: docker rmi -f rlafosem/xsearch_frontend
 
       - name: Install jq
         run: sudo apt-get install jq
