@@ -44,7 +44,7 @@
 		</div>
 	</nav>
 	<!-- container mx-auto h-screen bg-pink-700 -->
-	<div class="h-1/2 mt-7 lg:mt-9 bg-img-top bg-pink-800">
+	<div class=" bg-img-top h-1/2 mt-7 lg:mt-9">
 		<!-- bg-[url('https://flowbite.s3.amazonaws.com/docs/jumbotron/conference.jpg')] -->
 		<!-- bg-gradient-to-r from-gray-300 via-gray-500 to-gray-700 -->
 		<!-- <div
@@ -139,19 +139,19 @@
 			>
 				<div class="lg:pr-8 lg:pt-4">
 					<div class="lg:max-w-lg">
-						<h2 class="text-base font-semibold leading-7 text-indigo-600">Deploy faster</h2>
+						<h2 class="text-base font-semibold leading-7 text-sky-600">Introduction</h2>
 						<p class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-							A better workflow
+							What Is Xsearch ?
 						</p>
 						<p class="mt-6 text-lg leading-8 text-gray-600">
-							Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis
-							suscipit eaque, iste dolor cupiditate blanditiis ratione.
+							Xsearch is the fastest website to find the image you want. We will find the most
+							similar image among the images in about 100 categories.
 						</p>
 						<dl class="mt-10 max-w-xl space-y-8 text-base leading-7 text-gray-600 lg:max-w-none">
 							<div class="relative pl-9">
 								<dt class="inline font-semibold text-gray-900">
 									<svg
-										class="absolute left-1 top-1 h-5 w-5 text-indigo-600"
+										class="absolute left-1 top-1 h-5 w-5 text-sky-600"
 										viewBox="0 0 20 20"
 										fill="currentColor"
 										aria-hidden="true"
@@ -162,17 +162,16 @@
 											clip-rule="evenodd"
 										/>
 									</svg>
-									Push to deploy.
+									Just read the following
 								</dt>
 								<dd class="inline">
-									Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit
-									perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.
+									You will see the characteristics of Xsearch and what you can do with Xsearch.
 								</dd>
 							</div>
 							<div class="relative pl-9">
 								<dt class="inline font-semibold text-gray-900">
 									<svg
-										class="absolute left-1 top-1 h-5 w-5 text-indigo-600"
+										class="absolute left-1 top-1 h-5 w-5 text-sky-600"
 										viewBox="0 0 20 20"
 										fill="currentColor"
 										aria-hidden="true"
@@ -183,17 +182,16 @@
 											clip-rule="evenodd"
 										/>
 									</svg>
-									SSL certificates.
+									Security
 								</dt>
 								<dd class="inline">
-									Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat
-									commodo.
+									Xsearch will only show this page to those who are not members of Xsearch.
 								</dd>
 							</div>
 							<div class="relative pl-9">
 								<dt class="inline font-semibold text-gray-900">
 									<svg
-										class="absolute left-1 top-1 h-5 w-5 text-indigo-600"
+										class="absolute left-1 top-1 h-5 w-5 text-sky-600"
 										viewBox="0 0 20 20"
 										fill="currentColor"
 										aria-hidden="true"
@@ -207,18 +205,18 @@
 											clip-rule="evenodd"
 										/>
 									</svg>
-									Database backups.
+									Join
 								</dt>
 								<dd class="inline">
-									Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi
-									lobortis.
+									Anyone who is a member of Xsearch can use it for free. If you want to use Xsearch,
+									please sign up
 								</dd>
 							</div>
 						</dl>
 					</div>
 				</div>
 				<img
-					src="https://tailwindui.com/img/component-images/dark-project-app-screenshot.png"
+					src="/screen.PNG"
 					alt="Product screenshot"
 					class="w-[48rem] max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 sm:w-[57rem] md:-ml-4 lg:-ml-0"
 					width="2432"
