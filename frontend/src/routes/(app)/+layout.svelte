@@ -11,8 +11,14 @@
 
 <section class="flex flex-1">
 	<div>
-		<Sidebar>
+		<Sidebar class="fixed h-full bg-gray-50">
 			<SidebarWrapper>
+				<a href="/" class="flex items-center pl-2.5 mb-5">
+					<img src="/xsearchlogo.png" class="h-6 mr-3 sm:h-7" alt="Flowbite Logo" />
+					<span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"
+						>Xsearch</span
+					>
+				</a>
 				<SidebarGroup>
 					<SidebarItem label="Home" href="/home" active={activeUrl === '/home'}>
 						<svelte:fragment slot="icon">
@@ -84,22 +90,6 @@
 							>
 						</svelte:fragment>
 					</SidebarItem>
-					<SidebarItem label="Settings" href="/settings" active={activeUrl === '/settings'}>
-						<svelte:fragment slot="icon">
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								fill="none"
-								viewBox="0 0 24 24"
-								stroke-width="1.5"
-								stroke="currentColor"
-								class="w-6 h-6"
-								><path
-									d="M19 11V9a1 1 0 0 0-1-1h-.757l-.707-1.707.535-.536a1 1 0 0 0 0-1.414l-1.414-1.414a1 1 0 0 0-1.414 0l-.536.535L12 2.757V2a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v.757l-1.707.707-.536-.535a1 1 0 0 0-1.414 0L2.929 4.343a1 1 0 0 0 0 1.414l.536.536L2.757 8H2a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h.757l.707 1.707-.535.536a1 1 0 0 0 0 1.414l1.414 1.414a1 1 0 0 0 1.414 0l.536-.535L8 17.243V18a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-.757l1.707-.708.536.536a1 1 0 0 0 1.414 0l1.414-1.414a1 1 0 0 0 0-1.414l-.535-.536.707-1.707H18a1 1 0 0 0 1-1Z"
-								/>
-								<path d="M10 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" /></svg
-							>
-						</svelte:fragment>
-					</SidebarItem>
 					{#if data.role === 'admin'}
 						<SidebarItem label="Userlist" href="/userlist" active={activeUrl === '/userlist'}>
 							<svelte:fragment slot="icon">
@@ -138,7 +128,7 @@
 			</SidebarWrapper>
 		</Sidebar>
 	</div>
-	<div class="flex-1 justify-center">
+	<div class="flex-1 justify-center ml-64 p-4">
 		<slot />
 	</div>
 </section>
