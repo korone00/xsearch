@@ -22,7 +22,6 @@ jobs:
       - name: Docker Hub pubilsh
         run: docker push rlafosem/xsearch_backend
 
-      
       - name: Docker stop backend container
         run: docker stop backend
 
@@ -38,13 +37,6 @@ jobs:
           jq -r 'to_entries | .[] | .key + "=" + .value' env_variables.json > .env
         env:
           ENV_VARIABLES_JSON: ${{ secrets.ENV_VARIABLES }}
-
-      - name: Display .env file content (Optional)
-        run: cat .env
-
-
-      - name: Check .env directory
-        run: echo ".env file created in:$(pwd)"
 
       - name: Docker restart backend
         run: docker compose up -d
