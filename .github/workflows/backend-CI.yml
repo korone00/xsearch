@@ -30,22 +30,17 @@ jobs:
         run: docker rmi -f rlafosem/xsearch_backend
 
       - name: Install jq
-        run: sudo apt-get install -y jq
-      
-      - name: Set VARIABLES_JSON from secrets
+        run: sudo apt-get install jq
+
+      - name: Save ENV_VARIABLES to .env
         run: |
-          echo "VARIABLES_JSON=$(echo '${{ secrets.VARIABLES_JSON }}')" >> $GITHUB_ENV
-      
-      - name: Create .env file
-        run: |
-          echo "VARIABLES_JSON: $VARIABLES_JSON"
-          VARIABLES=$(echo $VARIABLES_JSON | jq -r 'to_entries|map("\(.key)=\(.value|tostring)")|.[]')
-          IFS=$'\n' # IFS를 줄바꿈 문자로 변경합니다.
-          for VAR in $VARIABLES; do
-            echo $VAR >> .env
-          done
-          echo ".env file content:"
-          cat .env
+          echo "$ENV_VARIABLES_JSON" > env_variables.json
+          jq -r 'to_entries | .[] | .key + "=" + .value' env_variables.json > .env
+        env:
+          ENV_VARIABLES_JSON: ${{ secrets.ENV_VARIABLES }}
+
+      - name: Display .env file content (Optional)
+        run: cat .env
 
 
       - name: Check .env directory
