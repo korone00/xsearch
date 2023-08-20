@@ -1,5 +1,6 @@
 # 🔎 XSearch
-제조 데이터 분석을 위한 유사 이미지 검색 엔진 서비스
+XSearch는 제조 데이터 분석을 위한 유사 이미지 검색 엔진 서비스이다.   
+사용자는 웹브라우저에 접속하여 손쉽게 서비스를 사용할 수 있다.
 
 ## 📋 Table of Contents
 + [About](#about)
@@ -11,7 +12,10 @@
 + [Technology](#technology)
 
 ## 📁 About
-XSearch는 제조 현장에서 부품 및 자재에 대한 정보를 쉽게 찾을 수 있는 웹 서비스를 제공한다.
+XSearch는 사용자가 입력한 이미지 데이터와 유사한 이미지를 데이터셋에서 검색하여 웹브라우저로 보여준다.   
+현장에서 작업자가 부품 및 자재에 대한 정보를 쉽게 찾을 수 있는 웹 서비스를 제공할 수 있다.
+
+XSearch의 전체적인 작동방식은 다음과 같다.
 ## 📚 Architecture
 
 ### 🌐 Frontend - [상세보기 wiki 페이지](https://github.com/korone00/xsearch/wiki/Architecture#frontend-%EC%A0%95%EC%9B%85-%EA%B0%80%EC%9D%80)
