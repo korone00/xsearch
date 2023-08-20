@@ -32,6 +32,10 @@ jobs:
       - name: Install jq
         run: sudo apt-get install -y jq
       
+      - name: Set VARIABLES_JSON from secrets
+        run: |
+          echo "VARIABLES_JSON=$(echo '${{ secrets.VARIABLES_JSON }}')" >> $GITHUB_ENV
+      
       - name: Create .env file
         run: |
           echo "VARIABLES_JSON: $VARIABLES_JSON"
