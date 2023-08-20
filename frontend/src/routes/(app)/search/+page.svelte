@@ -98,11 +98,10 @@
 				<div class="flex space-x-4 mt-4">
 					{#each urls as url (url)}
 						<div class="w-1/5 mt-4 flex flex-col">
-							<img src={url} alt="" class="object-cover rounded shadow-lg h-32 w-32 mx-auto" />
 							<img
 								src={url}
 								alt=""
-								class="h-40 w-40 object-cover transition duration-500 group-hover:scale-105 mx-auto shadow-lg"
+								class="h-40 w-40 object-cover rounded transition duration-500 group-hover:scale-105 mx-auto shadow-lg"
 							/>
 						</div>
 					{/each}
