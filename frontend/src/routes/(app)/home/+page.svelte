@@ -307,29 +307,27 @@
 		colors: ['#1A56DB', '#FDBA8C'],
 		series: [
 			{
-				name: 'Organic',
+				name: 'VGG16',
 				color: '#1A56DB',
 				data: [
-					{ x: 'Mon', y: 231 },
-					{ x: 'Tue', y: 122 },
-					{ x: 'Wed', y: 63 },
-					{ x: 'Thu', y: 421 },
-					{ x: 'Fri', y: 122 },
-					{ x: 'Sat', y: 323 },
-					{ x: 'Sun', y: 111 }
+					{ x: 'accuracy', y: 71.5 },
+					{ x: 'FLOPs', y: 15.5 },
+					{ x: 'Latency', y: 10 },
+					{ x: 'Memory', y: 530 },
+					{ x: 'Robustness', y: 99 },
+					{ x: 'Convergence', y: 120 }
 				]
 			},
 			{
-				name: 'Social media',
+				name: 'Resnet50',
 				color: '#FDBA8C',
 				data: [
-					{ x: 'Mon', y: 232 },
-					{ x: 'Tue', y: 113 },
-					{ x: 'Wed', y: 341 },
-					{ x: 'Thu', y: 224 },
-					{ x: 'Fri', y: 522 },
-					{ x: 'Sat', y: 411 },
-					{ x: 'Sun', y: 243 }
+					{ x: 'accuracy', y: 76 },
+					{ x: 'FLOPs', y: 3.8 },
+					{ x: 'Latency', y: 6 },
+					{ x: 'Memory', y: 100 },
+					{ x: 'Robustness', y: 99.5 },
+					{ x: 'Convergence', y: 90 }
 				]
 			}
 		],
@@ -621,8 +619,8 @@
 				</div>
 				<p class="text-sm text-gray-500 dark:text-gray-400">
 					<b>Data:</b>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-					labore et dolore magna aliqua.
+					refers to data stored and used in a database of 'xsearch' to use the similiar image search
+					function.
 				</p>
 
 				<section class="bg-white m-5 md:m-7">
@@ -631,8 +629,8 @@
 							<h2 class="text-3xl font-bold text-gray-900 sm:text-4xl">Data</h2>
 
 							<p class="mt-4 text-gray-500 sm:text-xl">
-								Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione dolores laborum
-								labore provident impedit esse recusandae facere libero harum sequi.
+								A total of 1,000 images of data are stored in the database, with 10 images each
+								belonging to 100 different categories for reverse image search.
 							</p>
 						</div>
 
@@ -770,90 +768,91 @@
 							<article class="rounded-xl bg-white p-4 shadow-md sm:p-6 lg:p-8 h-[30%]">
 								<div class="flex items-start sm:gap-8">
 									<div
-										class="hidden sm:grid sm:h-20 sm:w-20 sm:shrink-0 sm:place-content-center sm:rounded-full sm:border-2 sm:border-indigo-500"
+										class="hidden sm:grid sm:h-20 sm:w-20 sm:shrink-0 sm:place-content-center sm:rounded-full sm:border-2 sm:border-blue-600"
 										aria-hidden="true"
 									>
 										<div class="flex items-center gap-1">
-											<span class="h-8 w-0.5 rounded-full bg-indigo-500" />
-											<span class="h-6 w-0.5 rounded-full bg-indigo-500" />
-											<span class="h-4 w-0.5 rounded-full bg-indigo-500" />
-											<span class="h-6 w-0.5 rounded-full bg-indigo-500" />
-											<span class="h-8 w-0.5 rounded-full bg-indigo-500" />
+											<span class="h-8 w-0.5 rounded-full bg-blue-600" />
+											<span class="h-6 w-0.5 rounded-full bg-blue-600" />
+											<span class="h-4 w-0.5 rounded-full bg-blue-600" />
+											<span class="h-6 w-0.5 rounded-full bg-blue-600" />
+											<span class="h-8 w-0.5 rounded-full bg-blue-600" />
 										</div>
 									</div>
 
 									<div>
 										<strong
-											class="rounded border border-indigo-500 bg-indigo-500 px-3 py-1.5 text-[10px] font-medium text-white hidden md:block"
+											class="rounded border border-blue-600 bg-blue-600 px-3 py-1.5 text-[10px] font-medium text-white hidden md:block"
 										>
-											Episode #101
+											#1
 										</strong>
 
-										<h3 class="mt-4 text-lg font-medium sm:text-xl">
-											<a href="" class="hover:underline"> General</a>
-										</h3>
+										<h3 class="mt-4 text-lg font-xl sm:text-xl">Latest</h3>
 
-										<p class="mt-1 text-sm text-gray-700">General</p>
+										<p class="mt-1 text-sm text-gray-700">
+											used the latest image dataset of towhee library
+										</p>
 									</div>
 								</div>
 							</article>
 							<article class="rounded-xl bg-white p-4 shadow-md sm:p-6 lg:p-8 h-[30%] mt-3 md:mt-8">
 								<div class="flex items-start sm:gap-8">
 									<div
-										class="hidden sm:grid sm:h-20 sm:w-20 sm:shrink-0 sm:place-content-center sm:rounded-full sm:border-2 sm:border-indigo-500"
+										class="hidden sm:grid sm:h-20 sm:w-20 sm:shrink-0 sm:place-content-center sm:rounded-full sm:border-2 sm:border-blue-600"
 										aria-hidden="true"
 									>
 										<div class="flex items-center gap-1">
-											<span class="h-8 w-0.5 rounded-full bg-indigo-500" />
-											<span class="h-6 w-0.5 rounded-full bg-indigo-500" />
-											<span class="h-4 w-0.5 rounded-full bg-indigo-500" />
-											<span class="h-6 w-0.5 rounded-full bg-indigo-500" />
-											<span class="h-8 w-0.5 rounded-full bg-indigo-500" />
+											<span class="h-8 w-0.5 rounded-full bg-blue-600" />
+											<span class="h-6 w-0.5 rounded-full bg-blue-600" />
+											<span class="h-4 w-0.5 rounded-full bg-blue-600" />
+											<span class="h-6 w-0.5 rounded-full bg-blue-600" />
+											<span class="h-8 w-0.5 rounded-full bg-blue-600" />
 										</div>
 									</div>
 
 									<div>
 										<strong
-											class="rounded border border-indigo-500 bg-indigo-500 px-3 py-1.5 text-[10px] font-medium text-white hidden md:block"
+											class="rounded border border-blue-600 bg-blue-600 px-3 py-1.5 text-[10px] font-medium text-white hidden md:block"
 										>
-											Episode #101
+											#2
 										</strong>
 
-										<h3 class="mt-4 text-lg font-medium sm:text-xl">
-											<a href="" class="hover:underline"> General</a>
-										</h3>
+										<h3 class="mt-4 text-lg font-xl sm:text-xl">Diversity</h3>
 
-										<p class="mt-1 text-sm text-gray-700">General</p>
+										<p class="mt-1 text-sm text-gray-700">
+											included images that were general and corresponded to various categories.
+										</p>
 									</div>
 								</div>
 							</article>
 							<article class="rounded-xl bg-white p-4 shadow-md sm:p-6 lg:p-8 h-[30%] mt-3 md:mt-8">
 								<div class="flex items-start sm:gap-8">
 									<div
-										class="hidden sm:grid sm:h-20 sm:w-20 sm:shrink-0 sm:place-content-center sm:rounded-full sm:border-2 sm:border-indigo-500"
+										class="hidden sm:grid sm:h-20 sm:w-20 sm:shrink-0 sm:place-content-center sm:rounded-full sm:border-2 sm:border-blue-600"
 										aria-hidden="true"
 									>
 										<div class="flex items-center gap-1">
-											<span class="h-8 w-0.5 rounded-full bg-indigo-500" />
-											<span class="h-6 w-0.5 rounded-full bg-indigo-500" />
-											<span class="h-4 w-0.5 rounded-full bg-indigo-500" />
-											<span class="h-6 w-0.5 rounded-full bg-indigo-500" />
-											<span class="h-8 w-0.5 rounded-full bg-indigo-500" />
+											<span class="h-8 w-0.5 rounded-full bg-blue-600" />
+											<span class="h-6 w-0.5 rounded-full bg-blue-600" />
+											<span class="h-4 w-0.5 rounded-full bg-blue-600" />
+											<span class="h-6 w-0.5 rounded-full bg-blue-600" />
+											<span class="h-8 w-0.5 rounded-full bg-blue-600" />
 										</div>
 									</div>
 
 									<div>
 										<strong
-											class="rounded border border-indigo-500 bg-indigo-500 px-3 py-1.5 text-[10px] font-medium text-white hidden md:block"
+											class="rounded border border-blue-600 bg-blue-600 px-3 py-1.5 text-[10px] font-medium text-white hidden md:block"
 										>
-											Episode #101
+											#3
 										</strong>
 
-										<h3 class="mt-4 text-lg font-medium sm:text-xl">
-											<a href="" class="hover:underline"> General</a>
-										</h3>
+										<h3 class="mt-4 text-lg font-xl sm:text-xl">High-resolution</h3>
 
-										<p class="mt-1 text-sm text-gray-700">General</p>
+										<p class="mt-1 text-sm text-gray-700">
+											More accurate image features can be extracted through image datasets with high
+											resolution.
+										</p>
 									</div>
 								</div>
 							</article>
@@ -868,8 +867,7 @@
 				</div>
 				<p class="text-sm text-gray-500 dark:text-gray-400">
 					<b>Preprocess:</b>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-					labore et dolore magna aliqua.
+					a process of refining images before training as a model in earnest.
 				</p>
 
 				<section class="bg-white dark:bg-gray-900 mt-5 md:mt-10">
@@ -895,8 +893,8 @@
 						>
 							<article class="group">
 								<img
-									alt="Lava"
-									src="https://images.unsplash.com/photo-1631451095765-2c91616fc9e6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+									alt="decoding image"
+									src="/RGB-image-consisting-of-three-layers.png"
 									class="h-56 w-full rounded-xl object-cover shadow-xl transition group-hover:grayscale-[50%]"
 								/>
 
@@ -918,9 +916,9 @@
 
 							<article class="group">
 								<img
-									alt="Lava"
-									src="https://images.unsplash.com/photo-1631451095765-2c91616fc9e6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-									class="h-56 w-full rounded-xl object-cover shadow-xl transition group-hover:grayscale-[50%]"
+									alt="resizing"
+									src="/resizing.jpg"
+									class="h-56 w-full rounded-xl object-fit:contain shadow-xl transition group-hover:grayscale-[50%]"
 								/>
 
 								<div class="p-4">
@@ -941,9 +939,9 @@
 
 							<article class="group">
 								<img
-									alt="Lava"
-									src="https://images.unsplash.com/photo-1631451095765-2c91616fc9e6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-									class="h-56 w-full rounded-xl object-cover shadow-xl transition group-hover:grayscale-[50%]"
+									alt="augmentation"
+									src="/aug.jpg"
+									class="h-56 w-full rounded-xl object-fit:contain shadow-xl transition group-hover:grayscale-[50%]"
 								/>
 
 								<div class="p-4">
@@ -985,12 +983,11 @@
 						</h1>
 
 						<p class="mx-auto mt-2 text-gray-500 text-sm text-center">
-							Image preprocessing is the process of analyzing and adjusting the original image to
-							enhance its quality or prepare it for data analysis.
+							Training is conducted by extracting image feature vectors through the Resnet50 model.
 						</p>
 						<p class="mx-auto mt-2 text-gray-500 text-sm text-center">
-							This step involves various techniques such as noise removal, resizing, and contrast
-							adjustment, playing a crucial role in improving analytical accuracy.
+							The Resnet50 used was pre-trained using a total of 1.2m ImageNet data, and a total of
+							25m parameters were used.
 						</p>
 						<div class="mt-8 sm:mt-12">
 							<div class="m-2 md:m-6">
@@ -1050,52 +1047,30 @@
 															<h5
 																class="leading-none text-2xl font-bold text-gray-900 dark:text-white pb-1"
 															>
-																3.4k
+																VGG16 vs Resnet50
 															</h5>
 															<p class="text-sm font-normal text-gray-500 dark:text-gray-400">
-																Leads generated per week
+																performance comparison
 															</p>
 														</div>
-													</div>
-													<div>
-														<span
-															class="bg-green-100 text-green-800 text-xs font-medium inline-flex items-center px-2.5 py-1 rounded-md dark:bg-green-900 dark:text-green-300"
-														>
-															<svg
-																class="w-2.5 h-2.5 mr-1.5"
-																aria-hidden="true"
-																xmlns="http://www.w3.org/2000/svg"
-																fill="none"
-																viewBox="0 0 10 14"
-															>
-																<path
-																	stroke="currentColor"
-																	stroke-linecap="round"
-																	stroke-linejoin="round"
-																	stroke-width="2"
-																	d="M5 13V1m0 0L1 5m4-4 4 4"
-																/>
-															</svg>
-															42.5%
-														</span>
 													</div>
 												</div>
 
 												<div class="grid grid-cols-2">
 													<dl class="flex items-center">
 														<dt class="text-gray-500 dark:text-gray-400 text-sm font-normal mr-1">
-															Money spent:
+															VGG16:
 														</dt>
 														<dd class="text-gray-900 text-sm dark:text-white font-semibold">
-															$3,232
+															2014
 														</dd>
 													</dl>
 													<dl class="flex items-center justify-end">
 														<dt class="text-gray-500 dark:text-gray-400 text-sm font-normal mr-1">
-															Conversion rate:
+															Resnet50:
 														</dt>
 														<dd class="text-gray-900 text-sm dark:text-white font-semibold">
-															1.2%
+															2015
 														</dd>
 													</dl>
 												</div>
@@ -1114,15 +1089,17 @@
 											<h2 class="text-2xl font-bold sm:text-3xl">Resnet50</h2>
 
 											<p class="mt-4 text-gray-600">
-												Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid,
-												molestiae! Quidem est esse numquam odio deleniti, beatae, magni dolores
-												provident quaerat totam eos, aperiam architecto eius quis quibusdam fugiat
-												dicta.
+												ResNet50, a variant of the ResNet (Residual Network) architecture, was
+												introduced by Kaiming He and his team in their 2015 paper titled "Deep
+												Residual Learning for Image Recognition". The primary innovation behind the
+												ResNet architecture is the use of "residual blocks", which help combat the
+												vanishing gradient problem and enable the training of much deeper neural
+												networks.
 											</p>
 
 											<a
-												href="#"
-												class="mt-8 inline-block rounded border border-indigo-600 bg-indigo-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
+												href="https://arxiv.org/pdf/1512.03385v1.pdf"
+												class="mt-8 inline-block rounded border border-blue-100 bg-blue-300 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-100"
 											>
 												More
 											</a>
@@ -1134,14 +1111,13 @@
 						<div class="bg-white py-24 sm:py-32">
 							<div class="mx-auto max-w-7xl px-6 lg:px-8">
 								<div class="mx-auto max-w-2xl lg:text-center">
-									<h2 class="text-base font-semibold leading-7 text-indigo-600">Deploy faster</h2>
+									<h2 class="text-base font-semibold leading-7 text-blue-600">Explanation</h2>
 									<p class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-										Everything you need to deploy your app
+										Why we used Resnet50
 									</p>
-									<p class="mt-6 text-lg leading-8 text-gray-600">
-										Quis tellus eget adipiscing convallis sit sit eget aliquet quis. Suspendisse
-										eget egestas a elementum pulvinar et feugiat blandit at. In mi viverra elit
-										nunc.
+									<p class="mt-6 text-lg leading-8 text-gray-600">explain features of Resnet50</p>
+									<p class="text-lg leading-8 text-gray-600">
+										and why Resnet50 was used to extract feature vectors from images
 									</p>
 								</div>
 								<div class="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
@@ -1151,109 +1127,234 @@
 										<div class="relative pl-16">
 											<dt class="text-base font-semibold leading-7 text-gray-900">
 												<div
-													class="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600"
+													class="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-blue-100"
 												>
 													<svg
-														class="h-6 w-6 text-white"
+														width="30px"
+														height="30px"
+														viewBox="0 0 64 64"
+														xmlns="http://www.w3.org/2000/svg"
+														stroke-width="3"
+														stroke="#000000"
 														fill="none"
-														viewBox="0 0 24 24"
-														stroke-width="1.5"
-														stroke="currentColor"
-														aria-hidden="true"
+														><circle cx="34.52" cy="11.43" r="5.82" /><circle
+															cx="53.63"
+															cy="31.6"
+															r="5.82"
+														/><circle cx="34.52" cy="50.57" r="5.82" /><circle
+															cx="15.16"
+															cy="42.03"
+															r="5.82"
+														/><circle cx="15.16" cy="19.27" r="5.82" /><circle
+															cx="34.51"
+															cy="29.27"
+															r="4.7"
+														/><line x1="20.17" y1="16.3" x2="28.9" y2="12.93" /><line
+															x1="38.6"
+															y1="15.59"
+															x2="49.48"
+															y2="27.52"
+														/><line x1="50.07" y1="36.2" x2="38.67" y2="46.49" /><line
+															x1="18.36"
+															y1="24.13"
+															x2="30.91"
+															y2="46.01"
+														/><line x1="20.31" y1="44.74" x2="28.7" y2="48.63" /><line
+															x1="17.34"
+															y1="36.63"
+															x2="31.37"
+															y2="16.32"
+														/><line x1="20.52" y1="21.55" x2="30.34" y2="27.1" /><line
+															x1="39.22"
+															y1="29.8"
+															x2="47.81"
+															y2="30.45"
+														/><line x1="34.51" y1="33.98" x2="34.52" y2="44.74" /></svg
 													>
-														<path
-															stroke-linecap="round"
-															stroke-linejoin="round"
-															d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z"
-														/>
-													</svg>
 												</div>
-												Push to deploy
+												Deep Hierarchical Feature Learning
 											</dt>
 											<dd class="mt-2 text-base leading-7 text-gray-600">
-												Morbi viverra dui mi arcu sed. Tellus semper adipiscing suspendisse semper
-												morbi. Odio urna massa nunc massa.
+												ResNet50, with its depth of around 50 layers, learns a hierarchy of
+												features. The initial layers capture basic image structures like edges and
+												colors, while deeper layers encapsulate higher-level patterns. When using
+												ResNet50 for image vector extraction, these deep layers provide rich,
+												discriminative embeddings that encapsulate the essence of the image.
 											</dd>
 										</div>
 										<div class="relative pl-16">
 											<dt class="text-base font-semibold leading-7 text-gray-900">
 												<div
-													class="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600"
+													class="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-blue-100"
 												>
 													<svg
-														class="h-6 w-6 text-white"
+														width="30px"
+														height="30px"
+														viewBox="0 0 64 64"
+														xmlns="http://www.w3.org/2000/svg"
+														stroke-width="3"
+														stroke="#000000"
 														fill="none"
-														viewBox="0 0 24 24"
-														stroke-width="1.5"
-														stroke="currentColor"
-														aria-hidden="true"
+														><circle cx="34.52" cy="11.43" r="5.82" /><circle
+															cx="53.63"
+															cy="31.6"
+															r="5.82"
+														/><circle cx="34.52" cy="50.57" r="5.82" /><circle
+															cx="15.16"
+															cy="42.03"
+															r="5.82"
+														/><circle cx="15.16" cy="19.27" r="5.82" /><circle
+															cx="34.51"
+															cy="29.27"
+															r="4.7"
+														/><line x1="20.17" y1="16.3" x2="28.9" y2="12.93" /><line
+															x1="38.6"
+															y1="15.59"
+															x2="49.48"
+															y2="27.52"
+														/><line x1="50.07" y1="36.2" x2="38.67" y2="46.49" /><line
+															x1="18.36"
+															y1="24.13"
+															x2="30.91"
+															y2="46.01"
+														/><line x1="20.31" y1="44.74" x2="28.7" y2="48.63" /><line
+															x1="17.34"
+															y1="36.63"
+															x2="31.37"
+															y2="16.32"
+														/><line x1="20.52" y1="21.55" x2="30.34" y2="27.1" /><line
+															x1="39.22"
+															y1="29.8"
+															x2="47.81"
+															y2="30.45"
+														/><line x1="34.51" y1="33.98" x2="34.52" y2="44.74" /></svg
 													>
-														<path
-															stroke-linecap="round"
-															stroke-linejoin="round"
-															d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
-														/>
-													</svg>
 												</div>
-												SSL certificates
+												Residual Blocks for Stable Embeddings
 											</dt>
 											<dd class="mt-2 text-base leading-7 text-gray-600">
-												Sit quis amet rutrum tellus ullamcorper ultricies libero dolor eget. Sem
-												sodales gravida quam turpis enim lacus amet.
+												The core innovation in ResNet50 is its use of residual blocks with skip
+												connections. These allow the model to learn identity functions and bypass
+												certain layers, ensuring that even the deeper layers receive unadulterated
+												gradient information. This design results in stable and robust embeddings,
+												ideal for tasks like image retrieval.
 											</dd>
 										</div>
 										<div class="relative pl-16">
 											<dt class="text-base font-semibold leading-7 text-gray-900">
 												<div
-													class="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600"
+													class="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-blue-100"
 												>
 													<svg
-														class="h-6 w-6 text-white"
+														width="30px"
+														height="30px"
+														viewBox="0 0 64 64"
+														xmlns="http://www.w3.org/2000/svg"
+														stroke-width="3"
+														stroke="#000000"
 														fill="none"
-														viewBox="0 0 24 24"
-														stroke-width="1.5"
-														stroke="currentColor"
-														aria-hidden="true"
+														><circle cx="34.52" cy="11.43" r="5.82" /><circle
+															cx="53.63"
+															cy="31.6"
+															r="5.82"
+														/><circle cx="34.52" cy="50.57" r="5.82" /><circle
+															cx="15.16"
+															cy="42.03"
+															r="5.82"
+														/><circle cx="15.16" cy="19.27" r="5.82" /><circle
+															cx="34.51"
+															cy="29.27"
+															r="4.7"
+														/><line x1="20.17" y1="16.3" x2="28.9" y2="12.93" /><line
+															x1="38.6"
+															y1="15.59"
+															x2="49.48"
+															y2="27.52"
+														/><line x1="50.07" y1="36.2" x2="38.67" y2="46.49" /><line
+															x1="18.36"
+															y1="24.13"
+															x2="30.91"
+															y2="46.01"
+														/><line x1="20.31" y1="44.74" x2="28.7" y2="48.63" /><line
+															x1="17.34"
+															y1="36.63"
+															x2="31.37"
+															y2="16.32"
+														/><line x1="20.52" y1="21.55" x2="30.34" y2="27.1" /><line
+															x1="39.22"
+															y1="29.8"
+															x2="47.81"
+															y2="30.45"
+														/><line x1="34.51" y1="33.98" x2="34.52" y2="44.74" /></svg
 													>
-														<path
-															stroke-linecap="round"
-															stroke-linejoin="round"
-															d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
-														/>
-													</svg>
 												</div>
-												Simple queues
+												Transferability of Pretrained Features
 											</dt>
 											<dd class="mt-2 text-base leading-7 text-gray-600">
-												Quisque est vel vulputate cursus. Risus proin diam nunc commodo. Lobortis
-												auctor congue commodo diam neque.
+												ResNet50 models, often pretrained on large datasets like ImageNet, can
+												capture a vast range of visual concepts. When used for image vector
+												extraction, these pretrained weights act as a strong feature extractor. The
+												embeddings derived often generalize well, even to images outside the
+												original training dataset, enhancing the model's utility in diverse
+												scenarios.
 											</dd>
 										</div>
 										<div class="relative pl-16">
 											<dt class="text-base font-semibold leading-7 text-gray-900">
 												<div
-													class="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600"
+													class="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-blue-100"
 												>
 													<svg
-														class="h-6 w-6 text-white"
+														width="30px"
+														height="30px"
+														viewBox="0 0 64 64"
+														xmlns="http://www.w3.org/2000/svg"
+														stroke-width="3"
+														stroke="#000000"
 														fill="none"
-														viewBox="0 0 24 24"
-														stroke-width="1.5"
-														stroke="currentColor"
-														aria-hidden="true"
+														><circle cx="34.52" cy="11.43" r="5.82" /><circle
+															cx="53.63"
+															cy="31.6"
+															r="5.82"
+														/><circle cx="34.52" cy="50.57" r="5.82" /><circle
+															cx="15.16"
+															cy="42.03"
+															r="5.82"
+														/><circle cx="15.16" cy="19.27" r="5.82" /><circle
+															cx="34.51"
+															cy="29.27"
+															r="4.7"
+														/><line x1="20.17" y1="16.3" x2="28.9" y2="12.93" /><line
+															x1="38.6"
+															y1="15.59"
+															x2="49.48"
+															y2="27.52"
+														/><line x1="50.07" y1="36.2" x2="38.67" y2="46.49" /><line
+															x1="18.36"
+															y1="24.13"
+															x2="30.91"
+															y2="46.01"
+														/><line x1="20.31" y1="44.74" x2="28.7" y2="48.63" /><line
+															x1="17.34"
+															y1="36.63"
+															x2="31.37"
+															y2="16.32"
+														/><line x1="20.52" y1="21.55" x2="30.34" y2="27.1" /><line
+															x1="39.22"
+															y1="29.8"
+															x2="47.81"
+															y2="30.45"
+														/><line x1="34.51" y1="33.98" x2="34.52" y2="44.74" /></svg
 													>
-														<path
-															stroke-linecap="round"
-															stroke-linejoin="round"
-															d="M7.864 4.243A7.5 7.5 0 0119.5 10.5c0 2.92-.556 5.709-1.568 8.268M5.742 6.364A7.465 7.465 0 004.5 10.5a7.464 7.464 0 01-1.15 3.993m1.989 3.559A11.209 11.209 0 008.25 10.5a3.75 3.75 0 117.5 0c0 .527-.021 1.049-.064 1.565M12 10.5a14.94 14.94 0 01-3.6 9.75m6.633-4.596a18.666 18.666 0 01-2.485 5.33"
-														/>
-													</svg>
 												</div>
-												Advanced security
+												Global Average Pooling for Compact Representation
 											</dt>
 											<dd class="mt-2 text-base leading-7 text-gray-600">
-												Arcu egestas dolor vel iaculis in ipsum mauris. Tincidunt mattis aliquet hac
-												quis. Id hac maecenas ac donec pharetra eget.
+												Instead of using fully connected layers, ResNet50 typically employs Global
+												Average Pooling (GAP) at the end. GAP consolidates the spatial information,
+												resulting in a compact vector while preserving the crucial spatial
+												hierarchies learned throughout the network. This compactness is advantageous
+												when storing or comparing large numbers of image embeddings.
 											</dd>
 										</div>
 									</dl>
@@ -1270,8 +1371,7 @@
 				</div>
 				<p class="text-sm text-gray-500 dark:text-gray-400">
 					<b>Prediction:</b>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-					labore et dolore magna aliqua.
+					In the process of prediction, the distance between images is calculated using the L2 formula
 				</p>
 				<div class="container px-6 py-10 mx-auto">
 					<h1
@@ -1281,13 +1381,10 @@
 					</h1>
 
 					<p class="mx-auto mt-2 text-gray-500 text-sm text-center">
-						Image preprocessing is the process of analyzing and adjusting the original image to
-						enhance its quality or prepare it for data analysis.
+						Calculate the distance between image vectors to find the closest image to image X with
+						high similarity
 					</p>
-					<p class="mx-auto mt-2 text-gray-500 text-sm text-center">
-						This step involves various techniques such as noise removal, resizing, and contrast
-						adjustment, playing a crucial role in improving analytical accuracy.
-					</p>
+
 					<div class="mt-8 sm:mt-12">
 						<div class="m-2 md:m-6">
 							<dl class="grid grid-cols-1 gap-4 sm:grid-cols-3">
@@ -1316,200 +1413,158 @@
 				<div class="justify-center items-center m-5 md:m-7">
 					<div class="flex">
 						<div
-							class="rounded-lg shadow bg-white dark:bg-gray-800 p-4 md:p-6 shadow-xl mb-3 md:mb-5"
-							style="display:inline-block"
+							class="rounded-lg shadow bg-white dark:bg-gray-800 p-4 md:p-6 shadow-xl mb-3 md:mb-5 hidden xl:inline-block"
 						>
 							<div class="flex justify-between mb-3">
 								<div class="flex justify-center items-center">
 									<h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white pr-1">
-										Website traffic
+										Computation
 									</h5>
-									<svg
-										data-popover-target="chart-info"
-										data-popover-placement="bottom"
-										class="w-3.5 h-3.5 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white cursor-pointer ml-1"
-										aria-hidden="true"
-										xmlns="http://www.w3.org/2000/svg"
-										fill="currentColor"
-										viewBox="0 0 20 20"
-									>
-										<path
-											d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm0 16a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm1-5.034V12a1 1 0 0 1-2 0v-1.418a1 1 0 0 1 1.038-.999 1.436 1.436 0 0 0 1.488-1.441 1.501 1.501 0 1 0-3-.116.986.986 0 0 1-1.037.961 1 1 0 0 1-.96-1.037A3.5 3.5 0 1 1 11 11.466Z"
-										/>
-									</svg>
-									<div
-										data-popover
-										id="chart-info"
-										role="tooltip"
-										class="absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 w-72 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400"
-									>
-										<div class="p-3 space-y-2">
-											<h3 class="font-semibold text-gray-900 dark:text-white">
-												Activity growth - Incremental
-											</h3>
-											<p>
-												Report helps navigate cumulative growth of community activities. Ideally,
-												the chart should have a growing trend, as stagnating chart signifies a
-												significant decrease of community activity.
-											</p>
-											<h3 class="font-semibold text-gray-900 dark:text-white">Calculation</h3>
-											<p>
-												For each date bucket, the all-time volume of activities is calculated. This
-												means that activities in period n contain all activities up to period n,
-												plus the activities generated by your community in period.
-											</p>
-											<a
-												href="#"
-												class="flex items-center font-medium text-blue-600 dark:text-blue-500 dark:hover:text-blue-600 hover:text-blue-700 hover:underline"
-												>Read more <svg
-													class="w-2 h-2 ml-1.5"
-													aria-hidden="true"
-													xmlns="http://www.w3.org/2000/svg"
-													fill="none"
-													viewBox="0 0 6 10"
-												>
-													<path
-														stroke="currentColor"
-														stroke-linecap="round"
-														stroke-linejoin="round"
-														stroke-width="2"
-														d="m1 9 4-4-4-4"
-													/>
-												</svg></a
-											>
-										</div>
-										<div data-popper-arrow />
-									</div>
-								</div>
-								<div>
-									<button
-										type="button"
-										data-tooltip-target="data-tooltip"
-										data-tooltip-placement="bottom"
-										class="hidden sm:inline-flex items-center justify-center text-gray-500 w-8 h-8 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm"
-										><svg
-											class="w-3.5 h-3.5"
-											aria-hidden="true"
-											xmlns="http://www.w3.org/2000/svg"
-											fill="none"
-											viewBox="0 0 16 18"
-										>
-											<path
-												stroke="currentColor"
-												stroke-linecap="round"
-												stroke-linejoin="round"
-												stroke-width="2"
-												d="M8 1v11m0 0 4-4m-4 4L4 8m11 4v3a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-3"
-											/>
-										</svg><span class="sr-only">Download data</span>
-									</button>
-									<div
-										id="data-tooltip"
-										role="tooltip"
-										class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700"
-									>
-										Download CSV
-										<div class="tooltip-arrow" data-popper-arrow />
-									</div>
 								</div>
 							</div>
 
-							<!-- <div class="py-6" bind:this={donutChart1} /> -->
-							<div use:chart={donutOption1} />
+							<div class="h-56 w-full relative">
+								<img
+									src="/AdobeStock_358888294.jpeg"
+									alt="l2 distance"
+									class="h-full w-full rounded-xl object-fit:contain shadow-lg transition group-hover:grayscale-[50%]"
+								/>
+
+								<div class="absolute inset-30 bg-white bg-opacity-60 mt-5">
+									<p class="mb-3 text-gray-500">
+										Difference Calculation: For each pair of corresponding points or dimensions in
+										two vectors, compute the difference between their values.
+									</p>
+									<p class="mb-3 text-gray-500">
+										Squaring: Square each of the differences obtained in the first step.
+									</p>
+									<p class="mb-3 text-gray-500">
+										Summation and Square Root: Sum up all the squared differences from the second
+										step and then take the square root of this sum to get the Euclidean distance.
+									</p>
+								</div>
+							</div>
+							<!-- 
+							<div class="h-auto w-full">
+							
+								<img
+									src="/AdobeStock_358888294.jpeg"
+									alt="l2 distance"
+									class="h-56 w-full rounded-xl object-fit:contain shadow-lg transition group-hover:grayscale-[50%]"
+								/>
+
+								
+								<div class="h-56 w-full flex items-center justify-center bg-white">
+									Difference Calculation: For each pair of corresponding points or dimensions in two
+									vectors, compute the difference between their values. Squaring: Square each of the
+									differences obtained in the first step. Summation and Square Root: Sum up all the
+									squared differences from the second step and then take the square root of this sum
+									to get the Euclidean distance.
+								</div>
+							</div> -->
 						</div>
-						<div class="w-px mx-8 bg-gray-200 border-0 m-2" />
 
-						<div class="m-7 mt-0 w-full">
-							<article class="rounded-xl bg-white p-4 shadow-md sm:p-6 lg:p-8 h-[30%]">
-								<div class="flex items-start sm:gap-8">
-									<div
-										class="hidden sm:grid sm:h-20 sm:w-20 sm:shrink-0 sm:place-content-center sm:rounded-full sm:border-2 sm:border-indigo-500"
-										aria-hidden="true"
-									>
-										<div class="flex items-center gap-1">
-											<span class="h-8 w-0.5 rounded-full bg-indigo-500" />
-											<span class="h-6 w-0.5 rounded-full bg-indigo-500" />
-											<span class="h-4 w-0.5 rounded-full bg-indigo-500" />
-											<span class="h-6 w-0.5 rounded-full bg-indigo-500" />
-											<span class="h-8 w-0.5 rounded-full bg-indigo-500" />
+						<!-- <div class="py-6" bind:this={donutChart1} /> -->
+						<div class="flex">
+							<div class="w-px mx-8 bg-gray-200 border-0 m-2" />
+
+							<div class="m-7 mt-0 w-full">
+								<article class="rounded-xl bg-white p-4 shadow-md sm:p-6 lg:p-8 h-[30%]">
+									<div class="flex items-start sm:gap-8">
+										<div
+											class="hidden sm:grid sm:h-20 sm:w-20 sm:shrink-0 sm:place-content-center sm:rounded-full sm:border-2 sm:border-blue-600"
+											aria-hidden="true"
+										>
+											<div class="flex items-center gap-1">
+												<span class="h-8 w-0.5 rounded-full bg-blue-600" />
+												<span class="h-6 w-0.5 rounded-full bg-blue-600" />
+												<span class="h-4 w-0.5 rounded-full bg-blue-600" />
+												<span class="h-6 w-0.5 rounded-full bg-blue-600" />
+												<span class="h-8 w-0.5 rounded-full bg-blue-600" />
+											</div>
+										</div>
+
+										<div>
+											<strong
+												class="rounded border border-indigo-500 bg-blue-600 px-3 py-1.5 text-[10px] font-medium text-white hidden md:block"
+											>
+												Feature
+											</strong>
+
+											<h3 class="mt-4 text-lg font-medium sm:text-xl">Image Vector : 1024</h3>
+
+											<p class="mt-1 text-sm text-gray-700">
+												use 1024 vectors to represent the features of the image
+											</p>
 										</div>
 									</div>
-
-									<div>
-										<strong
-											class="rounded border border-indigo-500 bg-indigo-500 px-3 py-1.5 text-[10px] font-medium text-white hidden md:block"
+								</article>
+								<article
+									class="rounded-xl bg-white p-4 shadow-md sm:p-6 lg:p-8 h-[30%] mt-3 md:mt-8"
+								>
+									<div class="flex items-start sm:gap-8">
+										<div
+											class="hidden sm:grid sm:h-20 sm:w-20 sm:shrink-0 sm:place-content-center sm:rounded-full sm:border-2 sm:border-blue-600"
+											aria-hidden="true"
 										>
-											Episode #101
-										</strong>
+											<div class="flex items-center gap-1">
+												<span class="h-8 w-0.5 rounded-full bg-blue-600" />
+												<span class="h-6 w-0.5 rounded-full bg-blue-600" />
+												<span class="h-4 w-0.5 rounded-full bg-blue-600" />
+												<span class="h-6 w-0.5 rounded-full bg-blue-600" />
+												<span class="h-8 w-0.5 rounded-full bg-blue-600" />
+											</div>
+										</div>
 
-										<h3 class="mt-4 text-lg font-medium sm:text-xl">
-											<a href="" class="hover:underline"> General</a>
-										</h3>
+										<div>
+											<strong
+												class="rounded border border-blue-600 bg-blue-600 px-3 py-1.5 text-[10px] font-medium text-white hidden md:block"
+											>
+												Distance
+											</strong>
 
-										<p class="mt-1 text-sm text-gray-700">General</p>
-									</div>
-								</div>
-							</article>
-							<article class="rounded-xl bg-white p-4 shadow-md sm:p-6 lg:p-8 h-[30%] mt-3 md:mt-8">
-								<div class="flex items-start sm:gap-8">
-									<div
-										class="hidden sm:grid sm:h-20 sm:w-20 sm:shrink-0 sm:place-content-center sm:rounded-full sm:border-2 sm:border-indigo-500"
-										aria-hidden="true"
-									>
-										<div class="flex items-center gap-1">
-											<span class="h-8 w-0.5 rounded-full bg-indigo-500" />
-											<span class="h-6 w-0.5 rounded-full bg-indigo-500" />
-											<span class="h-4 w-0.5 rounded-full bg-indigo-500" />
-											<span class="h-6 w-0.5 rounded-full bg-indigo-500" />
-											<span class="h-8 w-0.5 rounded-full bg-indigo-500" />
+											<h3 class="mt-4 text-lg font-medium sm:text-xl">L2 : Euclidean distance</h3>
+
+											<p class="mt-1 text-sm text-gray-700">
+												The Euclidean distance is used to calculate the distance between the image
+												and the image
+											</p>
 										</div>
 									</div>
-
-									<div>
-										<strong
-											class="rounded border border-indigo-500 bg-indigo-500 px-3 py-1.5 text-[10px] font-medium text-white hidden md:block"
+								</article>
+								<article
+									class="rounded-xl bg-white p-4 shadow-md sm:p-6 lg:p-8 h-[30%] mt-3 md:mt-8"
+								>
+									<div class="flex items-start sm:gap-8">
+										<div
+											class="hidden sm:grid sm:h-20 sm:w-20 sm:shrink-0 sm:place-content-center sm:rounded-full sm:border-2 sm:border-blue-600"
+											aria-hidden="true"
 										>
-											Episode #101
-										</strong>
+											<div class="flex items-center gap-1">
+												<span class="h-8 w-0.5 rounded-full bg-blue-600" />
+												<span class="h-6 w-0.5 rounded-full bg-blue-600" />
+												<span class="h-4 w-0.5 rounded-full bg-blue-600" />
+												<span class="h-6 w-0.5 rounded-full bg-blue-600" />
+												<span class="h-8 w-0.5 rounded-full bg-blue-600" />
+											</div>
+										</div>
 
-										<h3 class="mt-4 text-lg font-medium sm:text-xl">
-											<a href="" class="hover:underline"> General</a>
-										</h3>
+										<div>
+											<strong
+												class="rounded border border-blue-600 bg-blue-600 px-3 py-1.5 text-[10px] font-medium text-white hidden md:block"
+											>
+												Similarity
+											</strong>
 
-										<p class="mt-1 text-sm text-gray-700">General</p>
-									</div>
-								</div>
-							</article>
-							<article class="rounded-xl bg-white p-4 shadow-md sm:p-6 lg:p-8 h-[30%] mt-3 md:mt-8">
-								<div class="flex items-start sm:gap-8">
-									<div
-										class="hidden sm:grid sm:h-20 sm:w-20 sm:shrink-0 sm:place-content-center sm:rounded-full sm:border-2 sm:border-indigo-500"
-										aria-hidden="true"
-									>
-										<div class="flex items-center gap-1">
-											<span class="h-8 w-0.5 rounded-full bg-indigo-500" />
-											<span class="h-6 w-0.5 rounded-full bg-indigo-500" />
-											<span class="h-4 w-0.5 rounded-full bg-indigo-500" />
-											<span class="h-6 w-0.5 rounded-full bg-indigo-500" />
-											<span class="h-8 w-0.5 rounded-full bg-indigo-500" />
+											<h3 class="mt-4 text-lg font-medium sm:text-xl">X : image similarity</h3>
+
+											<p class="mt-1 text-sm text-gray-700">
+												The calculated distance is used to determine the similarity of the image
+											</p>
 										</div>
 									</div>
-
-									<div>
-										<strong
-											class="rounded border border-indigo-500 bg-indigo-500 px-3 py-1.5 text-[10px] font-medium text-white hidden md:block"
-										>
-											Episode #101
-										</strong>
-
-										<h3 class="mt-4 text-lg font-medium sm:text-xl">
-											<a href="" class="hover:underline"> General</a>
-										</h3>
-
-										<p class="mt-1 text-sm text-gray-700">General</p>
-									</div>
-								</div>
-							</article>
+								</article>
+							</div>
 						</div>
 					</div>
 				</div>

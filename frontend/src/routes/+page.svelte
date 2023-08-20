@@ -92,7 +92,7 @@
 				<span class="w-3 h-3 rounded-full bg-green-400" />
 			</div>
 			<div class="bg-gray-100 border-t-0 w-full h-[600px]">
-				<img class="mx-auto h-[600px] p-2" src="/example.gif" alt="example gif" />
+				<img class="mx-auto h-[600px] p-2" src="/architecture.gif" alt="architecture.gif" />
 			</div>
 		</div>
 	</div>
