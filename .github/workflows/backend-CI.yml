@@ -31,11 +31,12 @@ jobs:
       
       - name: Create .env file
         run: |
-          VARIABLES_JSON=${{ secrets.ENV_VARIABLES }}
           VARIABLES=$(echo $VARIABLES_JSON | jq -r 'to_entries|map("\(.key)=\(.value|tostring)")|.[]')
-          for VAR in ${VARIABLES[@]}; do
+          IFS=$'\n' # IFS를 줄바꿈 문자로 변경합니다.
+          for VAR in $VARIABLES; do
             echo $VAR >> .env
           done
+
 
 
       - name: Docker restart backend
