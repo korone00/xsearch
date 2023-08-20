@@ -40,7 +40,8 @@ jobs:
             echo $VAR >> .env
           done
 
-
+      - name: check directory
+        run: pwd
 
       - name: Docker restart backend
         run: docker compose up -d
