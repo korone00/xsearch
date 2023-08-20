@@ -40,8 +40,8 @@ jobs:
             echo $VAR >> .env
           done
 
-      - name: check directory
-        run: pwd
+      - name: Check .env directory
+        run: echo ".env file created in:$(pwd)"
 
       - name: Docker restart backend
         run: docker compose up -d
