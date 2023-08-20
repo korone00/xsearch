@@ -10,6 +10,12 @@ jobs:
     steps:
       - name: repository Checkout
         uses: actions/checkout@v3
+      
+      - name: Docker stop backend container
+        run: docker stop engine
+
+      - name: Docker remove backend image
+        run: docker rmi -f rlafosem/xsearch_engine
 
       - name: docker image build
         run: docker build -t rlafosem/xsearch_engine ./engine
@@ -23,11 +29,6 @@ jobs:
       - name: Docker Hub pubilsh
         run: docker push rlafosem/xsearch_engine
 
-      - name: Docker stop backend container
-        run: docker stop engine
-
-      - name: Docker remove backend image
-        run: docker rmi -f rlafosem/xsearch_engine
 
       - name: Install jq
         run: sudo apt-get install jq
