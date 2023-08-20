@@ -1,0 +1,43 @@
+name: Engine CD
+on:
+  #push:
+   # branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: [self-hosted, linux, X64]
+    steps:
+      - name: repository Checkout
+        uses: actions/checkout@v3
+
+      - name: docker image build
+        run: docker build -t rlafosem/xsearch_engine ./engine
+
+      - name: docker hub login
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Docker Hub pubilsh
+        run: docker push rlafosem/xsearch_engine
+
+      - name: Docker stop backend container
+        run: docker stop engine
+
+      - name: Docker remove backend image
+        run: docker rmi -f rlafosem/xsearch_engine
+
+      - name: Install jq
+        run: sudo apt-get install jq
+
+      - name: Save ENV_VARIABLES to .env
+        run: |
+          echo "$ENV_VARIABLES_JSON" > env_variables.json
+          jq -r 'to_entries | .[] | .key + "=" + .value' env_variables.json > .env
+        env:
+          ENV_VARIABLES_JSON: ${{ secrets.ENV_VARIABLES }}
+
+      - name: Docker restart engine
+        run: docker compose up -d
