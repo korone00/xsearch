@@ -3,6 +3,7 @@ import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
 @Entity()
 export class rawResponseData {
+  @ApiProperty()
   @PrimaryGeneratedColumn()
   id: number;
 

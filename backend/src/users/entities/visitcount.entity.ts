@@ -3,25 +3,32 @@ import {
   Column,
   Entity,
   JoinColumn,
+  ManyToOne,
   OneToOne,
   PrimaryColumn,
   PrimaryGeneratedColumn,
   Timestamp,
 } from 'typeorm';
 import { User } from './user.entity';
+import { ApiProperty } from '@nestjs/swagger';
 
 @Entity('visitCount')
 export class VisitCount {
+
+  @ApiProperty()
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @OneToOne(() => User)
+  @ApiProperty()
+  @ManyToOne(() => User)
   @JoinColumn({ name: 'user_id' })
-  user_id: string;
+  user: User;
 
+  @ApiProperty()
   @Column('int')
   count: number;
 
-  @Column('timestamp', { default: () => 'CURRENT_TIMESTAMP' })
+  @ApiProperty()
+  @Column({ type: 'timestamp' })
   uploadDate: Date;
 }

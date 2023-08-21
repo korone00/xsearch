@@ -1,29 +1,35 @@
 import {
-  BaseEntity,
   Column,
   Entity,
   JoinColumn,
-  OneToOne,
+  ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 import { User } from './user.entity';
+import { rawResponseData } from './fileresponsedto.entity';
 
 @Entity()
-export class historyData extends BaseEntity {
-  @ApiProperty({})
+export class historyData {
+  @ApiProperty()
   @PrimaryGeneratedColumn()
+  id: number;
+
+  @ApiProperty()
+  @ManyToOne(() => rawResponseData)
+  @JoinColumn({ name: 'number' })
   number: number;
 
-  @OneToOne(() => User)
+  @ApiProperty()
+  @ManyToOne(() => User)
   @JoinColumn({ name: 'user_id' })
   user_id: string;
 
-  @ApiProperty({})
+  @ApiProperty()
   @Column()
   modifiedFileName: string;
 
-  @ApiProperty({})
+  @ApiProperty()
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   uploadDate: Date;
 
