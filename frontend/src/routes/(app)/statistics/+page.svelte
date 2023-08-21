@@ -347,8 +347,8 @@
 			> Statistics
 		</h1>
 		<p class="text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">
-			Here at Flowbite we focus on markets where technology, innovation, and capital can unlock
-			long-term value and drive economic growth.
+			It showed the number of weekly visitors to the web service, the route of user inflow, the
+			number of newly added data, the number of subscribers, and the user search record.
 		</p>
 	</div>
 </main>
