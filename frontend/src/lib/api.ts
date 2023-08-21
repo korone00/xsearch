@@ -4,7 +4,7 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 // const base = `${BASE_PATH}`;
 
-const base = `http://${import.meta.env.VITE_NESTJS_ENDPOINT}:${import.meta.env.VITE_NESTJS_PORT}`;
+const base = `http://192.168.100.5:3000`;
 
 async function send({
 	method,
