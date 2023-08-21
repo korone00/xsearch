@@ -1,23 +1,23 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  JoinColumn,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
+import { User } from './user.entity';
 
 @Entity()
 export class historyData extends BaseEntity {
-  @ApiProperty({
-    example: '1',
-    description: 'Auto-incremented primary key',
-    required: true,
-  })
+  @ApiProperty({})
   @PrimaryGeneratedColumn()
   number: number;
-  
-  @ApiProperty({
-    example: 'kangin',
-    description: 'id',
-    required: true,
-  })
-  @Column()
-  id: string;
+
+  @OneToOne(() => User)
+  @JoinColumn({ name: 'user_id' })
+  user_id: string;
 
   @ApiProperty({})
   @Column()
