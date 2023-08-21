@@ -39,3 +39,51 @@ NestJs를 이용하였고 Postgres DB와 Minio Storage를 함께 사용하였다
 + Feature extraction using ResNet 50
 + Similar image search using L2
 + Statistics
+
+## How to use
+
+Docker-compose는 3가지 간단한 단계만 거치면 바로 사용하실 수 있습니다.
+
+ Docker 설치:
+   - Docker Hub 웹사이트: https://hub.docker.com/
+   - 운영 체제(Windows, macOS, Linux)에 맞는 Docker를 다운로드하고 설치하세요.
+
+## 1단계: .env 파일 만들기
+.root 디렉토리에 .env 파일이 없거나 업데이트가 필요하면 .env 파일을 수정해야 합니다.
+
+<p align="center">
+ <img src = "./readmeimgs/dotenv.png">
+</p>
+
+> **Note**: Docker Compose에서 각 컨테이너의 이름을 Docker-compose.yml의 container_name으로 지정할 수 있습니다. 그러나 지정하지 않는 경우 localhost 또는 다른 IP 주소를 입력해야 합니다! 
+
+## 2단계: Docker Compose 실행
+
+터미널에서 xsearch 폴더에 들어간 다음 명령어를 입력하여 Postgres와 Minio 서비스를 Docker Compose를 사용하여 시작하세요
+
+```bash
+cd your-xsearch-path
+docker-compose up -d
+```
+
+### 이 화면이 docker 컨테이너에 나타난다면 거의 성공했습니다!
+
+<p align="center">
+ <img src = "./readmeimgs/docker container.png">
+</p>
+
+## 3단계: 동작 확인하기
+> **Notice**: 로컬호스트(또는 사용자가 설정한 호스트 => localhost)/(프론트엔드의 포트 설정 => 3000)에 접속하면 됩니다. 접속에 성공하신 다면 위 화면을 확인할 수 있습니다!
+
+<p align="center">
+ <img src = "./readmeimgs/frontend screen.png">
+</p>
+
+## Troubleshooting
+사용자가 코드를 수정하여 사용하고 싶다면
+```
+docker compose down
+docker compose build
+```
+위 명령어를 실행한 후 다시 2단계로 가시면 됩니다!
+만약 문제가 생긴다면 해당 관리자에게 문의하세요!
