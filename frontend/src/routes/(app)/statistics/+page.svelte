@@ -38,7 +38,7 @@
 			}
 		},
 
-		colors: ['#9D4CCC', '#E91E63', '#9C27B0'],
+		colors: ['#1C64F2', '#E91E63', '#9C27B0'],
 		series: [
 			{
 				name: 'visit',
@@ -77,7 +77,7 @@
 	const getChartOptions = () => {
 		return {
 			series: [52.8, 26.8, 20.4],
-			colors: ['#1C64F2', '#16BDCA', '#9061F9'],
+			colors: ['#7895CB', '#2E8A99', '#4FC0D0'],
 			chart: {
 				height: 420,
 				width: '100%',
@@ -134,11 +134,10 @@
 
 	// ApexCharts options and config
 	let signupoption = {
-		colors: ['#1A56DB', '#FDBA8C'],
 		series: [
 			{
 				name: 'Organic',
-				color: '#1A56DB',
+				color: '#4FC0D0',
 				data: [
 					{ x: 'Mon', y: 231 },
 					{ x: 'Tue', y: 122 },
@@ -151,7 +150,7 @@
 			},
 			{
 				name: 'Social media',
-				color: '#FDBA8C',
+				color: '#1B6B93',
 				data: [
 					{ x: 'Mon', y: 232 },
 					{ x: 'Tue', y: 113 },
@@ -373,21 +372,25 @@
 		<div class="flex justify-between items-start w-full">
 			<div class="flex-col items-center">
 				<div class="flex items-center mb-1">
-					<h5 class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">
-						Website traffic
-					</h5>
+					<div>
+						<h5 class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">
+							User Inflow Path
+						</h5>
+						<p class="text-base font-normal text-gray-500 dark:text-gray-400">
+							Percentage of User Inflow Paths
+						</p>
+					</div>
 				</div>
 			</div>
 		</div>
 
-		<!-- Line Chart -->
 		<div class="py-6" id="pie-chart" />
 
+		<!-- Table -->
 		<div
 			class="grid grid-cols-1 items-center border-gray-200 border-t dark:border-gray-700 justify-between"
-		>
-			<div class="flex justify-between items-center pt-5" />
-		</div>
+		/>
+		<div class="flex justify-between items-center pt-5" />
 	</div>
 
 	<div
@@ -404,7 +407,7 @@
 			<div
 				class="flex items-center px-2.5 py-0.5 text-base font-semibold text-green-500 dark:text-green-500 text-center"
 			>
-				%
+				9%
 				<svg
 					class="w-3 h-3 ml-1"
 					aria-hidden="true"
@@ -483,44 +486,44 @@
 						scope="row"
 						class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
 					>
-						Apple MacBook Pro 17"
+						User1
 					</th>
 					<td class="px-6 py-4"> Silver </td>
-					<td class="px-6 py-4"> Laptop </td>
-					<td class="px-6 py-4"> $2999 </td>
+					<td class="px-6 py-4"> 0.95 </td>
+					<td class="px-6 py-4"> 2023-08-21 10:23:45 </td>
 				</tr>
 				<tr class="border-b bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
 					<th
 						scope="row"
 						class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
 					>
-						Microsoft Surface Pro
+						User2
 					</th>
 					<td class="px-6 py-4"> White </td>
-					<td class="px-6 py-4"> Laptop PC </td>
-					<td class="px-6 py-4"> $1999 </td>
+					<td class="px-6 py-4"> 0.72 </td>
+					<td class="px-6 py-4"> 2023-08-21 11:45:23 </td>
 				</tr>
 				<tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
 					<th
 						scope="row"
 						class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
 					>
-						Magic Mouse 2
+						User3
 					</th>
 					<td class="px-6 py-4"> Black </td>
-					<td class="px-6 py-4"> Accessories </td>
-					<td class="px-6 py-4"> $99 </td>
+					<td class="px-6 py-4"> 0.87 </td>
+					<td class="px-6 py-4"> 2023-08-21 14:32:19 </td>
 				</tr>
 				<tr class="border-b bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
 					<th
 						scope="row"
 						class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
 					>
-						Google Pixel Phone
+						User4
 					</th>
 					<td class="px-6 py-4"> Gray </td>
-					<td class="px-6 py-4"> Phone </td>
-					<td class="px-6 py-4"> $799 </td>
+					<td class="px-6 py-4"> 0.98 </td>
+					<td class="px-6 py-4"> 2023-08-21 16:54:01 </td>
 				</tr>
 			</tbody>
 		</table>
