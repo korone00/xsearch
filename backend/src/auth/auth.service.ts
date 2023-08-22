@@ -52,7 +52,7 @@ export class AuthService {
     const userExist = await this.userService.find(newUser.id);
     if (userExist) {
       // 중복 회원 검사
-      throw new HttpException(
+      return new HttpException(
         '이미 존재하는 회원아이디입니다.',
         HttpStatus.BAD_REQUEST,
       );
@@ -60,7 +60,7 @@ export class AuthService {
     const userRegister = await this.userService.save(newUser);
     if (!userRegister) {
       // 혹시 모를 회원가입 실패
-      throw new HttpException(
+      return new HttpException(
         '회원가입 오류',
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
