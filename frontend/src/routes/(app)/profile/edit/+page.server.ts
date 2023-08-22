@@ -3,6 +3,7 @@ import type { Actions } from '@sveltejs/kit';
 import { Logger } from 'tslog';
 import * as api from '../../../../lib/api';
 const logger = new Logger({ name: 'Edit' });
+let editId = '';
 
 export const load = async ({ parent, url, locals }: any) => {
 	logger.debug('profile/edit load');
@@ -10,6 +11,7 @@ export const load = async ({ parent, url, locals }: any) => {
 	let initialValue = null;
 	const userId = url.searchParams.get('userId'); // 없으면 null
 	if (userId && id != userId) {
+		editId = userId;
 		initialValue = await api.post(
 			'auth/profile2',
 			{
@@ -18,6 +20,7 @@ export const load = async ({ parent, url, locals }: any) => {
 			locals.session.data.jwt
 		);
 	} else {
+		editId = id;
 		initialValue = await api.get('auth/profile', locals.session.data.jwt);
 	}
 	return initialValue;
@@ -32,10 +35,11 @@ export const actions: Actions = {
 			return fail(400, { password, incorrecting: true });
 		}
 		logger.debug(`action edit START`);
+		logger.debug(data.get('id'));
 		const modified = await api.put(
 			'auth/modify',
 			{
-				id: data.get('id'),
+				id: editId,
 				password: data.get('password'),
 				name: data.get('name'),
 				email: data.get('email'),

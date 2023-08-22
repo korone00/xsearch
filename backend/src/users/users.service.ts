@@ -19,7 +19,6 @@ export class UserService implements OnApplicationBootstrap {
     const isGuestPresent = hasGuest(data);
     if (!isAdminPresent) {
       console.log('default admin 등록');
-      //default admin 등록
       const defaultAdmin: Partial<User> = {
         id: 'admin',
         password: 'admin',
@@ -33,7 +32,6 @@ export class UserService implements OnApplicationBootstrap {
     }
     if (!isGuestPresent) {
       console.log('guest id 등록');
-      //default admin 등록
       const defaultGuest: Partial<User> = {
         id: 'guest',
         password: 'guest',
@@ -59,19 +57,6 @@ export class UserService implements OnApplicationBootstrap {
 
   async save(user: Partial<User>): Promise<User> {
     await this.transformPassword(user as User);
-    console.log(user); // 암호화가 된 것을 확인해보기
     return await this.userRepository.save(user);
   }
-
-  // create(user: Partial<User>): Promise<User> {
-  //   return this.usersRepository.save(user);
-  // }
-
-  // update(id: number, user: Partial<User>): Promise<User> {
-  //   return this.usersRepository.save({ id,...user });
-  // }
-
-  // async remove(id: number): Promise<void> {
-  //   await this.usersRepository.delete(id);
-  // }
 }
