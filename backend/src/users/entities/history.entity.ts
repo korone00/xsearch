@@ -15,14 +15,16 @@ export class historyData {
   @PrimaryGeneratedColumn()
   id: number;
 
+  // @ManyToOne(() => rawResponseData)
+  // @JoinColumn({ name: 'number' })
   @ApiProperty()
-  @ManyToOne(() => rawResponseData)
-  @JoinColumn({ name: 'number' })
+  @Column()
   number: number;
 
+  // @ManyToOne(() => User)
+  // @JoinColumn({ name: 'user_id' })
   @ApiProperty()
-  @ManyToOne(() => User)
-  @JoinColumn({ name: 'user_id' })
+  @Column()
   user_id: string;
 
   @ApiProperty()

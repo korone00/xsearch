@@ -11,12 +11,13 @@ import {
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { MinioService } from './minio.service';
-import { ApiBearerAuth, ApiBody, ApiConsumes, ApiParam } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiConsumes, ApiParam, ApiTags } from '@nestjs/swagger';
 import { rawResponseData } from '../users/entities/fileresponsedto.entity';
 import { RawResponseDataService } from './rawresponsedata.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @Controller('image')
+@ApiTags('file upload API')
 export class MinioController {
   constructor(
     private readonly minioService: MinioService,
@@ -75,14 +76,5 @@ export class MinioController {
   async deleteBookCover(@Param('fileName') fileName: string) {
     await this.minioService.deleteFile(fileName);
     return fileName;
-  }
-
-  @Post('cevers/geturl')
-  @ApiParam({
-    name: 'fillname',
-  })
-  async geturl(@Param('fileName') fileName: string) {
-    const link = await this.minioService.getFileUrl(fileName);
-    return link;
   }
 }
