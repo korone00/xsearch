@@ -29,6 +29,7 @@
 				<FooterBrand href="#" src="/xsearchlogo.png" alt="Xsearch Logo" />
 				<a class="no-underline hover:no-underline font-bold text-2xl lg:text-3xl" href="/">
 					<path d="M13 8V0L8.11 5.87 3 12h4v8L17 8h-4z" />
+					
 					Xsearch
 				</a>
 			</div>
@@ -52,7 +53,7 @@
 		/> -->
 		<div class="text-center px-3 lg:px-10 p-20 mt-10">
 			<h1
-				class="my-4 text-2xl md:text-3xl lg:text-5xl text-white font-extrabold leading-tight pb-5"
+				class="my-4 text-2xl md:text-3xl lg:text-5xl text-white font-extrabold leading-tight pb-5 "
 			>
 				Xsearch : Best Way to find image
 			</h1>
