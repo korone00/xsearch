@@ -22,21 +22,24 @@ export const actions: Actions = {
 		logger.debug(`actions register START`);
 		logger.debug(`actions register password:${password}`);
 
-		console.log(
-			await api.post(
-				'auth/register',
-				{
-					id: data.get('id'),
-					password: data.get('password'),
-					name: data.get('name'),
-					email: data.get('email'),
-					phone: data.get('phone'),
-					role: 'user'
-				},
-				''
-			)
+		const body = await api.post(
+			'auth/register',
+			{
+				id: data.get('id'),
+				password: data.get('password'),
+				name: data.get('name'),
+				email: data.get('email'),
+				phone: data.get('phone'),
+				role: 'user'
+			},
+			''
 		);
 
+		if (body.status == 400 || body.status == 500) {
+			const message = body.message;
+			logger.debug(message);
+			return fail(body.status, { message, incorrect: true });
+		}
 		logger.debug(`actions register redirect to /login`);
 		throw redirect(302, '/login'); // login으로 redirect
 	}
