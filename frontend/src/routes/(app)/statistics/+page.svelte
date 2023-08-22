@@ -76,8 +76,8 @@
 
 	const getChartOptions = () => {
 		return {
-			series: [52.8, 26.8, 20.4],
-			colors: ['#7895CB', '#2E8A99', '#4FC0D0'],
+			series: [52.8, 26.8, 20.4, 10.3],
+			colors: ['#18777D', '#2E8A99', '#4FC0D0', '#13B3BE'],
 			chart: {
 				height: 420,
 				width: '100%',
@@ -98,7 +98,7 @@
 					}
 				}
 			},
-			labels: ['Direct', 'Organic search', 'Referrals'],
+			labels: ['Direct', 'Organic search', 'Referrals', 'Others'],
 			dataLabels: {
 				enabled: true,
 				style: {
@@ -364,9 +364,9 @@
 </div>
 
 <!-- Donut Chart -->
-<div class="flex justify-between flex-wrap">
+<div class="flex justify-between flex-wrap md:m-5">
 	<div
-		class="w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6 m-0 md:m-0"
+		class="w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6 m-10 md:m-0"
 		style="width: calc(33.33% - 12px);"
 	>
 		<div class="flex justify-between items-start w-full">
@@ -386,11 +386,98 @@
 
 		<div class="py-6" id="pie-chart" />
 
-		<!-- Table -->
+		<!-- mini chart Table -->
 		<div
 			class="grid grid-cols-1 items-center border-gray-200 border-t dark:border-gray-700 justify-between"
 		/>
 		<div class="flex justify-between items-center pt-5" />
+		<table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+			<thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+				<tr>
+					<th scope="col" class="px-6 py-3"> Top Channels </th>
+					<th scope="col" class="px-6 py-3"> Users </th>
+					<th scope="col" class="px-6 py-3"> % </th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+					<th
+						scope="row"
+						class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+					>
+						Organic Search
+					</th>
+					<td class="px-6 py-4"> 0.95 </td>
+					<td class="px-6 py-4">
+						<div class="w-full bg-gray-200 rounded-full dark:bg-gray-700">
+							<div
+								class="bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full"
+								style="width: 45%"
+							>
+								45%
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr class="border-b bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
+					<th
+						scope="row"
+						class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+					>
+						Referral
+					</th>
+					<td class="px-6 py-4"> 0.72 </td>
+					<td class="px-6 py-4">
+						<div class="w-full bg-gray-200 rounded-full dark:bg-gray-700">
+							<div
+								class="bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full"
+								style="width: 45%"
+							>
+								45%
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+					<th
+						scope="row"
+						class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+					>
+						Direct
+					</th>
+					<td class="px-6 py-4"> 0.87 </td>
+					<td class="px-6 py-4">
+						<div class="w-full bg-gray-200 rounded-full dark:bg-gray-700">
+							<div
+								class="bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full"
+								style="width: 45%"
+							>
+								45%
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr class="border-b bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
+					<th
+						scope="row"
+						class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+					>
+						Other
+					</th>
+					<td class="px-6 py-4"> 0.98 </td>
+					<td class="px-6 py-4">
+						<div class="w-full bg-gray-200 rounded-full dark:bg-gray-700">
+							<div
+								class="bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full"
+								style="width: 45%"
+							>
+								45%
+							</div>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 
 	<div
@@ -402,7 +489,7 @@
 				<h5 class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">
 					Data Type
 				</h5>
-				<p class="text-base font-normal text-gray-500 dark:text-gray-400">Number of SignUp</p>
+				<p class="text-base font-normal text-gray-500 dark:text-gray-400">Type of Data</p>
 			</div>
 			<div
 				class="flex items-center px-2.5 py-0.5 text-base font-semibold text-green-500 dark:text-green-500 text-center"
@@ -468,9 +555,9 @@
 		class="grid grid-cols-1 items-center border-gray-200 border-t dark:border-gray-700 justify-between"
 	/>
 
-	<h3 class="text-3xl font-bold dark:text-white m-10">검색기록</h3>
+	<h3 class="text-3xl font-bold dark:text-white m-10 md:m-5">검색기록</h3>
 
-	<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+	<div class="relative overflow-x-auto shadow-md sm:rounded-lg md:m-5">
 		<table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
 			<thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
 				<tr>
