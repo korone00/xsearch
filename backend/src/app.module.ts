@@ -4,12 +4,11 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './users/users.modules';
 import { AuthModule } from './auth/auth.module';
-import { UploadModule } from './modules/search/upload/upload.module';
+// import { UploadModule } from './modules/search/upload/upload.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { DateController } from './modules/date/date.controller';
 import { MinioModule } from './miniocon/minio.module'; // Import the MinioModule
-import { LoggerMiddleware } from './modules/logging/logger.middleware';
-import { MilvusModule } from './milvuscon/milvus.module'; // Import the MilvusModule
+// import { LoggerMiddleware } from './modules/logging/logger.middleware';
+// import { MilvusModule } from './milvuscon/milvus.module'; // Import the MilvusModule
 
 @Module({
   imports: [
@@ -17,7 +16,7 @@ import { MilvusModule } from './milvuscon/milvus.module'; // Import the MilvusMo
       envFilePath: '../.env',
       isGlobal: true, // allow to all modules to use ConfigService
     }),
-    UploadModule,
+    // UploadModule,
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
@@ -38,7 +37,7 @@ import { MilvusModule } from './milvuscon/milvus.module'; // Import the MilvusMo
     // MilvusModule
   ],
 
-  controllers: [AppController, DateController],
+  controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}

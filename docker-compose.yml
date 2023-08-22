@@ -4,8 +4,8 @@ services:
     container_name: backend
     image: rlafosem/xsearch_backend
     #build:
-      #dockerfile: Dockerfile
-      #context: ./backend
+    #dockerfile: Dockerfile
+    #context: ./backend
     env_file:
       - ./.env
     depends_on:
@@ -16,12 +16,15 @@ services:
 
   frontend:
     container_name: frontend
-    image: rlafosem/xsearch_frontend
+    image:
+      rlafosem/xsearch_frontend
       #build:
       #dockerfile: Dockerfile
       #context: ./frontend
     ports:
       - 80:5137
+    env_file:
+      - ./.env
     depends_on:
       - engine
       - backend
@@ -49,11 +52,11 @@ services:
     volumes:
       - ../data/s3/storage/minio:/data
     command: server --address ":9010" --console-address ":9011" /data
-    
 
   engine:
     container_name: engine
-    image: rlafosem/xsearch_engine
+    image:
+      rlafosem/xsearch_engine
       #build:
       #dockerfile: Dockerfile
       #context: ./engine

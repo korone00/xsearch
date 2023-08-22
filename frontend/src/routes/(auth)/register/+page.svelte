@@ -23,6 +23,8 @@
 					<Label for="id" class="mb-2 text-sky-500 font-semibold">ID</Label>
 					<Input type="text" id="id" name="id" placeholder="kangin" required />
 				</div>
+
+				{#if form?.incorrect}<p class="error text-red-500">{form.message}</p>{/if}
 				<div>
 					<Label for="name" class="mb-2 text-sky-500 font-semibold">Name</Label>
 					<Input type="text" id="name" name="name" placeholder="이강인" required />

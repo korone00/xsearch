@@ -1,6 +1,9 @@
 #Nestjs
 NESTJS_ENDPOINT=backend
 NESTJS_PORT=3000
+VITE_NESTJS_ENDPOINT=localhost
+#or VITE_NESTJS_ENDPOINT= backend
+VITE_NESTJS_PORT=3000
 
 #Postgresql
 DB_HOST=localhost

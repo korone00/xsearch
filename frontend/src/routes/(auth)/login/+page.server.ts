@@ -20,7 +20,6 @@ export const actions: Actions = {
 			},
 			''
 		);
-		logger.debug(body);
 		if (body.status == 403) {
 			const message = body.response.message;
 			logger.debug(message);

@@ -8,7 +8,7 @@ import { RawResponseDataService } from './rawresponsedata.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { rawResponseData } from 'src/users/entities/fileresponsedto.entity';
 import { HistoryDataService } from './searchistory.serveice';
-import { historyData } from 'src/users/entities/user.history';
+import { historyData } from 'src/users/entities/history.entity';
 
 @Global()
 @Module({
