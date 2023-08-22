@@ -42,7 +42,7 @@
 		series: [
 			{
 				name: 'visit',
-				data: [12, 18, 23, 19, 29, 43, 39]
+				data: [4, 5, 6, 5, 7, 6, 7]
 			}
 		],
 		xaxis: {
@@ -76,8 +76,8 @@
 
 	const getChartOptions = () => {
 		return {
-			series: [52.8, 26.8, 20.4, 10.3],
-			colors: ['#18777D', '#2E8A99', '#4FC0D0', '#13B3BE'],
+			series: [60, 30, 10],
+			colors: ['#18777D', '#2E8A99', '#4FC0D0'],
 			chart: {
 				height: 420,
 				width: '100%',
@@ -98,7 +98,7 @@
 					}
 				}
 			},
-			labels: ['Direct', 'Organic search', 'Referrals', 'Others'],
+			labels: ['Direct', 'Organic search', 'Others'],
 			dataLabels: {
 				enabled: true,
 				style: {
@@ -338,7 +338,7 @@
 	});
 </script>
 
-<main>
+<article>
 	<div class="m-20">
 		<h1 class="mb-4 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl">
 			<span class="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-500"
@@ -350,7 +350,6 @@
 			number of newly added data, the number of subscribers, and the user search record.
 		</p>
 	</div>
-</main>
 
 <!-- C -->
 <div class="bg-gray-50 p-5">
@@ -364,10 +363,10 @@
 </div>
 
 <!-- Donut Chart -->
-<div class="flex justify-between flex-wrap md:m-5">
+<div class=" flex-wrap md:m-5">
+	<div id='explorer' style="width: calc(33.33% - 12px);">
 	<div
 		class="w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6 m-10 md:m-0"
-		style="width: calc(33.33% - 12px);"
 	>
 		<div class="flex justify-between items-start w-full">
 			<div class="flex-col items-center">
@@ -396,7 +395,7 @@
 				<tr>
 					<th scope="col" class="px-6 py-3"> Top Channels </th>
 					<th scope="col" class="px-6 py-3"> Users </th>
-					<th scope="col" class="px-6 py-3"> % </th>
+					<th scope="col" class="px-6 py-3"> Percentage </th>
 				</tr>
 			</thead>
 			<tbody>
@@ -405,16 +404,16 @@
 						scope="row"
 						class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
 					>
-						Organic Search
+						Direct
 					</th>
-					<td class="px-6 py-4"> 0.95 </td>
+					<td class="px-6 py-4"> 6 </td>
 					<td class="px-6 py-4">
 						<div class="w-full bg-gray-200 rounded-full dark:bg-gray-700">
 							<div
 								class="bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full"
-								style="width: 45%"
+								style="width: 60%"
 							>
-								45%
+								60%
 							</div>
 						</div>
 					</td>
@@ -424,35 +423,16 @@
 						scope="row"
 						class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
 					>
-						Referral
+						Organic Search
 					</th>
-					<td class="px-6 py-4"> 0.72 </td>
+					<td class="px-6 py-4"> 3 </td>
 					<td class="px-6 py-4">
 						<div class="w-full bg-gray-200 rounded-full dark:bg-gray-700">
 							<div
 								class="bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full"
-								style="width: 45%"
+								style="width: 30%"
 							>
-								45%
-							</div>
-						</div>
-					</td>
-				</tr>
-				<tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-					<th
-						scope="row"
-						class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-					>
-						Direct
-					</th>
-					<td class="px-6 py-4"> 0.87 </td>
-					<td class="px-6 py-4">
-						<div class="w-full bg-gray-200 rounded-full dark:bg-gray-700">
-							<div
-								class="bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full"
-								style="width: 45%"
-							>
-								45%
+								30%
 							</div>
 						</div>
 					</td>
@@ -464,14 +444,14 @@
 					>
 						Other
 					</th>
-					<td class="px-6 py-4"> 0.98 </td>
+					<td class="px-6 py-4"> 1 </td>
 					<td class="px-6 py-4">
 						<div class="w-full bg-gray-200 rounded-full dark:bg-gray-700">
 							<div
 								class="bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full"
-								style="width: 45%"
+								style="width: 10%"
 							>
-								45%
+								10%
 							</div>
 						</div>
 					</td>
@@ -479,11 +459,14 @@
 			</tbody>
 		</table>
 	</div>
+</div>
 
+<div id="main">
+<div id="sub1" 
+class="flex">
 	<div
 		class="w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6 m-0 md:m-0"
-		style="width: calc(33.33% - 12px);"
-	>
+		>
 		<div class="flex justify-between">
 			<div>
 				<h5 class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">
@@ -517,7 +500,7 @@
 
 	<div
 		class="w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6 m-0 md:m-0"
-		style="width: calc(33.33% - 12px);"
+		
 	>
 		<div class="flex justify-between">
 			<div>
@@ -550,7 +533,7 @@
 </div>
 
 <!-- Table -->
-<div id="grid">
+<div id="sub2">
 	<div
 		class="grid grid-cols-1 items-center border-gray-200 border-t dark:border-gray-700 justify-between"
 	/>
@@ -616,6 +599,9 @@
 		</table>
 	</div>
 </div>
+</div>
+</div>
+</article>
 
 <footer class="bg-white rounded-lg shadow m-4 dark:bg-gray-800">
 	<div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
@@ -651,4 +637,28 @@
 		display: flex;
 		flex-wrap: wrap;
 	}
+	article{
+		flex-basis: 680px;
+    flex-grow: 1;
+    flex-shrink: 1;
+    background-color: #ffffff;
+	}
+
+
+#explorer {
+    display: flex;
+    flex-grow: 2;
+    flex-direction: column;
+    margin: 10px;
+    padding: 3px;
+}
+#main {
+    display: flex;
+    flex-grow: 8;
+    flex-direction: column;
+    margin: 10px;
+    padding: 3px;
+}
+
+
 </style>
