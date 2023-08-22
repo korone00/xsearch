@@ -12,7 +12,7 @@ from minioHelper import MinioHelper
 load_dotenv()
 
 #setting variables
-download_link = "https://github.com/towhee-io/examples/releases/download/data/reverse_image_search.zip"
+download_link = "https://github.com/korone00/xsearch/releases/download/data/reverse_image_search.zip"
 temp_csv = 'output.csv'
 bucket_name = str(os.getenv('MINIO_IMAGE_BUCKET'))
 query_bucket_name = str(os.getenv('MINIO_QUERY_BUCKET'))
