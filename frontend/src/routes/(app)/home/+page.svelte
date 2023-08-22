@@ -917,7 +917,7 @@
 							<article class="group">
 								<img
 									alt="resizing"
-									src="/resizing.jpg"
+									src="/resize.jpg"
 									class="h-56 w-full rounded-xl object-fit:contain shadow-xl transition group-hover:grayscale-[50%]"
 								/>
 
@@ -940,7 +940,7 @@
 							<article class="group">
 								<img
 									alt="augmentation"
-									src="/aug.jpg"
+									src="/augmentation.jpg"
 									class="h-56 w-full rounded-xl object-fit:contain shadow-xl transition group-hover:grayscale-[50%]"
 								/>
 
