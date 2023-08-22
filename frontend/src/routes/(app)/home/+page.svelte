@@ -520,7 +520,7 @@
 		</p>
 	</div>
 	<div class="grid grid-cols-1 md:grid-cols-3 justify-center items-center p-5">
-		<div class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6 m-3 md:m-5">
+		<div class=" w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6 m-3 md:m-5">
 			<div class="flex justify-between">
 				<div>
 					<h5 class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">
@@ -551,7 +551,7 @@
 			</div>
 			<div bind:this={areaChart1} />
 		</div>
-		<div class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6 m-3 md:m-5">
+		<div class=" w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6 m-3 md:m-5">
 			<div class="flex justify-between">
 				<div>
 					<h5 class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">Speed</h5>
@@ -580,7 +580,7 @@
 			</div>
 			<div bind:this={areaChart2} />
 		</div>
-		<div class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6 m-3 md:m-5">
+		<div class=" w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6 m-5 md:m-5">
 			<div class="flex justify-between">
 				<div>
 					<h5 class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">Memory</h5>

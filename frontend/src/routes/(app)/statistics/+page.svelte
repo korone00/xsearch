@@ -38,7 +38,7 @@
 			}
 		},
 
-		colors: ['#1C64F2', '#E91E63', '#9C27B0'],
+		colors: ['#4FC0D0', '#E91E63', '#9C27B0'],
 		series: [
 			{
 				name: 'visit',
@@ -137,30 +137,18 @@
 		series: [
 			{
 				name: 'Organic',
-				color: '#4FC0D0',
+				color: '#85E6C5',
 				data: [
-					{ x: 'Mon', y: 231 },
-					{ x: 'Tue', y: 122 },
-					{ x: 'Wed', y: 63 },
-					{ x: 'Thu', y: 421 },
-					{ x: 'Fri', y: 122 },
-					{ x: 'Sat', y: 323 },
-					{ x: 'Sun', y: 111 }
+					{ x: 'Mon', y: 1 },
+					{ x: 'Tue', y: 1 },
+					{ x: 'Wed', y: 2 },
+					{ x: 'Thu', y: 1 },
+					{ x: 'Fri', y: 2 },
+					{ x: 'Sat', y: 1 },
+					{ x: 'Sun', y: 1 }
 				]
 			},
-			{
-				name: 'Social media',
-				color: '#1B6B93',
-				data: [
-					{ x: 'Mon', y: 232 },
-					{ x: 'Tue', y: 113 },
-					{ x: 'Wed', y: 341 },
-					{ x: 'Thu', y: 224 },
-					{ x: 'Fri', y: 522 },
-					{ x: 'Sat', y: 411 },
-					{ x: 'Sun', y: 243 }
-				]
-			}
+			
 		],
 		chart: {
 			type: 'bar',
@@ -236,6 +224,96 @@
 			opacity: 1
 		}
 	};
+
+	let hoptions = {
+      series: [
+        {
+          name: "Income",
+          color: "#93B1A6",
+          data: ["10", "10", "10", "10", "10", "10"],
+        },
+      ],
+      chart: {
+        sparkline: {
+          enabled: false,
+        },
+        type: "bar",
+        width: "100%",
+        height: 400,
+        toolbar: {
+          show: false,
+        }
+      },
+      fill: {
+        opacity: 1,
+      },
+      plotOptions: {
+        bar: {
+          horizontal: true,
+          columnWidth: "100%",
+          borderRadiusApplication: "end",
+          borderRadius: 6,
+          dataLabels: {
+            position: "top",
+          },
+        },
+      },
+      legend: {
+        show: true,
+        position: "bottom",
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      tooltip: {
+        shared: true,
+        intersect: false,
+        formatter: function (value) {
+          return  value
+        }
+      },
+      xaxis: {
+        labels: {
+          show: true,
+          style: {
+            fontFamily: "Inter, sans-serif",
+            cssClass: 'text-xs font-normal fill-gray-500 dark:fill-gray-400'
+          },
+          formatter: function(value) {
+            return value
+          }
+        },
+        categories: ["Bearing", "Robotics", "Sensors", "Shaft", "Ball", "Roller"],
+        axisTicks: {
+          show: false,
+        },
+        axisBorder: {
+          show: false,
+        },
+      },
+      yaxis: {
+        labels: {
+          show: true,
+          style: {
+            fontFamily: "Inter, sans-serif",
+            cssClass: 'text-xs font-normal fill-gray-500 dark:fill-gray-400'
+          }
+        }
+      },
+      grid: {
+        show: true,
+        strokeDashArray: 4,
+        padding: {
+          left: 2,
+          right: 2,
+          top: -20
+        },
+      },
+      fill: {
+        opacity: 1,
+      }
+    }
+
 
 	onMount(async () => {
 		await loadApexCharts();
@@ -332,7 +410,7 @@
 		}
 
 		if (areaChart3 && typeof ApexCharts !== 'undefined') {
-			const chart3 = new ApexCharts(areaChart3, options);
+			const chart3 = new ApexCharts(areaChart3, hoptions);
 			chart3.render();
 		}
 	});
@@ -366,7 +444,7 @@
 <div class=" flex-wrap md:m-5">
 	<div id='explorer' style="width: calc(33.33% - 12px);">
 	<div
-		class="w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6 m-10 md:m-0"
+		class="w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6 m-10 md:m-5"
 	>
 		<div class="flex justify-between items-start w-full">
 			<div class="flex-col items-center">
@@ -387,7 +465,7 @@
 
 		<!-- mini chart Table -->
 		<div
-			class="grid grid-cols-1 items-center border-gray-200 border-t dark:border-gray-700 justify-between"
+			class="grid grid-cols-1 items-center border-gray-200 border-b dark:border-gray-700 justify-between"
 		/>
 		<div class="flex justify-between items-center pt-5" />
 		<table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -410,7 +488,7 @@
 					<td class="px-6 py-4">
 						<div class="w-full bg-gray-200 rounded-full dark:bg-gray-700">
 							<div
-								class="bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full"
+								class="bg-green-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full"
 								style="width: 60%"
 							>
 								60%
@@ -429,7 +507,7 @@
 					<td class="px-6 py-4">
 						<div class="w-full bg-gray-200 rounded-full dark:bg-gray-700">
 							<div
-								class="bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full"
+								class="bg-green-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full"
 								style="width: 30%"
 							>
 								30%
@@ -448,7 +526,7 @@
 					<td class="px-6 py-4">
 						<div class="w-full bg-gray-200 rounded-full dark:bg-gray-700">
 							<div
-								class="bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full"
+								class="bg-green-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full"
 								style="width: 10%"
 							>
 								10%
@@ -465,19 +543,19 @@
 <div id="sub1" 
 class="flex">
 	<div
-		class="w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6 m-0 md:m-0"
+		class="w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6 m-0 md:m-5"
 		>
 		<div class="flex justify-between">
 			<div>
 				<h5 class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">
-					Data Type
+					Sign Up
 				</h5>
-				<p class="text-base font-normal text-gray-500 dark:text-gray-400">Type of Data</p>
+				<p class="text-base font-normal text-gray-500 dark:text-gray-400">Number of Signup</p>
 			</div>
 			<div
 				class="flex items-center px-2.5 py-0.5 text-base font-semibold text-green-500 dark:text-green-500 text-center"
 			>
-				9%
+				1%
 				<svg
 					class="w-3 h-3 ml-1"
 					aria-hidden="true"
@@ -499,34 +577,14 @@ class="flex">
 	</div>
 
 	<div
-		class="w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6 m-0 md:m-0"
-		
+		class="w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6 m-0 md:m-5"
 	>
 		<div class="flex justify-between">
 			<div>
-				<h5 class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">Sign Up</h5>
-				<p class="text-base font-normal text-gray-500 dark:text-gray-400">Number of New Users</p>
+				<h5 class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">Data Type</h5>
+				<p class="text-base font-normal text-gray-500 dark:text-gray-400">Number of Data by Type</p>
 			</div>
-			<div
-				class="flex items-center px-2.5 py-0.5 text-base font-semibold text-green-500 dark:text-green-500 text-center"
-			>
-				12%
-				<svg
-					class="w-3 h-3 ml-1"
-					aria-hidden="true"
-					xmlns="http://www.w3.org/2000/svg"
-					fill="none"
-					viewBox="0 0 10 14"
-				>
-					<path
-						stroke="currentColor"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						stroke-width="2"
-						d="M5 13V1m0 0L1 5m4-4 4 4"
-					/>
-				</svg>
-			</div>
+			
 		</div>
 		<div bind:this={areaChart3} />
 	</div>
@@ -538,14 +596,14 @@ class="flex">
 		class="grid grid-cols-1 items-center border-gray-200 border-t dark:border-gray-700 justify-between"
 	/>
 
-	<h3 class="text-3xl font-bold dark:text-white m-10 md:m-5">검색기록</h3>
+	<h3 class="text-3xl font-bold dark:text-white m-10 md:m-5">Search history</h3>
 
 	<div class="relative overflow-x-auto shadow-md sm:rounded-lg md:m-5">
 		<table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
 			<thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
 				<tr>
 					<th scope="col" class="px-6 py-3"> Id </th>
-					<th scope="col" class="px-6 py-3"> Pred </th>
+					<th scope="col" class="px-6 py-3"> Category </th>
 					<th scope="col" class="px-6 py-3"> Score </th>
 					<th scope="col" class="px-6 py-3"> Timestamp </th>
 				</tr>
@@ -558,7 +616,7 @@ class="flex">
 					>
 						User1
 					</th>
-					<td class="px-6 py-4"> Silver </td>
+					<td class="px-6 py-4"> Bearing </td>
 					<td class="px-6 py-4"> 0.95 </td>
 					<td class="px-6 py-4"> 2023-08-21 10:23:45 </td>
 				</tr>
@@ -569,7 +627,7 @@ class="flex">
 					>
 						User2
 					</th>
-					<td class="px-6 py-4"> White </td>
+					<td class="px-6 py-4"> Ball </td>
 					<td class="px-6 py-4"> 0.72 </td>
 					<td class="px-6 py-4"> 2023-08-21 11:45:23 </td>
 				</tr>
@@ -580,7 +638,7 @@ class="flex">
 					>
 						User3
 					</th>
-					<td class="px-6 py-4"> Black </td>
+					<td class="px-6 py-4"> Bearing </td>
 					<td class="px-6 py-4"> 0.87 </td>
 					<td class="px-6 py-4"> 2023-08-21 14:32:19 </td>
 				</tr>
@@ -591,7 +649,7 @@ class="flex">
 					>
 						User4
 					</th>
-					<td class="px-6 py-4"> Gray </td>
+					<td class="px-6 py-4"> Robotics </td>
 					<td class="px-6 py-4"> 0.98 </td>
 					<td class="px-6 py-4"> 2023-08-21 16:54:01 </td>
 				</tr>
