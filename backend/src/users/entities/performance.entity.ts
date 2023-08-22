@@ -14,13 +14,14 @@ export class PerformanceMetrics {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
+  // @ManyToOne(() => User)
+  // @JoinColumn({ name: 'id' })
   @ApiProperty()
-  @ManyToOne(() => User)
-  @JoinColumn({ name: 'user_id' })
-  user: User;
+  @Column()
+  user: number;
 
   @ApiProperty()
-  @Column('int')
+  @Column()
   elapsed_time: number;
 
   @ApiProperty()

@@ -42,7 +42,7 @@ NestJs를 이용하였고 Postgres DB와 Minio Storage를 함께 사용하였다
 
 ## How to use
 
-Docker-compose는 3가지 간단한 단계만 거치면 바로 사용하실 수 있습니다.
+Docker-compose는 4단계 간단한 과정만 거치면 바로 사용하실 수 있습니다.
 
  Docker 설치:
    - Docker Hub 웹사이트: https://hub.docker.com/
@@ -72,7 +72,22 @@ docker-compose up -d
  <img src = "./readmeimgs/docker container.png">
 </p>
 
-## 3단계: 동작 확인하기
+## 3단계: minio 접근키 만들기!
+localhost:9011 혹은 지정한 IP adrress:9011에 접속 후 이 화면이 나올 것입니다.
+<p align="center">
+ <img src = "./readmeimgs/miniologin.png">
+</p>
+
+추가로 해 둔 설정이 없다면 id: admin, password:xsearchdbs일 것입니다.
+
+<p align="center">
+ <img src = "./readmeimgs/minio access key.png">
+</p>
+
+그 다음 access key를 만들어 주세요!
+user, 1q2w3e4r로 설정해 주시면 됩니다.
+
+## 4단계: 동작 확인하기
 > **Notice**: 로컬호스트(또는 사용자가 설정한 호스트 => localhost)/(프론트엔드의 포트 설정 => 3000)에 접속하면 됩니다. 접속에 성공하신 다면 위 화면을 확인할 수 있습니다!
 
 <p align="center">

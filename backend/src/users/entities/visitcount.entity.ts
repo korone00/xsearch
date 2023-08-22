@@ -20,9 +20,10 @@ export class VisitCount {
   id: string;
 
   @ApiProperty()
-  @ManyToOne(() => User)
-  @JoinColumn({ name: 'user_id' })
-  user: User;
+  @Column()
+  // @ManyToOne(() => User)
+  // @JoinColumn({ name: 'visitor_id' })
+  user: number;
 
   @ApiProperty()
   @Column('int')
