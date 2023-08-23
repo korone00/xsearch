@@ -1,7 +1,7 @@
 name: Engine CD
 on:
-  #push:
-   # branches: [ main ]
+  push:
+    branches: [ main ]
   workflow_dispatch:
 
 jobs:
