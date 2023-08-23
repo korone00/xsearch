@@ -1,7 +1,7 @@
 import { error } from '@sveltejs/kit';
 import {} from '$env/static/private';
-import * as dotenv from 'dotenv';
-dotenv.config();
+// import * as dotenv from 'dotenv';
+// dotenv.config();
 // const base = `${BASE_PATH}`;
 
 const base = `http://${import.meta.env.VITE_NESTJS_ENDPOINT}:${import.meta.env.VITE_NESTJS_PORT}`;
