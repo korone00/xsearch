@@ -3,7 +3,7 @@ import { defineConfig } from 'vite';
 import dotenv from 'dotenv';
 import { resolve } from 'path';
 
-const envConfig = dotenv.config({ path: resolve(__dirname, '../.env') }).parsed;
+const envConfig = dotenv.config({ path: resolve(__dirname, '../.env') }).parsed || {};
 
 const viteEnv: { [key: string]: string } = {};
 for (const k in envConfig) {
@@ -17,8 +17,9 @@ export default defineConfig({
 		'process.env': viteEnv
 	},
 	server: {
-		host: '0.0.0.0',
-		port: 5137
+		host: envConfig.SERVER_ADDRESS || '0.0.0.0',
+		port: 5137,
+		cors: true
 	},
 	plugins: [sveltekit()]
 });
