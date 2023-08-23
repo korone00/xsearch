@@ -1,5 +1,6 @@
 <script>
-	import { Input, Label, Checkbox, Button, A, Card } from 'flowbite-svelte';
+	import { Input, Label, Checkbox, Button, A, Card, Alert } from 'flowbite-svelte';
+	import { Icon } from 'flowbite-svelte-icons';
 	export let form;
 </script>
 
@@ -24,7 +25,12 @@
 					<Input type="text" id="id" name="id" placeholder="kangin" required />
 				</div>
 
-				{#if form?.incorrect}<p class="error text-red-500">{form.message}</p>{/if}
+				{#if form?.incorrect}
+					<Alert color="blue">
+						<Icon name="info-circle-solid" slot="icon" class="w-4 h-4" />
+						<span class="font-medium">Register Error!</span>
+						{form.message}
+					</Alert>{/if}
 				<div>
 					<Label for="name" class="mb-2 text-sky-500 font-semibold">Name</Label>
 					<Input type="text" id="name" name="name" placeholder="이강인" required />
@@ -38,8 +44,12 @@
 				<Label for="email" class="mb-2 text-sky-500 font-semibold">✉️ Email address</Label>
 				<Input type="email" id="email" name="email" placeholder="kangin@gmail.com" required />
 			</div>
-			{#if form?.incorrecting}<p class="error text-red-500">Password Mismatch!</p>{/if}
-			<!--incorrect (x) incorrecting (o)-->
+			{#if form?.incorrecting}
+				<Alert color="blue" class="mb-2">
+					<Icon name="info-circle-solid" slot="icon" class="w-4 h-4" />
+					<span class="font-medium">Password Error!</span>
+					{form.message}
+				</Alert>{/if}
 			<div class="mb-6">
 				<Label for="password" class="mb-2 text-sky-500 font-semibold">🔒 Password</Label>
 				<Input type="password" id="password" name="password" placeholder="•••••••••" required />

@@ -17,7 +17,8 @@ export const actions: Actions = {
 		const password = data.get('password');
 
 		if (confirmPassword != password) {
-			return fail(400, { password, incorrecting: true });
+			const message = '비밀번호 불일치. 다시 시도하세요';
+			return fail(400, { message, incorrecting: true });
 		}
 		logger.debug(`actions register START`);
 		logger.debug(`actions register password:${password}`);

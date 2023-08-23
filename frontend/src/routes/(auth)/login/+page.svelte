@@ -3,6 +3,8 @@
 	let show = false;
 	export let form;
 	import { enhance } from '$app/forms';
+	import { Icon } from 'flowbite-svelte-icons';
+	import { Alert } from 'flowbite-svelte';
 </script>
 
 <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
@@ -73,7 +75,13 @@
 					>Sign in</button
 				>
 			</div>
-			{#if form?.incorrect}<p class="error text-red-500">{form.message}</p>{/if}
+			{#if form?.incorrect}
+				<Alert color="blue">
+					<Icon name="info-circle-solid" slot="icon" class="w-4 h-4" />
+					<span class="font-medium">Log In Error!</span>
+					{form.message}
+				</Alert>
+			{/if}
 		</form>
 
 		<div class="mt-5 text-center text-sm">
