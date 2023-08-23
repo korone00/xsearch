@@ -1,0 +1,11 @@
+{
+    "CORSRules": [
+        {
+            "AllowedOrigins": ["http://xsearch.podosoft.io"],
+            "AllowedMethods": ["GET", "PUT", "POST", "DELETE"],
+            "AllowedHeaders": ["*"],
+            "ExposeHeaders": ["ETag"],
+            "MaxAgeSeconds": 3000
+        }
+    ]
+}
