@@ -8,4 +8,4 @@ COPY . .
 
 EXPOSE 5137
 
-CMD ["npm", "run", "dev"]
+CMD ["node", "build"]
