@@ -6,7 +6,7 @@ export const load = async ({ locals, parent, url }: any) => {
 	logger.debug(`load START`);
 	const { role } = await parent();
 	let loadData;
-
+	logger.debug(locals.session.data.jwt);
 	if (role == 'admin' && url.searchParams.get('userId')) {
 		loadData = await api.post(
 			'auth/profile2',
@@ -20,7 +20,8 @@ export const load = async ({ locals, parent, url }: any) => {
 	}
 	const transData = {
 		...loadData,
-		accessRole: role
+		accessRole: role,
+		token: locals.session.data.jwt
 	};
 	logger.debug(`load FINISH`);
 	return transData;

@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import {
 		Card,
 		MenuButton,
@@ -9,7 +9,19 @@
 		ListgroupItem
 	} from 'flowbite-svelte';
 	export let data;
-	let properties = ['name', 'phone', 'email']; // 사용자 정보 추가
+	import * as api from '../../../lib/api';
+	import { goto } from '$app/navigation';
+	console.log(data.token);
+	let properties = ['name', 'phone', 'email'];
+	async function deleteUser() {
+		if (confirm('정말 사용자를 삭제하시겠습니까?')) {
+			console.log(await api.post('auth/delete', { userId: data.id }, data.token));
+			alert(data.id + '님 삭제 완료');
+			goto('/userlist');
+		} else {
+			alert('사용자 정보 삭제를 취소하셨습니다.');
+		}
+	}
 </script>
 
 <div class="m-20">
@@ -44,7 +56,7 @@
 					<DropdownItem href="/profile/edit?userId={data.id}" class="text-base font-semibold"
 						>Edit</DropdownItem
 					>
-					<DropdownItem href="/delete" class="text-base font-semibold">Delete</DropdownItem>
+					<DropdownItem on:click={deleteUser} class="text-base font-semibold">Delete</DropdownItem>
 				{/if}
 			</Dropdown>
 		</div>

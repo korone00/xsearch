@@ -6,7 +6,6 @@ import {
   Get,
   Body,
   Res,
-  Query,
   Put,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
@@ -88,16 +87,17 @@ export class AuthController {
   public findAll(@Paginate() query: PaginateQuery): Promise<Paginated<User>> {
     return this.authService.findAll(query);
   }
-  @UseGuards(LocalAuthGuard)
+
+  @Roles('admin')
+  @UseGuards(JwtAuthGuard, RoleGuard)
   @ApiOperation({
     summary: 'delete API',
     description: '사용자 탈퇴(계정 삭제)',
   })
   @ApiCreatedResponse({ description: '사용자 탈퇴' })
   @Post('delete')
-  deleteUser(@Body() userDelete: UserDto) {
-    this.authService.deleteUser(userDelete.id);
-    return `${userDelete.id}님 계정 삭제 완료`;
+  async deleteUser(@Body() deleteUser: userId): Promise<any> {
+    return await this.authService.deleteUser(deleteUser.userId);
   }
 
   @UseGuards(JwtAuthGuard)

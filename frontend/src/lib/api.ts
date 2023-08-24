@@ -1,5 +1,4 @@
 import { error } from '@sveltejs/kit';
-import {} from '$env/static/private';
 // import * as dotenv from 'dotenv';
 // dotenv.config();
 // const base = `${BASE_PATH}`;
@@ -33,7 +32,6 @@ async function send({
 	if (token) {
 		requestHeaders.set('Authorization', 'Bearer ' + token);
 	}
-
 	const res = await fetch(`${base}/${path}`, {
 		method: method,
 		headers: requestHeaders,
