@@ -10,7 +10,7 @@
 	}
 </script>
 
-<nav class=" border-gray-200 bg-gray-50 border-b dark:border-gray-700">
+<!-- <nav class=" border-gray-200 bg-gray-50 border-b dark:border-gray-700">
 	<div class="w-full flex flex-wrap items-center justify-between mx-auto p-4">
 		<a href="#" class="flex items-center">
 			<img src="xsearchlogo.png" class="h-8 mr-3" alt="Xsearch Logo" />
@@ -77,14 +77,20 @@
 			</ul>
 		</div>
 	</div>
-</nav>
+</nav> -->
 
 <section class="flex flex-1">
 	<div>
-		<div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800 border-r">
+		<div class="fixed h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800 border-r">
 			<Sidebar>
 				<SidebarWrapper>
 					<SidebarGroup>
+						<a href="/" class="flex items-center pl-2.5 mb-5">
+							<img src="/xsearchlogo.png" class="h-6 mr-3 sm:h-7" alt="Flowbite Logo" />
+							<span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"
+								>Xsearch</span
+							>
+						</a>
 						<SidebarItem label="Home" href="/home" active={activeUrl === '/home'}>
 							<svelte:fragment slot="icon">
 								<svg
@@ -195,7 +201,7 @@
 			</Sidebar>
 		</div>
 	</div>
-	<div class="flex-1 justify-center">
+	<div class="flex-1 justify-center ml-64 p-4">
 		<slot />
 	</div>
 </section>

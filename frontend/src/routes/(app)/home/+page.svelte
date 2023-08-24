@@ -410,7 +410,7 @@
 		await loadApexCharts();
 		canRender = true;
 
-		let options = {
+		let option1 = {
 			chart: {
 				height: '250px',
 				maxWidth: '100%',
@@ -455,20 +455,167 @@
 			},
 			series: [
 				{
-					name: 'New users',
-					data: [6500, 6418, 6456, 6526, 6356, 6456],
+					name: 'L2 distance',
+					data: [11.1, 14.6, 19.6, 28.2, 33.4],
 					color: '#1A56DB'
 				}
 			],
 			xaxis: {
 				categories: [
-					'01 February',
-					'02 February',
-					'03 February',
-					'04 February',
-					'05 February',
-					'06 February',
-					'07 February'
+					'TOP1',
+					'TOP2',
+					'TOP3',
+					'TOP4',
+					'TOP5',
+					
+				],
+				labels: {
+					show: false
+				},
+				axisBorder: {
+					show: false
+				},
+				axisTicks: {
+					show: false
+				}
+			},
+			yaxis: {
+				show: false
+			}
+		};
+
+		let option2 = {
+			chart: {
+				height: '250px',
+				maxWidth: '100%',
+				type: 'area',
+				fontFamily: 'Inter, sans-serif',
+				dropShadow: {
+					enabled: false
+				},
+				toolbar: {
+					show: false
+				}
+			},
+			tooltip: {
+				enabled: true,
+				x: {
+					show: false
+				}
+			},
+			fill: {
+				type: 'gradient',
+				gradient: {
+					opacityFrom: 0.55,
+					opacityTo: 0,
+					shade: '#1C64F2',
+					gradientToColors: ['#1C64F2']
+				}
+			},
+			dataLabels: {
+				enabled: false
+			},
+			stroke: {
+				width: 6
+			},
+			grid: {
+				show: false,
+				strokeDashArray: 4,
+				padding: {
+					left: 2,
+					right: 2,
+					top: 0
+				}
+			},
+			series: [
+				{
+					name: 'Time',
+					data: [0.2, 0.5, 1.3, 6.9, 7.6, 7.8],
+					color: '#1A56DB'
+				}
+			],
+			xaxis: {
+				categories: [
+					'Image Input',
+					'Access Backend',
+					'Access Engine',
+					'Calculate Similarity',
+					'Return Backend',
+					'Image Output',
+				],
+				labels: {
+					show: false
+				},
+				axisBorder: {
+					show: false
+				},
+				axisTicks: {
+					show: false
+				}
+			},
+			yaxis: {
+				show: false
+			}
+		};
+
+		let option3 = {
+			chart: {
+				height: '250px',
+				maxWidth: '100%',
+				type: 'area',
+				fontFamily: 'Inter, sans-serif',
+				dropShadow: {
+					enabled: false
+				},
+				toolbar: {
+					show: false
+				}
+			},
+			tooltip: {
+				enabled: true,
+				x: {
+					show: false
+				}
+			},
+			fill: {
+				type: 'gradient',
+				gradient: {
+					opacityFrom: 0.55,
+					opacityTo: 0,
+					shade: '#1C64F2',
+					gradientToColors: ['#1C64F2']
+				}
+			},
+			dataLabels: {
+				enabled: false
+			},
+			stroke: {
+				width: 6
+			},
+			grid: {
+				show: false,
+				strokeDashArray: 4,
+				padding: {
+					left: 2,
+					right: 2,
+					top: 0
+				}
+			},
+			series: [
+				{
+					name: 'Usage of Memory',
+					data: [0.2, 0.5, 3.2, 6.9, 2.8, 2.5],
+					color: '#1A56DB'
+				}
+			],
+			xaxis: {
+				categories: [
+					'Image Input',
+					'Access Backend',
+					'Access Engine',
+					'Calculate Similarity',
+					'Return Backend',
+					'Image Output',
 				],
 				labels: {
 					show: false
@@ -486,17 +633,17 @@
 		};
 
 		if (areaChart1 && typeof ApexCharts !== 'undefined') {
-			const chart1 = new ApexCharts(areaChart1, options);
+			const chart1 = new ApexCharts(areaChart1, option1);
 			chart1.render();
 		}
 
 		if (areaChart2 && typeof ApexCharts !== 'undefined') {
-			const chart2 = new ApexCharts(areaChart2, options);
+			const chart2 = new ApexCharts(areaChart2, option2);
 			chart2.render();
 		}
 
 		if (areaChart3 && typeof ApexCharts !== 'undefined') {
-			const chart3 = new ApexCharts(areaChart3, options);
+			const chart3 = new ApexCharts(areaChart3, option3);
 			chart3.render();
 		}
 	});
@@ -528,7 +675,7 @@
 					</h5>
 					<p class="text-base font-normal text-gray-500 dark:text-gray-400">Accuracy of Xsearch</p>
 				</div>
-				<div
+				<!-- <div
 					class="flex items-center px-2.5 py-0.5 text-base font-semibold text-green-500 dark:text-green-500 text-center"
 				>
 					12%
@@ -547,7 +694,7 @@
 							d="M5 13V1m0 0L1 5m4-4 4 4"
 						/>
 					</svg>
-				</div>
+				</div> -->
 			</div>
 			<div bind:this={areaChart1} />
 		</div>
@@ -557,7 +704,7 @@
 					<h5 class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">Speed</h5>
 					<p class="text-base font-normal text-gray-500 dark:text-gray-400">Speed of Xsearch</p>
 				</div>
-				<div
+				<!-- <div
 					class="flex items-center px-2.5 py-0.5 text-base font-semibold text-green-500 dark:text-green-500 text-center"
 				>
 					12%
@@ -576,7 +723,7 @@
 							d="M5 13V1m0 0L1 5m4-4 4 4"
 						/>
 					</svg>
-				</div>
+				</div> -->
 			</div>
 			<div bind:this={areaChart2} />
 		</div>
@@ -586,7 +733,7 @@
 					<h5 class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">Memory</h5>
 					<p class="text-base font-normal text-gray-500 dark:text-gray-400">Memory of Xsearch</p>
 				</div>
-				<div
+				<!-- <div
 					class="flex items-center px-2.5 py-0.5 text-base font-semibold text-green-500 dark:text-green-500 text-center"
 				>
 					12%
@@ -605,7 +752,7 @@
 							d="M5 13V1m0 0L1 5m4-4 4 4"
 						/>
 					</svg>
-				</div>
+				</div> -->
 			</div>
 			<div bind:this={areaChart3} />
 		</div>

@@ -1,8 +1,8 @@
 name: Backend CD
 on:
   push:
-    paths:
-      - 'backend/**'  
+    #paths:
+     # - 'backend/**'  
   workflow_dispatch:
 
 jobs:

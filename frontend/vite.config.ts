@@ -14,8 +14,9 @@ for (const k in envConfig) {
 
 export default defineConfig({
 	define: {
-		'process.env': viteEnv
-	},
+		'process.env.VITE_NESTJS_ENDPOINT': JSON.stringify(process.env.VITE_NESTJS_ENDPOINT || 'localhost'),
+		'process.env.VITE_NESTJS_PORT': JSON.stringify(process.env.VITE_NESTJS_PORT || '3000'),
+	  },
 	server: {
 		host: envConfig.SERVER_ADDRESS || '0.0.0.0',
 		port: 5137,

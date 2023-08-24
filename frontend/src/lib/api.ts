@@ -4,6 +4,7 @@ import { error } from '@sveltejs/kit';
 // const base = `${BASE_PATH}`;
 
 const base = `http://${import.meta.env.VITE_NESTJS_ENDPOINT}:${import.meta.env.VITE_NESTJS_PORT}`;
+console.log(base)
 
 async function send({
 	method,
