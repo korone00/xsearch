@@ -3,9 +3,9 @@ services:
   backend:
     container_name: backend
     image: rlafosem/xsearch_backend
-    #build:
-    #dockerfile: Dockerfile
-    #context: ./backend
+    # build:
+    #   dockerfile: Dockerfile
+    #   context: ./backend
     env_file:
       - ./.env
     depends_on:
