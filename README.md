@@ -81,8 +81,12 @@ localhost:9011 혹은 지정한 IP주소:9011에 접속 후 이 화면이 나올
  <img src = "./readmeimgs/minio access key.png">
 </p>
 
-그 다음 access key를 만들어 주신 뒤 Access Key는
+그 다음 Access key를 만들어 주신 뒤 Access Key는
 user, Secret Key는 1q2w3e4r로 설정해 주시면 됩니다.
+|Key|value|
+|---|---|
+|Access Key|user|
+|Secret Key|1q2w3e4r|
 
 ## 4단계: 동작 확인하기
 > **Notice**: 로컬호스트(또는 사용자가 설정한 호스트 => localhost)/(프론트엔드의 포트 설정 => 3000)에 접속하면 됩니다. 접속에 성공하신 다면 위 화면을 확인할 수 있습니다!
