@@ -56,7 +56,7 @@ Docker-compose는 4단계 간단한 과정만 거치면 바로 사용하실 수 
 
 ## 2단계: Docker Compose 실행
 
-터미널에서 xsearch 폴더에 들어간 다음 명령어를 입력하여 Postgres와 Minio 서비스를 Docker Compose를 사용하여 시작하세요
+터미널에서 xsearch 폴더에 들어간 다음 명령어를 입력하여 Docker Compose를 사용하여 시작하셔야 합니다.
 
 ```bash
 cd your-xsearch-path
@@ -70,7 +70,7 @@ docker-compose up -d
 </p>
 
 ## 3단계: minio 접근키 만들기!
-localhost:9011 혹은 지정한 IP adrress:9011에 접속 후 이 화면이 나올 것입니다.
+localhost:9011 혹은 지정한 IP주소:9011에 접속 후 이 화면이 나올 것입니다.
 <p align="center">
  <img src = "./readmeimgs/miniologin.png">
 </p>
@@ -81,8 +81,8 @@ localhost:9011 혹은 지정한 IP adrress:9011에 접속 후 이 화면이 나�
  <img src = "./readmeimgs/minio access key.png">
 </p>
 
-그 다음 access key를 만들어 주세요!
-user, 1q2w3e4r로 설정해 주시면 됩니다.
+그 다음 access key를 만들어 주신 뒤 Access Key는
+user, Secret Key는 1q2w3e4r로 설정해 주시면 됩니다.
 
 ## 4단계: 동작 확인하기
 > **Notice**: 로컬호스트(또는 사용자가 설정한 호스트 => localhost)/(프론트엔드의 포트 설정 => 3000)에 접속하면 됩니다. 접속에 성공하신 다면 위 화면을 확인할 수 있습니다!
@@ -99,8 +99,8 @@ user, 1q2w3e4r로 설정해 주시면 됩니다.
 docker compose down
 docker compose build
 ```
-위 명령어를 실행한 후 다시 2단계로 가시면 됩니다!
-만약 문제가 생긴다면 해당 관리자에게 문의하세요!
+위 명령어를 실행한 후 다시 2단계로 가시면 됩니다.
+만약 문제가 생긴다면 해당 관리자에게 문의하세요.
 
 ---
 ## Acknowledgement
